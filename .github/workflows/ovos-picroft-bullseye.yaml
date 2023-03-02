@@ -108,10 +108,10 @@ jobs:
       - name: copy file via ssh password
         uses: appleboy/scp-action@master
         with:
-          host: ${{ secrets.HOST }}
+          host: openvoiceos.com
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.PORT }}
+          port: 22
           source: ${{ steps.build.outputs.image-path }}
           target: "ovos-picroft-builds"
 
