@@ -113,5 +113,4 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: 22
           source: ${{ steps.build.outputs.image-path }}
-          target: "ovos-picroft-builds"
-
+          target: "/home/github_user"
