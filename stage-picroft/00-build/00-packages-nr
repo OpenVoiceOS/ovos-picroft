@@ -30,3 +30,5 @@ jq
 pulseaudio
 pulseaudio-utils
 python-pip-whl
+cmake
+libncurses-dev
