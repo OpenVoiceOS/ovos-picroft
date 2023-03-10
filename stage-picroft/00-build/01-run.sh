@@ -18,14 +18,6 @@ install -v -m 0644 files/home/pi/update_ocp.sh "${ROOTFS_DIR}/home/pi/update_pha
 install -v -m 0644 files/home/pi/update_ocp.sh "${ROOTFS_DIR}/home/pi/update_ocp.sh"
 install -v -m 0644 files/home/pi/update_skills.sh "${ROOTFS_DIR}/home/pi/update_skills.sh"
 
-# helper scripts
-install -v -d -m 0755 "${ROOTFS_DIR}/home/pi/.local"
-install -v -d -m 0755 "${ROOTFS_DIR}/home/pi/.local/bin"
-install -v -m 0755 files/home/pi/.local/bin/bus-monitor "${ROOTFS_DIR}/home/pi/.local/bin/bus-monitor"
-install -v -m 0755 files/home/pi/.local/bin/ovos-listen "${ROOTFS_DIR}/home/pi/.local/bin/ovos-listen"
-install -v -m 0755 files/home/pi/.local/bin/ovos-speak "${ROOTFS_DIR}/home/pi/.local/bin/ovos-speak"
-install -v -m 0755 files/home/pi/.local/bin/ovos-say-to "${ROOTFS_DIR}/home/pi/.local/bin/ovos-say-to"
-
 # systemd entrypoints
 install -v -m 0755 files/home/pi/.local/bin/mycroft-systemd-messagebus "${ROOTFS_DIR}/home/pi/.local/bin/mycroft-systemd-messagebus"
 install -v -m 0755 files/home/pi/.local/bin/mycroft-systemd-skills "${ROOTFS_DIR}/home/pi/.local/bin/mycroft-systemd-skills"
