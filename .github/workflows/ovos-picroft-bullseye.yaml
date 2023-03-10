@@ -25,7 +25,7 @@ jobs:
           hostname: ovos-picroft
 
           # Name of the initial user account.
-          username: pi
+          username: ovos
 
           # Password of the intial user account, locked if empty.
           password: 'OVOS123'
