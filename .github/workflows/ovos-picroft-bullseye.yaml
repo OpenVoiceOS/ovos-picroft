@@ -10,6 +10,7 @@ jobs:
         with:
           fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
       - uses: usimd/pi-gen-action@v1
+        id: build
         with:
           # Final image name.
           image-name: ovos-picroft-bullseye
@@ -112,5 +113,5 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: 22
-          source: ${{ steps.build.outputs.image-path }}
+          source: "${{ steps.build.outputs.image-path }}"
           target: "."
