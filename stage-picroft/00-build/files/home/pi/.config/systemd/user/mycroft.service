@@ -1,0 +1,10 @@
+[Unit]
+Description=OpenVoiceOS Software stack.
+
+[Service]
+Type=oneshot
+ExecStart=/bin/true
+RemainAfterExit=yes
+
+[Install]
+WantedBy=default.target
