@@ -27,23 +27,23 @@ install -v -m 0755 files/home/ovos/.local/bin/ovos-speak "${ROOTFS_DIR}/home/ovo
 install -v -m 0755 files/home/ovos/.local/bin/ovos-say-to "${ROOTFS_DIR}/home/ovos/.local/bin/ovos-say-to"
 
 # systemd entrypoints
-install -v -m 0755 files/home/ovos/.local/bin/mycroft-systemd-messagebus "${ROOTFS_DIR}/home/ovos/.local/bin/mycroft-systemd-messagebus"
-install -v -m 0755 files/home/ovos/.local/bin/mycroft-systemd-skills "${ROOTFS_DIR}/home/ovos/.local/bin/mycroft-systemd-skills"
-install -v -m 0755 files/home/ovos/.local/bin/mycroft-systemd-audio "${ROOTFS_DIR}/home/ovos/.local/bin/mycroft-systemd-audio"
-install -v -m 0755 files/home/ovos/.local/bin/mycroft-systemd-voice "${ROOTFS_DIR}/home/ovos/.local/bin/mycroft-systemd-voice"
-install -v -m 0755 files/home/ovos/.local/bin/mycroft-systemd-phal "${ROOTFS_DIR}/home/ovos/.local/bin/mycroft-systemd-phal"
-install -v -m 0755 files/home/ovos/.local/bin/mycroft-systemd-admin-phal "${ROOTFS_DIR}/home/ovos/.local/bin/mycroft-systemd-admin-phal"
+install -v -m 0755 files/home/ovos/.local/bin/ovos-systemd-messagebus "${ROOTFS_DIR}/home/ovos/.local/bin/ovos-systemd-messagebus"
+install -v -m 0755 files/home/ovos/.local/bin/ovos-systemd-skills "${ROOTFS_DIR}/home/ovos/.local/bin/ovos-systemd-skills"
+install -v -m 0755 files/home/ovos/.local/bin/ovos-systemd-audio "${ROOTFS_DIR}/home/ovos/.local/bin/ovos-systemd-audio"
+install -v -m 0755 files/home/ovos/.local/bin/ovos-systemd-voice "${ROOTFS_DIR}/home/ovos/.local/bin/ovos-systemd-voice"
+install -v -m 0755 files/home/ovos/.local/bin/ovos-systemd-phal "${ROOTFS_DIR}/home/ovos/.local/bin/ovos-systemd-phal"
+install -v -m 0755 files/home/ovos/.local/bin/ovos-systemd-admin-phal "${ROOTFS_DIR}/home/ovos/.local/bin/ovos-systemd-admin-phal"
 
 # systemd services
 install -v -d -m 0755 "${ROOTFS_DIR}/home/ovos/.config"
 
-install -v -m 0644 files/usr/lib/systemd/user/mycroft.service "${ROOTFS_DIR}/usr/lib/systemd/user/mycroft.service"
-install -v -m 0644 files/usr/lib/systemd/user/mycroft-audio.service "${ROOTFS_DIR}/usr/lib/systemd/user/mycroft-audio.service"
-install -v -m 0644 files/usr/lib/systemd/user/mycroft-messagebus.service "${ROOTFS_DIR}/usr/lib/systemd/user/mycroft-messagebus.service"
-install -v -m 0644 files/usr/lib/systemd/user/mycroft-phal.service "${ROOTFS_DIR}/usr/lib/systemd/user/mycroft-phal.service"
-install -v -m 0644 files/usr/lib/systemd/user/mycroft-skills.service "${ROOTFS_DIR}/usr/lib/systemd/user/mycroft-skills.service"
-install -v -m 0644 files/usr/lib/systemd/user/mycroft-voice.service "${ROOTFS_DIR}/usr/lib/systemd/user/mycroft-voice.service"
-install -v -m 0644 files/usr/lib/systemd/user/mycroft-admin-phal.service "${ROOTFS_DIR}/usr/lib/systemd/user/mycroft-admin-phal.service"
+install -v -m 0644 files/usr/lib/systemd/user/ovos.service "${ROOTFS_DIR}/usr/lib/systemd/user/ovos.service"
+install -v -m 0644 files/usr/lib/systemd/user/ovos-audio.service "${ROOTFS_DIR}/usr/lib/systemd/user/ovos-audio.service"
+install -v -m 0644 files/usr/lib/systemd/user/ovos-messagebus.service "${ROOTFS_DIR}/usr/lib/systemd/user/ovos-messagebus.service"
+install -v -m 0644 files/usr/lib/systemd/user/ovos-phal.service "${ROOTFS_DIR}/usr/lib/systemd/user/ovos-phal.service"
+install -v -m 0644 files/usr/lib/systemd/user/ovos-skills.service "${ROOTFS_DIR}/usr/lib/systemd/user/ovos-skills.service"
+install -v -m 0644 files/usr/lib/systemd/user/ovos-voice.service "${ROOTFS_DIR}/usr/lib/systemd/user/ovos-voice.service"
+install -v -m 0644 files/usr/lib/systemd/user/ovos-admin-phal.service "${ROOTFS_DIR}/usr/lib/systemd/user/ovos-admin-phal.service"
 install -v -m 0644 files/usr/lib/systemd/user-preset/10-ovos.preset "${ROOTFS_DIR}/usr/lib/systemd/user-preset/"
 install -v -m 0644 files/usr/lib/systemd/user-preset/91-dbus.preset "${ROOTFS_DIR}/usr/lib/systemd/user-preset/"
 # log directories

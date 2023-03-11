@@ -1,13 +1,13 @@
 [Unit]
-Description=Mycroft Voice
-PartOf=mycroft.service
-After=mycroft.service
-After=mycroft-messagebus.service
+Description=OVOS Voice
+PartOf=ovos.service
+After=ovos.service
+After=ovos-messagebus.service
 After=pulseaudio.service
 
 [Service]
 Type=notify
-ExecStart=/home/ovos/.local/bin/mycroft-systemd-voice
+ExecStart=/home/ovos/.local/bin/ovos-systemd-voice
 TimeoutStartSec=1m
 TimeoutStopSec=1m
 Restart=on-failure
@@ -18,4 +18,4 @@ StartLimitBurst=4
 #WatchdogSec=30s
 
 [Install]
-WantedBy=mycroft.service
+WantedBy=ovos.service

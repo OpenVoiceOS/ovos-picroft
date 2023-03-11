@@ -1,11 +1,11 @@
 enable pulseaudio.service
 enable pulseaudio.socket
 
-enable mycroft.service
-enable mycroft-messagebus.service
-enable mycroft-voice.service
-enable mycroft-audio.service
-enable mycroft-skills.service
-enable mycroft-phal.service
-enable mycroft-admin-phal.service
+enable ovos.service
+enable ovos-messagebus.service
+enable ovos-voice.service
+enable ovos-audio.service
+enable ovos-skills.service
+enable ovos-phal.service
+enable ovos-admin-phal.service
 

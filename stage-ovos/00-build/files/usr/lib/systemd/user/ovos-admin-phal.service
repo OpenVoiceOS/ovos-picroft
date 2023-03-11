@@ -1,0 +1,14 @@
+[Unit]
+Description=Admin PHAL
+PartOf=ovos.service
+After=ovos-messagebus.service
+
+[Service]
+Type=notify
+TimeoutStopSec=30
+Restart=always
+User=root
+ExecStart=/home/ovos/.local/bin/ovos-systemd-admin-phal
+
+[Install]
+WantedBy=ovos.service
