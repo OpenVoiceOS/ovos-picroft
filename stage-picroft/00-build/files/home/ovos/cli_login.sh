@@ -9,7 +9,7 @@ echo "                |_|                                                "
 echo
 echo -e "\e[0m"
 echo "                     --- Welcome to OpenVoiceOS ---              "
-echo "                          OVOS Edition v0.1.0                  "
+echo "                       OVOS-PICROFT Edition v0.0.1                  "
 echo
 echo "OVOS Tool COMMANDs:"
 echo "  ovos-cli-client        Command line client, useful for debugging"

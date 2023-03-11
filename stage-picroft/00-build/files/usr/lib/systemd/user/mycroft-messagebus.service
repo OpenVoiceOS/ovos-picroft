@@ -1,0 +1,18 @@
+[Unit]
+Description=Mycroft Messagebus
+PartOf=mycroft.service
+After=mycroft.service
+
+[Service]
+Type=notify
+ExecStart=/home/ovos/.local/bin/mycroft-systemd-messagebus
+TimeoutStartSec=1m
+TimeoutStopSec=1m
+Restart=on-failure
+StartLimitInterval=5min
+StartLimitBurst=4
+#StartLimitAction=reboot-force
+#WatchdogSec=30s
+
+[Install]
+WantedBy=mycroft.service
