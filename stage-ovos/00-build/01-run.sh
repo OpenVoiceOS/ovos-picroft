@@ -22,9 +22,12 @@ install -v -d -m 0755 "${ROOTFS_DIR}/home/ovos/.local"
 install -v -d -m 0755 "${ROOTFS_DIR}/home/ovos/.local/bin"
 
 install -v -m 0755 files/home/ovos/.local/bin/bus-monitor "${ROOTFS_DIR}/home/ovos/.local/bin/bus-monitor"
-install -v -m 0755 files/home/ovos/.local/bin/ovos-listen "${ROOTFS_DIR}/home/ovos/.local/bin/ovos-listen"
-install -v -m 0755 files/home/ovos/.local/bin/ovos-speak "${ROOTFS_DIR}/home/ovos/.local/bin/ovos-speak"
-install -v -m 0755 files/home/ovos/.local/bin/ovos-say-to "${ROOTFS_DIR}/home/ovos/.local/bin/ovos-say-to"
+
+# Taken care of by ovos-utils
+
+# install -v -m 0755 files/home/ovos/.local/bin/ovos-listen "${ROOTFS_DIR}/home/ovos/.local/bin/ovos-listen"
+# install -v -m 0755 files/home/ovos/.local/bin/ovos-speak "${ROOTFS_DIR}/home/ovos/.local/bin/ovos-speak"
+# install -v -m 0755 files/home/ovos/.local/bin/ovos-say-to "${ROOTFS_DIR}/home/ovos/.local/bin/ovos-say-to"
 
 # systemd entrypoints
 install -v -m 0755 files/home/ovos/.local/bin/mycroft-systemd-messagebus "${ROOTFS_DIR}/home/ovos/.local/bin/mycroft-systemd-messagebus"
