@@ -8,4 +8,3 @@ enable ovos-audio.service
 enable ovos-skills.service
 enable ovos-phal.service
 enable ovos-admin-phal.service
-

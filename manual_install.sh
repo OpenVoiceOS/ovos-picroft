@@ -152,7 +152,8 @@ function install_extra_skills (){
     echo
     }
 
-echo "This file will install ovos-core to this device."
+echo "This file will install ovos-core to this device"
+echo "using the latest commits from github."
 echo
 echo "First lets setup some things."
 echo

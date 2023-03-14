@@ -22,9 +22,6 @@ install -v -d -m 0755 "${ROOTFS_DIR}/home/ovos/.local"
 install -v -d -m 0755 "${ROOTFS_DIR}/home/ovos/.local/bin"
 
 install -v -m 0755 files/home/ovos/.local/bin/bus-monitor "${ROOTFS_DIR}/home/ovos/.local/bin/bus-monitor"
-install -v -m 0755 files/home/ovos/.local/bin/ovos-listen "${ROOTFS_DIR}/home/ovos/.local/bin/ovos-listen"
-install -v -m 0755 files/home/ovos/.local/bin/ovos-speak "${ROOTFS_DIR}/home/ovos/.local/bin/ovos-speak"
-install -v -m 0755 files/home/ovos/.local/bin/ovos-say-to "${ROOTFS_DIR}/home/ovos/.local/bin/ovos-say-to"
 
 # systemd entrypoints
 install -v -m 0755 files/home/ovos/.local/bin/ovos-systemd-messagebus "${ROOTFS_DIR}/home/ovos/.local/bin/ovos-systemd-messagebus"
@@ -44,6 +41,7 @@ install -v -m 0644 files/usr/lib/systemd/user/ovos-phal.service "${ROOTFS_DIR}/u
 install -v -m 0644 files/usr/lib/systemd/user/ovos-skills.service "${ROOTFS_DIR}/usr/lib/systemd/user/ovos-skills.service"
 install -v -m 0644 files/usr/lib/systemd/user/ovos-voice.service "${ROOTFS_DIR}/usr/lib/systemd/user/ovos-voice.service"
 install -v -m 0644 files/usr/lib/systemd/user/ovos-admin-phal.service "${ROOTFS_DIR}/usr/lib/systemd/user/ovos-admin-phal.service"
+
 install -v -m 0644 files/usr/lib/systemd/user-preset/10-ovos.preset "${ROOTFS_DIR}/usr/lib/systemd/user-preset/"
 install -v -m 0644 files/usr/lib/systemd/user-preset/91-dbus.preset "${ROOTFS_DIR}/usr/lib/systemd/user-preset/"
 # log directories
