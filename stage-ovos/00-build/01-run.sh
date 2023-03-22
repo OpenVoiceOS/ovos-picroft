@@ -102,6 +102,8 @@ touch "${ROOTFS_DIR}/boot/ssh"
 
 # install ovos-core
 on_chroot << EOF
+ssh-keygen -A && update-rc.d ssh enable
+
 chmod -v +x /install_ovos.sh
 chmod -v +x /install_skills.sh
 
