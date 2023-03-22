@@ -21,4 +21,5 @@ sudo ln -s /usr/lib/systemd/user/ovos-skills.service /usr/lib/systemd/user/ovos.
 sudo ln -s /usr/lib/systemd/user/ovos-voice.service /usr/lib/systemd/user/ovos.service.wants/
 
 sudo ln -s /usr/lib/systemd/system/ovos-admin-phal.service /etc/systemd/system/default.target.wants/
+
 sudo ln -s /usr/lib/systemd/system/NetworkManager.service /etc/systemd/system/default.target.wants/
