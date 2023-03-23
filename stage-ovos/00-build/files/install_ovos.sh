@@ -35,6 +35,7 @@ pip install ovos-PHAL-plugin-oauth==0.0.1
 pip install ovos-phal-plugin-alsa==0.0.2
 pip install ovos-phal-plugin-pulseaudio==0.0.2
 pip install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-balena-wifi
+pip install ovos-PHAL-plugin-wifi-setup==1.1.0
 
 # install ww plugins
 pip install git+https://github.com/OpenVoiceOS/ovos-ww-plugin-precise-lite

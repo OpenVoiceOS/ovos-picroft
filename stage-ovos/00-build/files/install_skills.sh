@@ -7,7 +7,6 @@ pip install ovos-skill-personal==0.0.3
 pip install ovos-skill-volume==0.0.1
 pip install ovos-skill-stop==0.2.1
 pip install ovos-skill-hello-world==0.0.3
-pip install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-balena-wifi.git
 
 # from NeonGeckoCom
 pip install git+https://github.com/NeonGeckoCom/skill-user_settings

@@ -25,7 +25,7 @@ install -v -m 0644 files/etc/udev/rules.d/91-pulseaudio-GeneralPlus.rules "${ROO
 
 # locale
 install -v -d -m 0755 "${ROOTFS_DIR}/etc/wpa_supplicant"
-install -v -m 0600 files/etc/wpa_supplicant/wpa_supplicant.conf "${ROOTFS_DIR}/etc/wpa_supplicant/"
+install -v -m 0600 files/etc/wpa_supplicant/wpa_supplicant.conf "${ROOTFS_DIR}/boot"
 
 # home directory
 
@@ -102,6 +102,7 @@ touch "${ROOTFS_DIR}/boot/ssh"
 
 # install ovos-core
 on_chroot << EOF
+
 ssh-keygen -A && update-rc.d ssh enable
 
 chmod -v +x /install_ovos.sh
