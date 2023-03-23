@@ -1,6 +1,6 @@
-keyboard-configuration  keyboard-configuration/model    select  Generic 105-key PC
+keyboard-configuration  keyboard-configuration/model    select  Generic 104-key PC
 keyboard-configuration  keyboard-configuration/variant  select  English (US)
-keyboard-configuration  keyboard-configuration/modelcode        string  pc105
+keyboard-configuration  keyboard-configuration/modelcode        string  pc104
 keyboard-configuration  keyboard-configuration/layoutcode       string  us
 keyboard-configuration  keyboard-configuration/layout   select  English (US)
 
