@@ -24,12 +24,9 @@ EOF
 
 on_chroot <<EOF
 
-cd /home/ovos
-git clone https://github.com/andlo/fairytalez-skill.git
-su -c 'pip install -r /home/ovos/.config/mycroft/skills/fairytalez-skill.andlo/requirements.txt' ovos
-rm -rf fairytalez-skill
-
 cd /home/ovos/.local/mycroft/skills
+git clone https://github.com/andlo/fairytalez-skill.git
+
 git clone https://github.com/forslund/skill-cocktail.git
 
 git clone https://github.com/JarbasSkills/skill-confucius-quotes.git
