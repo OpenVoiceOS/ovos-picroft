@@ -1,0 +1,7 @@
+# install ovos-core
+ovos-core==0.0.7
+ovos_PHAL==0.0.4
+ovos_plugin_common_play==0.0.4
+git+https://github.com/OpenVoiceOS/ovos-cli-client
+ovos-bus-client
+ovos-vad-plugin-webrtcvad==0.0.1

@@ -1,0 +1,13 @@
+
+# service hooks needs sdnotify
+sdnotify==0.3.2
+
+# non ovos packages
+tornado==6.2
+adapt-parser==1.0.0
+padacioso==0.1.2
+PyYAML==5.4.1
+padatious==0.4.8
+PyAudio~=0.2
+SpeechRecognition
+#quiet.py --install-option="--no-deps"

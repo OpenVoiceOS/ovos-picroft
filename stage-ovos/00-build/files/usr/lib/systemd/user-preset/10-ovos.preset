@@ -1,9 +1,0 @@
-enable pulseaudio.service
-enable pulseaudio.socket
-
-enable ovos.service
-enable ovos-messagebus.service
-enable ovos-voice.service
-enable ovos-audio.service
-enable ovos-skills.service
-enable ovos-phal.service

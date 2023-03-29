@@ -8,7 +8,7 @@ ARCHIVE_FILENAME="raspbian-ovos-dev"
 # images in stage2 (lite), stage4 and stage5. You probably want to hook in custom
 # stages before one of the exported stages. Otherwise, the action will make sure
 # any custom stage will include an image export directive.
-STAGE_LIST="stage0 stage1 stage2 <full/path/to/git/clone>/raspbian-ovos/stage-ovos"
+STAGE_LIST="stage0 stage1 stage2 <full/path/to/git/clone>/raspbian-ovos/stage-prep <full/path/to/git/clone>/raspbian-ovos/stage-ovos"
 
 # Host name of the image.
 TARGET_HOSTNAME="raspOvos"
