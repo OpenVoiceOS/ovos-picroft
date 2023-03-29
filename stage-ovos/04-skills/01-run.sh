@@ -22,14 +22,13 @@ su -c 'pip install -r /skills-jarbas.txt' ovos
 
 EOF
 
-on_chroot <<EOF
+install -v -d -m 0755 "${ROOTFS_DIR}/home/ovos/.local/mycroft"
+install -v -d -m 0755 "${ROOTFS_DIR}/home/ovos/.local/mycroft/skills"
 
-cd /home/ovos/.local/mycroft/skills
+
+cd "${ROOTFS_DIR}/home/ovos/.local/mycroft/skills"
 git clone https://github.com/andlo/fairytalez-skill.git
 
 git clone https://github.com/forslund/skill-cocktail.git
 
 git clone https://github.com/JarbasSkills/skill-confucius-quotes.git
-EOF
-
-rm "${ROOTFS_DIR}/skills-*"
