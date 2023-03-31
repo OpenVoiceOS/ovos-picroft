@@ -1,0 +1,7 @@
+[Unit]
+Before=mycroft.service
+
+[Service]
+Type=forking
+GuessMainPID=no
+ExecStart=/usr/bin/media-automount %I
