@@ -11,9 +11,3 @@ install -v -m 0644 files/vfat "${ROOTFS_DIR}/etc/udev/automount.d/vfat"
 install -v -m 0644 files/99-media-automount.rules "${ROOTFS_DIR}/etc/udev/rules.d/99-media-automount.rules"
 install -v -m 0644 files/media-automount "${ROOTFS_DIR}/usr/bin/media-automount"
 install -v -d -m 0755 "${ROOTFS_DIR}/media"
-
-on_chroot <<EOF
-
-systemctl enable media-automount
-
-EOF
