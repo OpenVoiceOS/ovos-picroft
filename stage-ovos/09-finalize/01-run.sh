@@ -4,7 +4,7 @@ set -exu
 
 on_chroot <<EOF
 
-chown -Rv ovos:ovos /home/ovos
-chmod -Rv +x /home/ovos/.local/bin/*
+chown -Rv "$FIRST_USER_NAME":"$FIRST_USER_NAME" "/home/$FIRST_USER_NAME"
+chmod -Rv +x "/home/$FIRST_USER_NAME/.local/bin/"
 
 EOF

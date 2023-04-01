@@ -11,4 +11,4 @@ User=root
 ExecStart=/usr/libexec/ovos-systemd-admin-phal
 
 [Install]
-WantedBy=ovos.service
+WantedBy=multi-user.target

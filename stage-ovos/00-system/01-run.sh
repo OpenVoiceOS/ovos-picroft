@@ -20,12 +20,17 @@ install -v -m 0644 files/ovos-messagebus.service "${ROOTFS_DIR}/usr/lib/systemd/
 install -v -m 0644 files/ovos-phal.service "${ROOTFS_DIR}/usr/lib/systemd/user/ovos-phal.service"
 install -v -m 0644 files/ovos-skills.service "${ROOTFS_DIR}/usr/lib/systemd/user/ovos-skills.service"
 install -v -m 0644 files/ovos-voice.service "${ROOTFS_DIR}/usr/lib/systemd/user/ovos-voice.service"
+install -v -d -m 0755 "${ROOTFS_DIR}/home/$FIRST_USER_NAME/.config/systemd/user"
 
 # balena stuff
 install -v -m 0755 files/wifi-connect.bin "${ROOTFS_DIR}/usr/local/sbin/wifi-connect"
 cp -rv files/wifi-connect "${ROOTFS_DIR}/usr/local/share/"
-on_chroot <<EOF
-chmod -R a+r /usr/local/share/wifi-connect
-EOF
-install -v -d -m 0755 "${ROOTFS_DIR}/media"
 
+# services are enabled in "stage" 02
+# enable linger
+on_chroot <<EOF
+
+chmod -R a+r /usr/local/share/wifi-connect
+loginctl enable-linger "$FIRST_USER_NAME"
+
+EOF
