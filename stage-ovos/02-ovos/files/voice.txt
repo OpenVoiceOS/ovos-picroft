@@ -6,4 +6,4 @@ ovos-ww-plugin-vosk==0.1.1
 # install stt plugins
 ovos-stt-plugin-selene==0.0.3
 ovos-stt-plugin-vosk==0.1.4
-ovos-stt-plugin-server==0.0.2
+git+https://github.com/OpenVoiceOS/ovos-stt-plugin-server.git

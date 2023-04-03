@@ -1,5 +1,5 @@
 [Unit]
-Before=mycroft.service
+Before=ovos.service
 
 [Service]
 Type=forking

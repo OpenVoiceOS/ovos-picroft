@@ -5,13 +5,13 @@ set -exu
 install -v -d -m 0755 "${ROOTFS_DIR}/etc/mycroft"
 install -v -m 0644 files/mycroft.conf "${ROOTFS_DIR}/etc/mycroft/mycroft.conf"
 
-install -v -d -m 0755 "${ROOTFS_DIR}/home/ovos/.local"
-install -v -d -m 0755 "${ROOTFS_DIR}/home/ovos/.local/bin"
-install -v -m 0755 files/bus-monitor "${ROOTFS_DIR}/home/ovos/.local/bin/bus-monitor"
+install -v -d -m 0755 "${ROOTFS_DIR}/home/${FIRST_USER_NAME}/.local"
+install -v -d -m 0755 "${ROOTFS_DIR}/home/${FIRST_USER_NAME}/.local/bin"
+install -v -m 0755 files/bus-monitor "${ROOTFS_DIR}/home/${FIRST_USER_NAME}/.local/bin/bus-monitor"
 
 # log directories
-install -v -d -m 0755 "${ROOTFS_DIR}/home/ovos/.local/state"
-install -v -d -m 0755 "${ROOTFS_DIR}/home/ovos/.local/state/mycroft"
+install -v -d -m 0755 "${ROOTFS_DIR}/home/${FIRST_USER_NAME}/.local/state"
+install -v -d -m 0755 "${ROOTFS_DIR}/home/${FIRST_USER_NAME}/.local/state/mycroft"
 
 install -v -m 0644 files/core.txt "${ROOTFS_DIR}/"
 install -v -m 0644 files/ocp.txt "${ROOTFS_DIR}/"
@@ -28,9 +28,3 @@ pip install -r /speech.txt
 pip install -r /voice.txt
 
 EOF
-
-rm "${ROOTFS_DIR}/core.txt"
-rm "${ROOTFS_DIR}/ocp.txt"
-rm "${ROOTFS_DIR}/phal.txt"
-rm "${ROOTFS_DIR}/speech.txt"
-rm "${ROOTFS_DIR}/voice.txt"
