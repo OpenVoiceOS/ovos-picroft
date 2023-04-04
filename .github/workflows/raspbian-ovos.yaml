@@ -69,7 +69,7 @@ jobs:
           enable-noobs: false
 
           # Enable SSH access to Pi.
-          enable-ssh: 0
+          enable-ssh: 1
 
           # If this feature is enabled, the action will configure pi-gen to not export any
           # stage as image but the last one defined in property 'stage-list'. This is
