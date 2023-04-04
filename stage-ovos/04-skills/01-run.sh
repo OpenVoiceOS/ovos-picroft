@@ -29,6 +29,10 @@ exit
 
 EOF
 
+rm "${ROOTFS_DIR}/skills-ovos.txt"
+rm "${ROOTFS_DIR}/skills-neon.txt"
+rm "${ROOTFS_DIR}/skills-jarbas.txt"
+
 install -v -d -m 0755 "${ROOTFS_DIR}/home/${FIRST_USER_NAME}/.local"
 install -v -d -m 0755 "${ROOTFS_DIR}/home/${FIRST_USER_NAME}/.local/share"
 install -v -d -m 0755 "${ROOTFS_DIR}/home/${FIRST_USER_NAME}/.local/share/mycroft"

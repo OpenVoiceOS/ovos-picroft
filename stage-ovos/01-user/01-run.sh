@@ -2,14 +2,6 @@
 
 set -exu
 
-# Hack for the snake of a thing called systemd
-install -v -m 0644 files/first_boot "${ROOTFS_DIR}/"
-on_chroot <<EOF
-
-chown ${FIRST_USER_NAME}:${FIRST_USER_NAME} /first_boot
-
-EOF
-
 install -v -m 0644 files/.bashrc "${ROOTFS_DIR}/home/${FIRST_USER_NAME}/.bashrc"
 sed -i "s|/home/ovos|/home/$FIRST_USER_NAME|g" files/.bash_profile
 install -v -m 0644 files/.bash_profile "${ROOTFS_DIR}/home/${FIRST_USER_NAME}/.bash_profile"

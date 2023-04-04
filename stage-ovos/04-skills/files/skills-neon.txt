@@ -1,5 +1,5 @@
 git+https://github.com/NeonGeckoCom/skill-user_settings
 git+https://github.com/NeonGeckoCom/skill-spelling
-# wont install this untill I figure out how to not auto download sample music
+# wont install this until I figure out how to not auto download sample music
 # git+https://github.com/NeonGeckoCom/skill-local_music
 git+https://github.com/NeonGeckoCom/skill-caffeinewiz

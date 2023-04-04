@@ -1,1 +1,2 @@
 enable ovos-admin-phal.service
+enable NetworkManager.service

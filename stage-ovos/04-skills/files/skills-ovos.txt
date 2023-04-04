@@ -1,3 +1,4 @@
+# Move some of these that are needed by core
 ovos-skill-date-time==0.2.2
 ovos-skill-naptime==0.2.2
 ovos-skill-personal==0.0.3

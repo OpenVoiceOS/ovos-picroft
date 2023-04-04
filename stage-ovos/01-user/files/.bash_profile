@@ -7,11 +7,6 @@ case :$PATH: in
   *) PATH=/home/ovos/.local/bin:$PATH ;;
 esac
 
-if [ -f /first_boot ]; then
-  . /first_boot
-  rm /first_boot
-fi
-
 if [ -n "$BASH_VERSION" ]; then
   # include .bashrc if it exists
   if [ -f "$HOME/.bashrc" ]; then

@@ -137,15 +137,7 @@ function install_extra_skills (){
     pip install git+https://github.com/OpenVoiceOS/skill-ovos-somafm
     pip install git+https://github.com/OpenVoiceOS/skill-ovos-youtube-music
 
-    # non pip skills
-    if [[ ! -d $HOME/.local/share/mycroft/skills ]]; then
-        mkdir -p $HOME/.local/share/mycroft/skills
-    fi
-    cd $HOME/.local/share/mycroft/skills
-    # jarbasskills
-    git clone https://github.com/JarbasSkills/skill-icanhazdadjokes.git
-    pip install -r skill-icanhazdadjokes/requirements.txt
-    cd $HOME
+    pip install git+https://github.com/JarbasSkills/skill-icanhazdadjokes
     echo
     echo "Done installing extra skills"
     echo
@@ -188,14 +180,22 @@ if [[ $install == Y* || $install == y* ]]; then
 
     echo "Done installing OVOS"
     echo
-    read -p "Would you like to start ovos now? (Y/n): " start
-    if [[ -z "$start" || $start == y* || $start == Y* ]]; then
-        systemctl --user start ovos
+    if [[ $systemd="YES" ]]; then
+        read -p "Would you like to start ovos now? (Y/n): " start
+        if [[ -z "$start" || $start == y* || $start == Y* ]]; then
+            systemctl --user start ovos
 
-    else
-        echo
-        echo "You can start the ovos services with `systemctl --user start ovos`"
-        echo
+        else
+            if [[ $enabled == "YES" ]]; then
+                echo
+                echo "OVOS will be started on next reboot"
+                echo
+            else
+                echo
+                echo "You can start the ovos services with `systemctl --user start ovos`"
+                echo
+            fi
+        fi
     fi
 
     echo

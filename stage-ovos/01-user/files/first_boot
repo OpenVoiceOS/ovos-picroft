@@ -1,5 +1,0 @@
-sudo systemctl enable NetworkManager
-sudo systemctl start NetworkManager
-
-sudo systemctl enable ovos-admin-phal
-sudo systemctl start ovos-admin-phal

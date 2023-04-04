@@ -6,4 +6,3 @@ git+https://github.com/OpenVoiceOS/ovos-cli-client
 ovos-bus-client
 ovos-vad-plugin-webrtcvad==0.0.1
 git+https://github.com/OpenVoiceOS/ovos-plugin-manager
-
