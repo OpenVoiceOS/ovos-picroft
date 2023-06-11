@@ -5,84 +5,90 @@ TOP="stage-ovos/00-build/files"
 function install_core (){
     echo "installing core"
     echo
-    pip install -U pip
+    pip3 install -U pip
 
     # install ovos-core - ovos-backend-client has conflicting dependencies
-    pip install git+https://github.com/OpenVoiceOS/ovos-backend-client
-    pip install git+https://github.com/OpenVoiceOS/ovos-core
-    pip install git+https://github.com/OpenVoiceOS/ovos-audio
-    pip install git+https://github.com/OpenVoiceOS/ovos-ocp-audio-plugin
-    pip install tornado
-    pip install git+https://github.com/OpenVoiceOS/ovos-messagebus
-    pip install adapt-parser~=1.0.0
-    pip install padacioso~=0.2
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-backend-client
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-core
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-audio
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-ocp-audio-plugin
+    pip3 install tornado
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-messagebus
+    pip3 install adapt-parser~=1.0.0
+    pip3 install padacioso~=0.2
 
     # ovos voice depends on ovos-listener
-    pip install git+https://github.com/OpenVoiceOS/ovos-listener
-    pip install git+https://github.com/OpenVoiceOS/ovos-microphone-plugin-alsa
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-listener
+
+    # ovos_listener.mic tries to create VAD engine with ovos-vad-plugin-webrtcvad
+    pip3 install ovos-vad-plugin-webrtcvad
 
     # dinkum listener
-#    pip install git+https://github.com/OpenVoiceOS/ovos-dinkum-listener
-#    pip install git+https://github.com/OpenVoiceOS/ovos-vad-plugin-silero
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-dinkum-listener
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-vad-plugin-silero
     #Precise-lite cluster
-#    sudo apt install -y python3-scipy
-#    pip install git+https://github.com/OpenVoiceOS/ovos-ww-plugin-precise-lite
-#    pip3 install --upgrade pip
-#    python3 -m pip install --upgrade setuptools
-#    pip3 install --no-cache-dir --force-reinstall -Iv grpcio 
-#    pip3 install --no-cache-dir --force-reinstall -Iv grpcio-tools
-#    pip3 install tflite_runtime
+    sudo apt install -y python3-scipy
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-ww-plugin-precise-lite
+    python3 -m pip3 install --upgrade setuptools
+    pip3 install --no-cache-dir --force-reinstall -Iv grpcio 
+    pip3 install --no-cache-dir --force-reinstall -Iv grpcio-tools
+    # pip3 install tflite_runtime # can be problematic so...
+    # we install full tensorflow (because it just works, takes a while to install)
+    sudo apt install libatlas-base-dev
+    pip3 install tensorflow
 
-    pip install PyYAML
-    pip install git+https://github.com/OpenVoiceOS/ovos-workshop
-    pip install fann2
-    pip install padatious~=0.4.8
-    pip install git+https://github.com/OpenVoiceOS/ovos-lingua-franca
-    pip install PyAudio~=0.2
-    pip install git+https://github.com/OpenVoiceOS/ovos-ww-plugin-pocketsphinx
-    pip install git+https://github.com/OpenVoiceOS/ovos-ww-plugin-precise
-#    pip install git+https://github.com/OpenVoiceOS/ovos-ww-plugin-vosk
+    pip3 install PyYAML
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-workshop
+    pip3 install fann2
+    pip3 install padatious~=0.4.8
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-lingua-franca
+    pip3 install PyAudio~=0.2
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-ww-plugin-pocketsphinx
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-ww-plugin-precise
+#    pip3 install git+https://github.com/OpenVoiceOS/ovos-ww-plugin-vosk
 
     # install stt
-    pip install git+https://github.com/OpenVoiceOS/ovos-stt-plugin-server
-    pip install git+https://github.com/OpenVoiceOS/ovos-stt-plugin-selene
-#    pip install git+https://github.com/OpenVoiceOS/ovos-stt-plugin-vosk
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-stt-plugin-server
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-stt-plugin-selene
+#    pip3 install git+https://github.com/OpenVoiceOS/ovos-stt-plugin-vosk
 
     # install text to speech
-    pip install git+https://github.com/OpenVoiceOS/ovos-tts-plugin-mimic3-server
-    pip install git+https://github.com/OpenVoiceOS/ovos-tts-server-plugin
-    pip install git+https://github.com/OpenVoiceOS/ovos-tts-plugin-mimic
-    pip install git+https://github.com/OpenVoiceOS/ovos-tts-plugin-mimic2
-    pip install git+https://github.com/OpenVoiceOS/ovos-tts-plugin-google-tx
+    # https://stackoverflow.com/questions/7088672/pyaudio-working-but-spits-out-error-messages-each-time
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-microphone-plugin-alsa
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-tts-plugin-mimic3-server
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-tts-server-plugin
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-tts-plugin-mimic
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-tts-plugin-mimic2
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-tts-plugin-google-tx
 
-    pip install git+https://github.com/OpenVoiceOS/ovos-config
-    pip install git+https://github.com/OpenVoiceOS/ovos-utils
-    pip install git+https://github.com/OpenVoiceOS/ovos-bus-client
-    pip install git+https://github.com/OpenVoiceOS/ovos-plugin-manager
-    pip install git+https://github.com/OpenVoiceOS/ovos-workshop
-    pip install git+https://github.com/OpenVoiceOS/ovos-lingua-franca
-    pip install git+https://github.com/OpenVoiceOS/ovos-cli-client
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-config
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-utils
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-bus-client
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-plugin-manager
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-workshop
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-lingua-franca
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-cli-client
 
     # install phal components
-    pip install git+https://github.com/OpenVoiceOS/ovos-PHAL
-    pip install git+https://github.com/OpenVoiceOS/ovos-phal-plugin-connectivity-events
-    pip install git+https://github.com/OpenVoiceOS/ovos-phal-plugin-system
-    pip install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-ipgeo
-    pip install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-oauth
-    pip install git+https://github.com/OpenVoiceOS/ovos-phal-plugin-dashboard
-    pip install git+https://github.com/OpenVoiceOS/ovos-phal-plugin-alsa
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-phal-plugin-connectivity-events
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-phal-plugin-system
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-ipgeo
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-oauth
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-phal-plugin-dashboard
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-phal-plugin-alsa
 
     sudo apt install -y pulseaudio
-    pip install git+https://github.com/OpenVoiceOS/ovos-phal-plugin-pulseaudio
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-phal-plugin-pulseaudio
 
     # install required skills
-    pip install git+https://github.com/OpenVoiceOS/skill-ovos-volume
-    pip install git+https://github.com/OpenVoiceOS/skill-ovos-fallback-unknown
-    pip install git+https://github.com/OpenVoiceOS/skill-ovos-stop
-    pip install git+https://github.com/OpenVoiceOS/skill-alerts
-    pip install git+https://github.com/OpenVoiceOS/skill-ovos-personal
-    pip install git+https://github.com/OpenVoiceOS/skill-ovos-naptime
-    pip install git+https://github.com/OpenVoiceOS/skill-ovos-date-time
+    pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-volume
+    pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-fallback-unknown
+    pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-stop
+    pip3 install git+https://github.com/OpenVoiceOS/skill-alerts
+    pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-personal
+    pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-naptime
+    pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-date-time
     echo
     echo "Done installing ovos-core"
     }
@@ -102,7 +108,7 @@ function install_systemd (){
     chmod +x $HOME/.local/bin/ovos-systemd*
 
     # sdnotify is required
-    pip install sdnotify
+    pip3 install sdnotify
 
     # install the service files
     if [[ ! -d $HOME/.config/systemd/user ]]; then
@@ -117,8 +123,8 @@ function install_systemd (){
         echo
         systemctl --user enable ovos
         systemctl --user enable ovos-messagebus
-        systemctl --user disable ovos-dinkum-listener
-        systemctl --user enable ovos-listener
+        systemctl --user enable ovos-dinkum-listener
+        systemctl --user disable ovos-listener
         systemctl --user enable ovos-audio
         systemctl --user enable ovos-voice
         systemctl --user enable ovos-skills
@@ -136,35 +142,35 @@ function install_extra_skills (){
     echo "Installing extra skills"
     echo
     # from NeonGeckoCom
-    pip install git+https://github.com/NeonGeckoCom/skill-user_settings
-    pip install git+https://github.com/NeonGeckoCom/skill-spelling
-    pip install git+https://github.com/NeonGeckoCom/skill-local_music
-    pip install git+https://github.com/NeonGeckoCom/skill-caffeinewiz
+    pip3 install git+https://github.com/NeonGeckoCom/skill-user_settings
+    pip3 install git+https://github.com/NeonGeckoCom/skill-spelling
+    pip3 install git+https://github.com/NeonGeckoCom/skill-local_music
+    pip3 install git+https://github.com/NeonGeckoCom/skill-caffeinewiz
 
-    pip install git+https://github.com/OpenVoiceOS/skill-ovos-weather
-    pip install git+https://github.com/OpenVoiceOS/skill-ovos-hello-world
+    pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-weather
+    pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-hello-world
 
     # common query
-    pip install git+https://github.com/OpenVoiceOS/skill-ovos-ddg
-    pip install git+https://github.com/OpenVoiceOS/skill-ovos-wolfie
-    pip install git+https://github.com/OpenVoiceOS/skill-ovos-wikipedia
+    pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-ddg
+    pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-wolfie
+    pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-wikipedia
 
     # fallback
-    pip install git+https://github.com/OpenVoiceOS/skill-ovos-fallback-chatgpt
+    pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-fallback-chatgpt
 
     # OCP
-    pip install git+https://github.com/OpenVoiceOS/skill-ovos-news
-    pip install git+https://github.com/OpenVoiceOS/skill-ovos-somafm
-    pip install git+https://github.com/OpenVoiceOS/skill-ovos-youtube-music
+    pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-news
+    pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-somafm
+    pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-youtube-music
 
-    # non pip skills
+    # non pip3 skills
     if [[ ! -d $HOME/.local/share/mycroft/skills ]]; then
         mkdir -p $HOME/.local/share/mycroft/skills
     fi
     cd $HOME/.local/share/mycroft/skills
     # jarbasskills
     git clone https://github.com/JarbasSkills/skill-icanhazdadjokes.git
-    pip install -r skill-icanhazdadjokes/requirements.txt
+    pip3 install -r skill-icanhazdadjokes/requirements.txt
     cd $HOME
     echo
     echo "Done installing extra skills"
