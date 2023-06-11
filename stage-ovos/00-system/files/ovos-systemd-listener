@@ -14,6 +14,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ##########################################################################
-
+import sdnotify
 from ovos_listener.__main__ import main
-main()
+
+n = sdnotify.SystemdNotifier()
+
+def notify_ready():
+    n.notify('READY=1')
+    print('Startup of Ovos Listener service complete')
+
+def notify_stopping():
+    n.notify('STOPPING=1')
+    print('Stopping the Ovos Listener service')
+
+main(ready_hook=notify_ready, stopping_hook=notify_stopping)
