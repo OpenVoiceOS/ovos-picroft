@@ -1,0 +1,20 @@
+[Unit]
+Description=OVOS Listener
+PartOf=ovos.service
+After=ovos.service
+After=ovos-messagebus.service
+After=pulseaudio.service
+
+[Service]
+Type=notify
+ExecStart=/usr/libexec/ovos-systemd-dinkum-listener
+TimeoutStartSec=1m
+TimeoutStopSec=1m
+Restart=on-failure
+StartLimitInterval=5min
+StartLimitBurst=4
+#StartLimitAction=reboot-force
+#WatchdogSec=30s
+
+[Install]
+WantedBy=ovos.service
