@@ -7,7 +7,7 @@ After=pulseaudio.service
 
 [Service]
 Type=notify
-ExecStart=/usr/libexec/ovos-systemd-dinkum-listener
+ExecStart=/usr/libexec/ovos-systemd-listener
 TimeoutStartSec=1m
 TimeoutStopSec=1m
 Restart=on-failure
