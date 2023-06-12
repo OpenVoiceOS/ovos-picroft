@@ -35,7 +35,7 @@ function install_core (){
     # pip3 install tflite_runtime # can be problematic so...
     # we install full tensorflow (because it just works, takes a while to install)
     sudo apt install libatlas-base-dev
-    pip3 install tensorflow
+    pip3 install tensorflow --no-cache-dir
 
     pip3 install PyYAML
     pip3 install git+https://github.com/OpenVoiceOS/ovos-workshop
