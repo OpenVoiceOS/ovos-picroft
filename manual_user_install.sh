@@ -39,7 +39,7 @@ function install_core (){
 
     pip3 install PyYAML
     pip3 install git+https://github.com/OpenVoiceOS/ovos-workshop
-    pip3 install fann2
+    sudo apt install -y python3-fann2
     pip3 install padatious~=0.4.8
     pip3 install git+https://github.com/OpenVoiceOS/ovos-lingua-franca
     pip3 install PyAudio~=0.2
