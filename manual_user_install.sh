@@ -21,7 +21,7 @@ function install_core (){
     pip3 install git+https://github.com/OpenVoiceOS/ovos-listener
 
     # ovos_listener.mic tries to create VAD engine with ovos-vad-plugin-webrtcvad
-    pip3 install ovos-vad-plugin-webrtcvad
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-vad-plugin-webrtcvad
 
     # dinkum listener
     pip3 install git+https://github.com/OpenVoiceOS/ovos-dinkum-listener
