@@ -34,7 +34,7 @@ function install_core (){
     pip3 install --no-cache-dir --force-reinstall -Iv grpcio-tools
     # pip3 install tflite_runtime # can be problematic so...
     # we install full tensorflow (because it just works, takes a while to install)
-    sudo apt install libatlas-base-dev
+    sudo apt install -y libatlas-base-dev
     pip3 install tensorflow --no-cache-dir
 
     pip3 install PyYAML
