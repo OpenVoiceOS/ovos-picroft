@@ -221,11 +221,6 @@ if [[ $install == Y* || $install == y* ]]; then
     read -p "Would you like to start ovos now? (Y/n): " start
     if [[ -z "$start" || $start == y* || $start == Y* ]]; then
         systemctl --user start ovos
-        
-        ovos-config set -k system_unit -v imperial
-        # ovos-config set -k system_unit -v metric
-        
-        
     else
         echo
         echo "You can start the ovos services with 'systemctl --user start ovos'"
