@@ -18,6 +18,7 @@ function install_core (){
     pip3 install padacioso~=0.2
 
     # ovos voice depends on ovos-listener
+    sudo apt install -y python3-scipy
     pip3 install git+https://github.com/OpenVoiceOS/ovos-listener
 
     # ovos_listener.mic tries to create VAD engine with ovos-vad-plugin-webrtcvad
@@ -27,7 +28,6 @@ function install_core (){
     pip3 install git+https://github.com/OpenVoiceOS/ovos-dinkum-listener
     pip3 install git+https://github.com/OpenVoiceOS/ovos-vad-plugin-silero
     #Precise-lite cluster
-    sudo apt install -y python3-scipy
     pip3 install git+https://github.com/OpenVoiceOS/ovos-ww-plugin-precise-lite
     python3 -m pip3 install --upgrade setuptools
     pip3 install --no-cache-dir --force-reinstall -Iv grpcio 
