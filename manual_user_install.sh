@@ -79,6 +79,7 @@ function install_core (){
     pip3 install git+https://github.com/OpenVoiceOS/ovos-phal-plugin-alsa
 
     sudo apt install -y pulseaudio
+    pulseaudio -D
     pip3 install git+https://github.com/OpenVoiceOS/ovos-phal-plugin-pulseaudio
 
     # install required skills
