@@ -5,7 +5,6 @@
 function install_core (){
     echo "Installing OVOS core"
     echo
-    pip3 install -U pip
 
     # install ovos-core - ovos-backend-client has conflicting dependencies
     pip3 install git+https://github.com/OpenVoiceOS/ovos-backend-client
@@ -58,6 +57,7 @@ function install_core (){
     sed -i '/\@deprecated/d' $HOME/.local/lib/python3.9/site-packages/ovos_utils/fingerprinting.py
     sed -i '/\@deprecated/d' $HOME/.local/lib/python3.9/site-packages/ovos_utils/configuration.py
     sed -i '/\@deprecated/d' $HOME/.local/lib/python3.9/site-packages/ovos_utils/ovos_service_api.py
+    sed -i '/\@deprecated/d' $HOME/.local/lib/python3.9/site-packages/ovos_utils/signal.py
     pip3 install git+https://github.com/OpenVoiceOS/ovos-bus-client
     pip3 install git+https://github.com/OpenVoiceOS/ovos-plugin-manager
     pip3 install git+https://github.com/OpenVoiceOS/ovos-workshop
@@ -230,7 +230,6 @@ if [[ $install == Y* || $install == y* ]]; then
     fi
 
     echo "Don't forget to check your microphone volume with alsamixer, arecord, and aplay."
-    # https://stackoverflow.com/questions/7088672/pyaudio-working-but-spits-out-error-messages-each-time
     echo
     echo "Enjoy your OVOS device"
 fi
