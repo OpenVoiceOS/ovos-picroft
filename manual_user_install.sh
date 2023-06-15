@@ -1,9 +1,9 @@
 #!/bin/bash
 
-TOP="stage-ovos/00-build/files"
+# tested with a clean 64 bit installation of Raspbian-Lite
 
 function install_core (){
-    echo "installing core"
+    echo "Installing OVOS core"
     echo
     pip3 install -U pip
 
@@ -14,46 +14,38 @@ function install_core (){
     pip3 install git+https://github.com/OpenVoiceOS/ovos-ocp-audio-plugin
     pip3 install tornado
     pip3 install git+https://github.com/OpenVoiceOS/ovos-messagebus
-    pip3 install adapt-parser~=1.0.0
-    pip3 install padacioso~=0.2
-
-    # ovos voice depends on ovos-listener
-    sudo apt install -y python3-scipy
-    pip3 install git+https://github.com/OpenVoiceOS/ovos-listener
-
-    # ovos_listener.mic tries to create VAD engine with ovos-vad-plugin-webrtcvad
-    pip3 install git+https://github.com/OpenVoiceOS/ovos-vad-plugin-webrtcvad
+    pip3 install adapt-parser
+    pip3 install padacioso
 
     # dinkum listener
     pip3 install git+https://github.com/OpenVoiceOS/ovos-dinkum-listener
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-vad-plugin-webrtcvad
     pip3 install git+https://github.com/OpenVoiceOS/ovos-vad-plugin-silero
-    #Precise-lite cluster
+
+    #Precise-lite wake-word cluster
     pip3 install git+https://github.com/OpenVoiceOS/ovos-ww-plugin-precise-lite
     python3 -m pip3 install --upgrade setuptools
-    pip3 install --no-cache-dir --force-reinstall -Iv grpcio 
-    pip3 install --no-cache-dir --force-reinstall -Iv grpcio-tools
-    # pip3 install tflite_runtime # can be problematic so...
+    # if pip3 install tflite_runtime is problematic try:
     # we install full tensorflow (because it just works, takes a while to install)
-    sudo apt install -y libatlas-base-dev
-    pip3 install tensorflow --no-cache-dir
-
+    # sudo apt install -y libatlas-base-dev
+    #  pip3 install tensorflow --no-cache-dir
+    pip3 install tflite_runtime
     pip3 install PyYAML
     pip3 install git+https://github.com/OpenVoiceOS/ovos-workshop
     sudo apt install -y python3-fann2
-    pip3 install padatious~=0.4.8
+    pip3 install padatious
     pip3 install git+https://github.com/OpenVoiceOS/ovos-lingua-franca
-    pip3 install PyAudio~=0.2
+    pip3 install PyAudio
     pip3 install git+https://github.com/OpenVoiceOS/ovos-ww-plugin-pocketsphinx
     pip3 install git+https://github.com/OpenVoiceOS/ovos-ww-plugin-precise
-#    pip3 install git+https://github.com/OpenVoiceOS/ovos-ww-plugin-vosk
+    # pip3 install git+https://github.com/OpenVoiceOS/ovos-ww-plugin-vosk
 
-    # install stt
+    # install speech to text
     pip3 install git+https://github.com/OpenVoiceOS/ovos-stt-plugin-server
     pip3 install git+https://github.com/OpenVoiceOS/ovos-stt-plugin-selene
-#    pip3 install git+https://github.com/OpenVoiceOS/ovos-stt-plugin-vosk
+    # pip3 install git+https://github.com/OpenVoiceOS/ovos-stt-plugin-vosk
 
     # install text to speech
-    # https://stackoverflow.com/questions/7088672/pyaudio-working-but-spits-out-error-messages-each-time
     pip3 install git+https://github.com/OpenVoiceOS/ovos-microphone-plugin-alsa
     pip3 install git+https://github.com/OpenVoiceOS/ovos-tts-plugin-mimic3-server
     pip3 install git+https://github.com/OpenVoiceOS/ovos-tts-server-plugin
@@ -63,6 +55,9 @@ function install_core (){
 
     pip3 install git+https://github.com/OpenVoiceOS/ovos-config
     pip3 install git+https://github.com/OpenVoiceOS/ovos-utils
+    sed -i '/\@deprecated/d' $HOME/.local/lib/python3.9/site-packages/ovos_utils/fingerprinting.py
+    sed -i '/\@deprecated/d' $HOME/.local/lib/python3.9/site-packages/ovos_utils/configuration.py
+    sed -i '/\@deprecated/d' $HOME/.local/lib/python3.9/site-packages/ovos_utils/ovos_service_api.py
     pip3 install git+https://github.com/OpenVoiceOS/ovos-bus-client
     pip3 install git+https://github.com/OpenVoiceOS/ovos-plugin-manager
     pip3 install git+https://github.com/OpenVoiceOS/ovos-workshop
@@ -91,17 +86,20 @@ function install_core (){
     pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-naptime
     pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-date-time
     echo
-    echo "Done installing ovos-core"
+    echo "Done installing OVOS core"
     }
 
 function install_systemd (){
     echo
     echo "Installing systemd files"
     echo
+
     cd $HOME/raspbian-ovos/stage-ovos/00-system/files
     sed -i s/multi-user/default/g ovos.service
     for f in *.service ; do
       sed -i s,/usr/libexec,/home/ovos/.local/bin,g $f
+      # extend the timeouts
+      # sed -i s/=1m/=2m/g $f
     done
 
     # install the hook files
@@ -125,9 +123,7 @@ function install_systemd (){
         systemctl --user enable ovos
         systemctl --user enable ovos-messagebus
         systemctl --user enable ovos-dinkum-listener
-        systemctl --user disable ovos-listener
         systemctl --user enable ovos-audio
-        systemctl --user enable ovos-voice
         systemctl --user enable ovos-skills
         systemctl --user enable ovos-phal
         systemctl --user enable ovos-admin-phal
@@ -202,11 +198,16 @@ echo
 echo "We are now ready to install OVOS"
 echo
 read -p "Type 'Y' to start install (any other key aborts): " install
+
+# update your system
+sudo apt update -y
+sudo apt upgrade -y
+
 if [[ $install == Y* || $install == y* ]]; then
     if [[ ! -d $HOME/.local/bin ]]; then
         mkdir -p $HOME/.local/bin
     fi
-    PATH=/home/ovos/.local/bin:$PATH
+    export PATH=/home/ovos/.local/bin:$PATH
     install_core
 
     if [[ $systemd == "YES" ]]; then
@@ -228,6 +229,8 @@ if [[ $install == Y* || $install == y* ]]; then
         echo
     fi
 
+    echo "Don't forget to check your microphone volume with alsamixer, arecord, and aplay."
+    # https://stackoverflow.com/questions/7088672/pyaudio-working-but-spits-out-error-messages-each-time
     echo
     echo "Enjoy your OVOS device"
 fi
