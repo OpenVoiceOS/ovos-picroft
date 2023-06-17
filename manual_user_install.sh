@@ -6,58 +6,44 @@ function install_core (){
     echo "Installing OVOS core"
     echo
 
-    # install ovos-core - ovos-backend-client has conflicting dependencies
+    # set up the Raspberry Pi
+    sudo apt install -y build-essential python3-dev python3-pip swig libssl-dev libfann-dev portaudio19-dev libpulse-dev cmake libncurses-dev pulseaudio-utils pulseaudio
+    pulseaudio -D
+
+    # install ovos-core
     pip3 install git+https://github.com/OpenVoiceOS/ovos-backend-client
     pip3 install git+https://github.com/OpenVoiceOS/ovos-core
     pip3 install git+https://github.com/OpenVoiceOS/ovos-audio
     pip3 install git+https://github.com/OpenVoiceOS/ovos-ocp-audio-plugin
-    pip3 install tornado
     pip3 install git+https://github.com/OpenVoiceOS/ovos-messagebus
-    pip3 install adapt-parser
-    pip3 install padacioso
+    # pip3 install padatious
 
     # dinkum listener
     pip3 install git+https://github.com/OpenVoiceOS/ovos-dinkum-listener
-    pip3 install git+https://github.com/OpenVoiceOS/ovos-vad-plugin-webrtcvad
     pip3 install git+https://github.com/OpenVoiceOS/ovos-vad-plugin-silero
 
-    #Precise-lite wake-word cluster
+    #Precise-lite wake-word (ww) cluster
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-ww-plugin-precise
     pip3 install git+https://github.com/OpenVoiceOS/ovos-ww-plugin-precise-lite
-    python3 -m pip3 install --upgrade setuptools
-    # if pip3 install tflite_runtime is problematic try:
-    # we install full tensorflow (because it just works, takes a while to install)
-    # sudo apt install -y libatlas-base-dev
-    #  pip3 install tensorflow --no-cache-dir
+    pip3 install --upgrade setuptools
     pip3 install tflite_runtime
     pip3 install PyYAML
     pip3 install git+https://github.com/OpenVoiceOS/ovos-workshop
-    sudo apt install -y python3-fann2
-    pip3 install padatious
     pip3 install git+https://github.com/OpenVoiceOS/ovos-lingua-franca
     pip3 install PyAudio
-    pip3 install git+https://github.com/OpenVoiceOS/ovos-ww-plugin-pocketsphinx
-    pip3 install git+https://github.com/OpenVoiceOS/ovos-ww-plugin-precise
-    # pip3 install git+https://github.com/OpenVoiceOS/ovos-ww-plugin-vosk
 
-    # install speech to text
-    pip3 install git+https://github.com/OpenVoiceOS/ovos-stt-plugin-server
-    pip3 install git+https://github.com/OpenVoiceOS/ovos-stt-plugin-selene
-    # pip3 install git+https://github.com/OpenVoiceOS/ovos-stt-plugin-vosk
-
-    # install text to speech
+    # install speech to text (stt)
     pip3 install git+https://github.com/OpenVoiceOS/ovos-microphone-plugin-alsa
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-stt-plugin-server
+
+    # install text to speech (tts)
     pip3 install git+https://github.com/OpenVoiceOS/ovos-tts-plugin-mimic3-server
+    sudo apt install -y espeak-ng
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-tts-plugin-piper
     pip3 install git+https://github.com/OpenVoiceOS/ovos-tts-server-plugin
-    pip3 install git+https://github.com/OpenVoiceOS/ovos-tts-plugin-mimic
-    pip3 install git+https://github.com/OpenVoiceOS/ovos-tts-plugin-mimic2
-    pip3 install git+https://github.com/OpenVoiceOS/ovos-tts-plugin-google-tx
 
     pip3 install git+https://github.com/OpenVoiceOS/ovos-config
     pip3 install git+https://github.com/OpenVoiceOS/ovos-utils
-    sed -i '/\@deprecated/d' $HOME/.local/lib/python3.9/site-packages/ovos_utils/fingerprinting.py
-    sed -i '/\@deprecated/d' $HOME/.local/lib/python3.9/site-packages/ovos_utils/configuration.py
-    sed -i '/\@deprecated/d' $HOME/.local/lib/python3.9/site-packages/ovos_utils/ovos_service_api.py
-    sed -i '/\@deprecated/d' $HOME/.local/lib/python3.9/site-packages/ovos_utils/signal.py
     pip3 install git+https://github.com/OpenVoiceOS/ovos-bus-client
     pip3 install git+https://github.com/OpenVoiceOS/ovos-plugin-manager
     pip3 install git+https://github.com/OpenVoiceOS/ovos-workshop
@@ -73,10 +59,6 @@ function install_core (){
     pip3 install git+https://github.com/OpenVoiceOS/ovos-phal-plugin-dashboard
     pip3 install git+https://github.com/OpenVoiceOS/ovos-phal-plugin-alsa
 
-    sudo apt install -y pulseaudio
-    pulseaudio -D
-    pip3 install git+https://github.com/OpenVoiceOS/ovos-phal-plugin-pulseaudio
-
     # install required skills
     pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-volume
     pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-fallback-unknown
@@ -85,6 +67,18 @@ function install_core (){
     pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-personal
     pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-naptime
     pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-date-time
+
+    # You can uncomment these lines if the deprecation notices are flooding your logs or slowing the system
+    #sed -i '/\@deprecated/d' $HOME/.local/lib/python3.9/site-packages/ovos_utils/fingerprinting.py
+    #sed -i '/\@deprecated/d' $HOME/.local/lib/python3.9/site-packages/ovos_utils/configuration.py
+    #sed -i '/\@deprecated/d' $HOME/.local/lib/python3.9/site-packages/ovos_utils/ovos_service_api.py
+    #sed -i '/\@deprecated/d' $HOME/.local/lib/python3.9/site-packages/ovos_utils/signal.py
+
+    if [[ ! -d $HOME/.config/mycroft ]]; then
+        mkdir -p $HOME/.config/mycroft
+    fi
+    cp $HOME/raspbian-ovos/stage-ovos/02-ovos/files/mycroft.conf $HOME/.config/mycroft/
+
     echo
     echo "Done installing OVOS core"
     }
@@ -160,20 +154,21 @@ function install_extra_skills (){
     pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-somafm
     pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-youtube-music
 
-    # non pip3 skills
+    # fun
+    pip3 install git+https://github.com/JarbasSkills/skill-icanhazdadjokes
+
+    # Here is where to include your local skills
     if [[ ! -d $HOME/.local/share/mycroft/skills ]]; then
         mkdir -p $HOME/.local/share/mycroft/skills
     fi
-    cd $HOME/.local/share/mycroft/skills
-    # jarbasskills
-    git clone https://github.com/JarbasSkills/skill-icanhazdadjokes.git
-    pip3 install -r skill-icanhazdadjokes/requirements.txt
+
     cd $HOME
     echo
     echo "Done installing extra skills"
     echo
     }
 
+############################################################################################
 echo
 echo "This file will install ovos-core to this device"
 echo "using the latest commits from github."
@@ -229,8 +224,11 @@ if [[ $install == Y* || $install == y* ]]; then
         echo
     fi
 
-    echo "Don't forget to check your microphone volume with alsamixer, arecord, and aplay."
-    echo
+    echo "Consider creating an .asoundrc and check your microphone with alsamixer, arecord, and aplay."
+    echo ""
+    echo "You can find documentation at https://github.com/OpenVoiceOS/community-docs/blob/master/docs/install_raspbian.md?rgh-link-date=2023-06-16T19%3A13%3A14Z#step-3-install-ovos-core"
+    echo ""
+
     echo "Enjoy your OVOS device"
 fi
 
