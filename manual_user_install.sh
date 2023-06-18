@@ -77,8 +77,8 @@ function install_core (){
     if [[ ! -d $HOME/.config/mycroft ]]; then
         mkdir -p $HOME/.config/mycroft
     fi
-    cp $HOME/raspbian-ovos/stage-ovos/02-ovos/files/mycroft.conf $HOME/.config/mycroft/
-
+    cp $SCRIPT_DIR/stage-ovos/02-ovos/files/mycroft.conf $HOME/.config/mycroft/
+    echo $SCRIPT_DIR
     echo
     echo "Done installing OVOS core"
     }
@@ -88,7 +88,7 @@ function install_systemd (){
     echo "Installing systemd files"
     echo
 
-    cd $HOME/raspbian-ovos/stage-ovos/00-system/files
+    cd $SCRIPT_DIR/stage-ovos/00-system/files
     sed -i s/multi-user/default/g ovos.service
     for f in *.service ; do
       sed -i s,/usr/libexec,/home/ovos/.local/bin,g $f
@@ -123,6 +123,8 @@ function install_systemd (){
         systemctl --user enable ovos-admin-phal
         systemctl --user daemon-reload
     fi
+
+    cd $SCRIPT_DIR
     echo
     echo "Done installing systemd files"
     echo
@@ -162,7 +164,6 @@ function install_extra_skills (){
         mkdir -p $HOME/.local/share/mycroft/skills
     fi
 
-    cd $HOME
     echo
     echo "Done installing extra skills"
     echo
@@ -175,6 +176,10 @@ echo "using the latest commits from github."
 echo
 echo "First lets setup some things."
 echo
+
+
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
 read -p "Do you want to install systemd files (Y/n): " systemd
 if [[ -z "$systemd" || $systemd == y* || $systemd == Y* ]]; then
     systemd="YES"
@@ -202,7 +207,7 @@ if [[ $install == Y* || $install == y* ]]; then
     if [[ ! -d $HOME/.local/bin ]]; then
         mkdir -p $HOME/.local/bin
     fi
-    export PATH=/home/ovos/.local/bin:$PATH
+    PATH=/home/ovos/.local/bin:$PATH
     install_core
 
     if [[ $systemd == "YES" ]]; then
