@@ -228,12 +228,13 @@ if [[ $install == Y* || $install == y* ]]; then
         echo "You can start the ovos services with 'systemctl --user start ovos'"
         echo
     fi
-
-    echo "Consider creating an .asoundrc and check your microphone with alsamixer, arecord, and aplay."
     echo ""
-    echo "You can find documentation at https://github.com/OpenVoiceOS/community-docs/blob/master/docs/install_raspbian.md?rgh-link-date=2023-06-16T19%3A13%3A14Z#step-3-install-ovos-core"
+    echo "1. Consider creating an .asoundrc and check your microphone with alsamixer, arecord, and aplay."
     echo ""
-
+    echo "2. You can find documentation at https://github.com/OpenVoiceOS/community-docs/blob/master/docs/install_raspbian.md?rgh-link-date=2023-06-16T19%3A13%3A14Z#step-3-install-ovos-core"
+    echo ""
+    echo "3. After a reboot /home/ovos/.local/bin will be added to your path and give you access the ovos command line utilities."
+    echo ""
     echo "Enjoy your OVOS device"
 fi
 
