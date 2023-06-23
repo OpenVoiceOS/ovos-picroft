@@ -91,7 +91,7 @@ function install_systemd (){
     cd $SCRIPT_DIR/stage-ovos/00-system/files
     sed -i s/multi-user/default/g ovos.service
     for f in *.service ; do
-      sed -i s,/usr/libexec,/home/ovos/.local/bin,g $f
+      sed -i s,/usr/libexec,$HOME/.local/bin,g $f
       # extend the timeouts
       # sed -i s/=1m/=2m/g $f
     done
@@ -207,7 +207,7 @@ if [[ $install == Y* || $install == y* ]]; then
     if [[ ! -d $HOME/.local/bin ]]; then
         mkdir -p $HOME/.local/bin
     fi
-    PATH=/home/ovos/.local/bin:$PATH
+    PATH=$HOME/.local/bin:$PATH
     install_core
 
     if [[ $systemd == "YES" ]]; then
@@ -231,9 +231,9 @@ if [[ $install == Y* || $install == y* ]]; then
     echo ""
     echo "1. Consider creating an .asoundrc and check your microphone with alsamixer, arecord, and aplay."
     echo ""
-    echo "2. You can find documentation at https://github.com/OpenVoiceOS/community-docs/blob/master/docs/install_raspbian.md?rgh-link-date=2023-06-16T19%3A13%3A14Z#step-3-install-ovos-core"
+    echo "2. You can find documentation at https://openvoiceos.github.io/community-docs/install_raspbian/"
     echo ""
-    echo "3. After a reboot /home/ovos/.local/bin will be added to your path and give you access the ovos command line utilities."
+    echo "3. After a reboot $HOME/.local/bin will be added to your path and give you access the ovos command line utilities."
     echo ""
     echo "Enjoy your OVOS device"
 fi
