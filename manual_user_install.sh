@@ -208,6 +208,7 @@ if [[ $install == Y* || $install == y* ]]; then
         mkdir -p $HOME/.local/bin
     fi
     PATH=$HOME/.local/bin:$PATH
+    
     install_core
 
     if [[ $systemd == "YES" ]]; then

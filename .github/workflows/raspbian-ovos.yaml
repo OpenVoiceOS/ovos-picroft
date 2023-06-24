@@ -125,9 +125,9 @@ jobs:
       - name: copy file via ssh password
         uses: appleboy/scp-action@master
         with:
-          host: downloads.openvoiceos.com
+          host: ovosimages.ziggyai.online
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          port: 22
+          port: 11226
           source: "${{ steps.build.outputs.image-path }}"
           target: "."
