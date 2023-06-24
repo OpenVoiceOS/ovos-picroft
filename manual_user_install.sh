@@ -233,7 +233,9 @@ if [[ $install == Y* || $install == y* ]]; then
     echo ""
     echo "2. You can find documentation at https://openvoiceos.github.io/community-docs/install_raspbian/"
     echo ""
-    echo "3. After a reboot $HOME/.local/bin will be added to your path and give you access the ovos command line utilities."
+    echo "3. You can find pre-built OVOS/PI images at https://ovosimages.ziggyai.online/raspbian/"
+    echo ""
+    echo "4. After a reboot $HOME/.local/bin will be added to your path and give you access the ovos command line utilities."
     echo ""
     echo "Enjoy your OVOS device"
 fi
