@@ -6,7 +6,7 @@
 
 Run OVOS on top of RaspberryPiOS
 
-Prebuilt images will be found on the [OpenVoiceOS Downloads Page](https://downloads.openvoiceos.com/images/raspbian/) once our image server is operational.
+Pre-built images can be found on the [OpenVoiceOS Downloads Page](https://ovosimages.ziggyai.online/raspbian/).
 
 Check out the [community documentation](https://openvoiceos.github.io/community-docs/install_raspbian/) for information on how to install manually or build an image yourself.
 
