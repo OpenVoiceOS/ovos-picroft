@@ -221,6 +221,10 @@ if [[ $install == Y* || $install == y* ]]; then
     
     install_core
 
+    # Patch mycroft.conf to not use ramdisk for logs
+    # Comment this section out if you wish to create and use a ramdisk
+    sudo patch ${SCRIPT_DIR}/patches/01-mycroft_conf.diff < $HOME/.config/mycroft/mycroft.conf
+
     if [[ $systemd == "YES" ]]; then
         install_systemd
     fi

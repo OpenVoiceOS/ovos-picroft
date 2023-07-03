@@ -1,0 +1,65 @@
+--- mycroft.conf	2023-07-02 19:45:46.491473166 -0600
++++ mycroft.bk	2023-07-02 20:03:11.557743593 -0600
+@@ -2,8 +2,8 @@
+     "listener": {
+         "VAD": {
+             "module": "ovos-vad-plugin-silero"
+-            }
+-        },
++        }
++    },
+     "hotwords": {
+         "hey_mycroft": {
+             "module": "ovos-ww-plugin-precise-lite",
+@@ -14,35 +14,35 @@
+             "trigger_level": 3,
+             "sensitivity": 0.5,
+             "fallback_ww": "hey_mycroft_openwakeword"
+-            },
++        },
+         "hey_mycroft_openwakeword": {
+             "module": "ovos-ww-plugin-openwakeword",
+             "threshold": 0.4,
+             "fallback_ww": "hey_mycroft_vosk"
+-            },
++        },
+         "hey_mycroft_vosk": {
+             "module": "ovos-ww-plugin-vosk",
+             "model_folder": "/home/ovos/.local/share/vosk/vosk-model-small-en-us-0.15",
+             "samples": ["hey mycroft", "hey microsoft", "hey mike roft", "hey minecraft"],
+             "rule": "fuzzy",
+             "fallback_ww": "hey_mycroft_pocketsphinx"
+-            },
+-        "hey_mycroft_pocketsphinx": {
+-            "module": "ovos-ww-plugin-pocketsphinx",
+-            "phonemes": "HH EY . M AY K R AO F T",
+-            "threshold": 1e-90,
+-            "lang": "en-us"
+-            }
+-        },
++         },
++         "hey_mycroft_pocketsphinx": {
++             "module": "ovos-ww-plugin-pocketsphinx",
++             "phonemes": "HH EY . M AY K R AO F T",
++             "threshold": 1e-90,
++             "lang": "en-us"
++         }
++    },
+     "tts": {
+         "fallback_module": "ovos-tts-plugin-mimic",
+         "ovos-tts-plugin-mimic": {
+             "voice": "ap"
+-            }
+-        },
+-    "logs": {
+-        "path": "/ramdisk/mycroft",
+-        "max_bytes": 2000000,
+-        "backup_count": 1
+         }
++    },
++    //"logs": {
++    //    "path": "/ramdisk/mycroft",
++    //    "max_bytes": 2000000,
++    //    "backup_count": 1
++    //}
+ }
