@@ -66,8 +66,8 @@ load-module module-position-event-sounds
 
 ### OpenVoiceOS Audio Settings
 load-module module-role-ducking
-load-module module-combine-sink sink_name=OpenVoiceOS
-set-default-sink OpenVoiceOS
+#load-module module-combine-sink sink_name=OpenVoiceOS
+#set-default-sink OpenVoiceOS
 
 ### Enable Echo/Noise-Cancellation
 #load-module module-echo-cancel aec_method=webrtc source_name=echoCancel_source sink_name=echoCancel_sink

@@ -13,7 +13,7 @@ jobs:
         id: build
         with:
           # Final image name.
-          image-name: raspbian-ovos-dev
+          image-name: raspbian-ovos-testing-mk1
 
           # List of stage name to execute in given order. Relative and absolute paths to
           # custom stage directories are allowed here. Note that by default pi-gen exports
@@ -130,6 +130,6 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.SSH_PORT }}
           source: "${{ steps.build.outputs.image-path }}"
-          target: "raspbian/development"
+          target: "raspbian/mark1"
           strip_components: 4
           
