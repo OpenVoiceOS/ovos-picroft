@@ -5,7 +5,12 @@ install -v -d -m 0755 "${ROOTFS_DIR}/etc/pulse"
 install -v -m 0644 files/pulseaudio-daemon.conf "${ROOTFS_DIR}/etc/pulse/"
 install -v -m 0644 files/pulseaudio-system.pa "${ROOTFS_DIR}/etc/pulse/"
 
-install -v -m 0644 files/asound.conf "${ROOTFS_DIR}/etc/"
+# Comment out `suspend_on_idle` from both system.pa and default.pa
+sed -i "s\load-module module-suspend-on-idle\#load-module module-suspend-on-idle\g" ${ROOTFS_DIR}/etc/pulse/default.pa
+sed -i "s\load-module module-suspend-on-idle\#load-module module-suspend-on-idle\g" ${ROOTFS_DIR}/etc/pulse/system.pa
+sed -i "s\load-module module-udev-detect\load-module module-udev-detect tsched=0\g" ${ROOTFS_DIR}/etc/pulse/system.pa
+
+install -v -m 0644 files/asound.state "${ROOTFS_DIR}/etc/asound.state"
 
 install -v -d -m 0755 "${ROOTFS_DIR}/etc/udev"
 install -v -d -m 0755 "${ROOTFS_DIR}/etc/udev/rules.d"

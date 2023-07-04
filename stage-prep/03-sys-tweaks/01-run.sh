@@ -2,8 +2,6 @@
 
 # Create a ramdisk
 echo "tmpfs /ramdisk tmpfs rw,nodev,nosuid,size=20M 0 0" >> "${ROOTFS_DIR}/etc/fstab"
-# TODO: setup swap space
-# DONE: uses zram. setup with run-chroot.sh
 
 install -v -m 0644 files/97-ovos.conf "${ROOTFS_DIR}/etc/sysctl.d/97-ovos.conf"
 
