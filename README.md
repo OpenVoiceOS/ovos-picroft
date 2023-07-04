@@ -35,3 +35,13 @@ It has been noted that there is no audio playback with certain output devices du
 - `sudo systemctl restart shairport-sync.service`
 
 Playback should now work
+
+## Raspotify
+
+This loads and the you can see the device in the `available devices` on the spotify app, but a premium account is needed to connect to it.  As of this writing, I do not have a premium account to test with.  Any feedback would be great.
+
+## ISSUES
+
+All issues and/or feedback is more than welcome.
+
+File them on the [raspbian-ovos issues page](https://github.com/OpenVoiceOS/raspbian-ovos/issues)

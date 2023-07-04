@@ -28,8 +28,8 @@ state.CD002 {
 	control.1 {
 		iface PCM
 		name 'Playback Channel Map'
-		value.0 25
-		value.1 25
+		value.0 30
+		value.1 30
 		comment {
 			access read
 			type INTEGER

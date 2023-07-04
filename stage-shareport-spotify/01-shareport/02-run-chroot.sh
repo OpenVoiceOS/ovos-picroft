@@ -18,3 +18,5 @@ autoreconf -fi
   --with-soxr --with-avahi --with-ssl=openssl --with-systemd --with-airplay-2
 make
 make install
+cd ..
+rm -rf shairport-sync
