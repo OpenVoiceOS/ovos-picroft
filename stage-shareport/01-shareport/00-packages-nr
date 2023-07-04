@@ -1,0 +1,10 @@
+autoconf
+libpopt-dev
+libconfig-dev
+libsoxr-dev
+libavahi-client-dev
+libplist-dev
+libsodium-dev
+libgcrypt-dev
+libavutil-dev
+libavformat-dev

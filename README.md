@@ -16,3 +16,22 @@ Purpose of this guide
 This guide was originally designed for a headless, (No GUI) Raspberry Pi 3. The RPi3 does not have the umph required to reliably run ovos-shell, hence "headless". There is not an image available at this point in time that works with this hardware(RPi3), so this was constructed. This guide DOES NOT produce the same experience as the official images do. This just creates a minimal install, that the user can then expand to their own personal needs.
 
 Please, if any mistakes, including spelling mistakes are found, or if a more detailed explanation of a step is needed, open an issue here and I will address it ASAP.
+
+## Shairport
+
+Shairport-sync is available for this device as `raspOvos`
+
+#### Playback issues
+
+It has been noted that there is no audio playback with certain output devices due to sampling rates...but there is a fix
+
+- ssh into your device
+- `shairport-sync -h`
+  - at the end of the output will be the devices that are available.  make note of the name of the device you want to use
+- `sudo nano /etc/shairport-sync.conf`
+  - find the line that contains `output_device = "default"`
+  - change to read `output_device = "plughw:<device_name_from_above>"
+  - save the file
+- `sudo systemctl restart shairport-sync.service`
+
+Playback should now work

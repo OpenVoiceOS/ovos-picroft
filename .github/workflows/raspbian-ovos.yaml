@@ -128,7 +128,7 @@ jobs:
           host: ovosimages.ziggyai.online
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          port: 11226
+          port: ${{ secrets.SSH_PORT }}
           source: "${{ steps.build.outputs.image-path }}"
           target: "raspbian/development"
           strip_components: 4
