@@ -1,6 +1,0 @@
-# install tts plugins
-ovos-tts-plugin-mimic==0.2.7.post1
-ovos-tts-plugin-mimic2==0.1.5
-ovos-tts-plugin-mimic3-server==0.0.1
-ovos-tts-plugin-google-tx==0.0.3
-ovos-tts-plugin-server==0.0.2a1

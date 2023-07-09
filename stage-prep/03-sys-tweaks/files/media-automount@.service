@@ -1,0 +1,7 @@
+[Unit]
+Before=ovos.service
+
+[Service]
+Type=forking
+GuessMainPID=no
+ExecStart=/usr/bin/media-automount %I

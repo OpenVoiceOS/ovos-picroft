@@ -1,0 +1,2 @@
+enable ovos.service
+enable ovos-messagebus.service

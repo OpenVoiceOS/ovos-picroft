@@ -18,4 +18,4 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: 11226
           source: "README.md"
-          target: "./raspbian"
+          target: "raspbian"

@@ -20,7 +20,7 @@ jobs:
           # images in stage2 (lite), stage4 and stage5. You probably want to hook in custom
           # stages before one of the exported stages. Otherwise, the action will make sure
           # any custom stage will include an image export directive.
-          stage-list: stage0 stage1 stage2 ./stage-prep ./stage-ovos
+          stage-list: stage0 stage1 stage2 ./stage-prep ./stage-core ./stage-phal ./stage-audio ./stage-skills ./stage-shareport-spotify ./stage-finalize
 
           # Host name of the image.
           hostname: raspOvos
@@ -69,7 +69,7 @@ jobs:
           enable-noobs: false
 
           # Enable SSH access to Pi.
-          enable-ssh: 0
+          enable-ssh: 1
 
           # If this feature is enabled, the action will configure pi-gen to not export any
           # stage as image but the last one defined in property 'stage-list'. This is
@@ -100,11 +100,11 @@ jobs:
 
           # GitHub repository to fetch pi-gen from, must be a fork from RPi-Distro/pi-gen.
 
-          pi-gen-repository: builderjer/pi-gen
+          pi-gen-repository: RPi-Distro/pi-gen
 
           # Release version of pi-gen to use. This can both be a branch or tag name known in
           # the pi-gen repository.
-          pi-gen-version: ovos
+          pi-gen-version: arm64
 
           # The release version to build images against. Valid values are jessie, stretch,
           # buster, bullseye, and testing.
@@ -128,6 +128,8 @@ jobs:
           host: ovosimages.ziggyai.online
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          port: 11226
+          port: ${{ secrets.SSH_PORT }}
           source: "${{ steps.build.outputs.image-path }}"
-          target: "."
+          target: "raspbian/development"
+          strip_components: 4
+          

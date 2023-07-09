@@ -1,0 +1,20 @@
+[Unit]
+Description=OVOS ADMIN PHAL
+PartOf=ovos.service
+After=ovos.service
+After=ovos-messagebus.service
+
+[Service]
+Type=notify
+User=ovos
+ExecStart=/usr/libexec/ovos-systemd-admin-phal
+TimeoutStartSec=1m
+TimeoutStopSec=1m
+Restart=on-failure
+StartLimitInterval=5min
+StartLimitBurst=4
+#StartLimitAction=reboot-force
+#WatchdogSec=30s
+
+[Install]
+WantedBy=default.target
