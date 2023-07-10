@@ -233,19 +233,9 @@ if [[ $install == Y* || $install == y* ]]; then
 
     install_core
 
-    if [[ramdisk == "YES" ]]; then
-       ed $HOME/.config/mycroft/mycroft.conf >> DONE
-          /{
-          i
-          "logs": {
-          "path": "/ramdisk/mycroft",
-          "max_bytes": 2000000,
-          "backup_count": 1
-          },
-          .
-          w
-          q
-       DONE
+    # in preparation for someday asking the location of the ramdisk and putting it in
+    if [[ramdisk != "YES" ]]; then
+       sed -i /},\s"logs"/,+4d $HOME/.config/mycroft/mycroft.conf
     fi
 
     if [[ $systemd == "YES" ]]; then
