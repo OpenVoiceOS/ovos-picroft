@@ -228,9 +228,20 @@ if [[ $install == Y* || $install == y* ]]; then
 
     install_core
 
-    # Remove ramdisk logs
-    # Comment this out if you create a ramdisk
-    sed -i '42,46d' $HOME/.config/mycroft/mycroft.conf
+    echo "Uncomment and update these lines if you're using a ramdisk"
+    # (simplifies auto editing of mycroft.conf, doesn't depend on line count)
+    #ed $HOME/.config/mycroft/mycroft.conf >> DONE
+    #/{
+    #i
+    #"logs": {
+    #    "path": "/ramdisk/mycroft",
+    #    "max_bytes": 2000000,
+    #    "backup_count": 1
+    #},
+    #.
+    #w
+    #q
+    #DONE
 
     if [[ $systemd == "YES" ]]; then
         install_systemd
@@ -263,3 +274,4 @@ if [[ $install == Y* || $install == y* ]]; then
 fi
 
 exit 0
+
