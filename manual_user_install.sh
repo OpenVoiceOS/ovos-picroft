@@ -207,6 +207,11 @@ if [[ -z "$systemd" || $systemd == y* || $systemd == Y* ]]; then
     fi
 fi
 echo
+read -p "Are you using a ramdisk at /ramdisk/mycroft? (Y/n): " ram_disk
+if [[ -z "$ram_disk" || $ram_disk == y* || $ram_disk == Y* ]]; then
+    ram_disk="YES"
+fi
+echo
 read -p "Would you like to install extra skills to match the downloadable image? (Y/n): " extra_skills
 if [[ -z "$extra_skills" || $extra_skills == y* || $extra_skills == Y* ]]; then
     extra_skills="YES"
@@ -228,20 +233,20 @@ if [[ $install == Y* || $install == y* ]]; then
 
     install_core
 
-    echo "Uncomment and update these lines if you're using a ramdisk"
-    # (simplifies auto editing of mycroft.conf, doesn't depend on line count)
-    #ed $HOME/.config/mycroft/mycroft.conf >> DONE
-    #/{
-    #i
-    #"logs": {
-    #    "path": "/ramdisk/mycroft",
-    #    "max_bytes": 2000000,
-    #    "backup_count": 1
-    #},
-    #.
-    #w
-    #q
-    #DONE
+    if [[ramdisk == "YES" ]]; then
+       ed $HOME/.config/mycroft/mycroft.conf >> DONE
+          /{
+          i
+          "logs": {
+          "path": "/ramdisk/mycroft",
+          "max_bytes": 2000000,
+          "backup_count": 1
+          },
+          .
+          w
+          q
+       DONE
+    fi
 
     if [[ $systemd == "YES" ]]; then
         install_systemd
