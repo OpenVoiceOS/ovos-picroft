@@ -114,12 +114,7 @@ function install_systemd (){
     cp $SCRIPT_DIR/stage-phal/01-user/files/ovos-phal.service $HOME/.config/systemd/user/
     cp $SCRIPT_DIR/stage-phal/02-admin/files/ovos-admin-phal.service $HOME/.config/systemd/user/
 
-    ed $HOME/.config/systemd/user/ovos-admin-phal.service << DONE
-    /User
-    d
-    w
-    q
-    DONE
+    sed -i /User/d $HOME/.config/mycroft/mycroft.conf
 
     for f in $HOME/.config/systemd/user/*.service ; do
         sed -i s,/usr/libexec,/home/ovos/.local/bin,g $f
@@ -234,8 +229,8 @@ if [[ $install == Y* || $install == y* ]]; then
     install_core
 
     # in preparation for someday asking the location of the ramdisk and putting it in
-    if [[ramdisk != "YES" ]]; then
-       sed -i /},\s"logs"/,+4d $HOME/.config/mycroft/mycroft.conf
+    if [[ $ramdisk != "YES" ]]; then
+       sed -i /"logs"/,+4d $HOME/.config/mycroft/mycroft.conf
     fi
 
     if [[ $systemd == "YES" ]]; then
