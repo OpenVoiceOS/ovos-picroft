@@ -16,6 +16,7 @@ function install_core (){
     pip3 install git+https://github.com/OpenVoiceOS/ovos-audio
     pip3 install git+https://github.com/OpenVoiceOS/ovos-ocp-audio-plugin
     pip3 install git+https://github.com/OpenVoiceOS/ovos-messagebus
+    # padatious required to support newest ovos-core
     # pip3 install padatious
 
     # dinkum listener
@@ -114,7 +115,7 @@ function install_systemd (){
     cp $SCRIPT_DIR/stage-phal/01-user/files/ovos-phal.service $HOME/.config/systemd/user/
     cp $SCRIPT_DIR/stage-phal/02-admin/files/ovos-admin-phal.service $HOME/.config/systemd/user/
 
-    sed -i /User/d $HOME/.config/mycroft/mycroft.conf
+    sed -i /User/d $HOME/.config/systemd/user/ovos-admin-phal.service
 
     for f in $HOME/.config/systemd/user/*.service ; do
         sed -i s,/usr/libexec,/home/ovos/.local/bin,g $f
