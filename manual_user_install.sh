@@ -99,7 +99,7 @@ function install_systemd (){
     sudo cp $SCRIPT_DIR/stage-phal/02-admin/files/ovos-systemd-admin-phal /usr/libexec
 
     chmod +x $HOME/.local/bin/ovos-systemd*
-    chmod +x /usr/libexec/ovos-systemd-admin-phal
+    echo $sudoPW | sudo -S chmod +x /usr/libexec/ovos-systemd-admin-phal
 
     # sdnotify is required
     pip3 install sdnotify
@@ -114,9 +114,7 @@ function install_systemd (){
     cp $SCRIPT_DIR/stage-audio/01-speech/files/ovos-audio.service $HOME/.config/systemd/user/
     cp $SCRIPT_DIR/stage-audio/02-voice/files/ovos-dinkum-listener.service $HOME/.config/systemd/user/
     cp $SCRIPT_DIR/stage-phal/01-user/files/ovos-phal.service $HOME/.config/systemd/user/
-    sudo cp $SCRIPT_DIR/stage-phal/02-admin/files/ovos-admin-phal.service /etc/systemd/system/
-
-#    sed -i /User/d $HOME/.config/systemd/user/ovos-admin-phal.service
+    echo $sudoPW |  sudo -S cp $SCRIPT_DIR/stage-phal/02-admin/files/ovos-admin-phal.service /etc/systemd/system/
 
     for f in $HOME/.config/systemd/user/*.service ; do
         sed -i s,/usr/libexec,/home/ovos/.local/bin,g $f
@@ -134,9 +132,9 @@ function install_systemd (){
         systemctl --user enable ovos-audio
         systemctl --user enable ovos-skills
         systemctl --user enable ovos-phal
-        systemctl enable ovos-admin-phal
+        echo $sudoPW | sudo -S systemctl enable ovos-admin-phal
         systemctl --user daemon-reload
-        systemctl daemon-reload
+        echo $sudoPW | sudo -S systemctl daemon-reload
     fi
 
     cd $SCRIPT_DIR
@@ -199,6 +197,9 @@ read -p "Do you want to install systemd files (Y/n): " systemd
 if [[ -z "$systemd" || $systemd == y* || $systemd == Y* ]]; then
     systemd="YES"
     echo
+    read -s -p "Enter your $USER password: " sudoPW
+    echo
+    echo
     read -p "Do you want to automatically start the ovos services? (Y/n): " enabled
     if [[ -z "$enabled" || $enabled == y* || $enabled == Y* ]]; then
         enabled="YES"
@@ -249,6 +250,8 @@ if [[ $install == Y* || $install == y* ]]; then
     read -p "Would you like to start ovos now? (Y/n): " start
     if [[ -z "$start" || $start == y* || $start == Y* ]]; then
         systemctl --user start ovos
+        sleep 1
+        echo $sudoPW | sudo -S systemctl start ovos-admin-phal
     else
         echo
         echo "You can start the ovos services with 'systemctl --user start ovos'"
