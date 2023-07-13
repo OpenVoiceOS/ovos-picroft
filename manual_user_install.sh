@@ -96,9 +96,10 @@ function install_systemd (){
     cp $SCRIPT_DIR/stage-audio/01-speech/files/ovos-systemd-audio $HOME/.local/bin/
     cp $SCRIPT_DIR/stage-audio/02-voice/files/ovos-systemd-dinkum-listener $HOME/.local/bin/
     cp $SCRIPT_DIR/stage-phal/01-user/files/ovos-systemd-phal $HOME/.local/bin/
-    cp $SCRIPT_DIR/stage-phal/02-admin/files/ovos-systemd-admin-phal $HOME/.local/bin
+    sudo cp $SCRIPT_DIR/stage-phal/02-admin/files/ovos-systemd-admin-phal /usr/libexec
 
     chmod +x $HOME/.local/bin/ovos-systemd*
+    chmod +x /usr/libexec/ovos-systemd-admin-phal
 
     # sdnotify is required
     pip3 install sdnotify
@@ -113,9 +114,9 @@ function install_systemd (){
     cp $SCRIPT_DIR/stage-audio/01-speech/files/ovos-audio.service $HOME/.config/systemd/user/
     cp $SCRIPT_DIR/stage-audio/02-voice/files/ovos-dinkum-listener.service $HOME/.config/systemd/user/
     cp $SCRIPT_DIR/stage-phal/01-user/files/ovos-phal.service $HOME/.config/systemd/user/
-    cp $SCRIPT_DIR/stage-phal/02-admin/files/ovos-admin-phal.service $HOME/.config/systemd/user/
+    sudo cp $SCRIPT_DIR/stage-phal/02-admin/files/ovos-admin-phal.service /etc/systemd/system/
 
-    sed -i /User/d $HOME/.config/systemd/user/ovos-admin-phal.service
+#    sed -i /User/d $HOME/.config/systemd/user/ovos-admin-phal.service
 
     for f in $HOME/.config/systemd/user/*.service ; do
         sed -i s,/usr/libexec,/home/ovos/.local/bin,g $f
@@ -133,8 +134,9 @@ function install_systemd (){
         systemctl --user enable ovos-audio
         systemctl --user enable ovos-skills
         systemctl --user enable ovos-phal
-        systemctl --user enable ovos-admin-phal
+        systemctl enable ovos-admin-phal
         systemctl --user daemon-reload
+        systemctl daemon-reload
     fi
 
     cd $SCRIPT_DIR
