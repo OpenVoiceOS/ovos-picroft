@@ -48,8 +48,6 @@ function install_core (){
     pip3 install git+https://github.com/OpenVoiceOS/ovos-utils
     pip3 install git+https://github.com/OpenVoiceOS/ovos-bus-client
     pip3 install git+https://github.com/OpenVoiceOS/ovos-plugin-manager
-    pip3 install git+https://github.com/OpenVoiceOS/ovos-workshop
-    pip3 install git+https://github.com/OpenVoiceOS/ovos-lingua-franca
     pip3 install git+https://github.com/OpenVoiceOS/ovos-cli-client
 
     # install phal components
