@@ -6,7 +6,7 @@ After=ovos-messagebus.service
 
 [Service]
 Type=notify
-User=ovos
+User=root
 ExecStart=/usr/libexec/ovos-systemd-admin-phal
 TimeoutStartSec=1m
 TimeoutStopSec=1m
@@ -17,4 +17,4 @@ StartLimitBurst=4
 #WatchdogSec=30s
 
 [Install]
-WantedBy=default.target
+WantedBy=ovos.service
