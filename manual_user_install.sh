@@ -52,6 +52,7 @@ function install_core (){
     pip3 install git+https://github.com/OpenVoiceOS/ovos-cli-client
 
     # install phal components
+    pip3 install sdnotify
     pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL
     pip3 install git+https://github.com/OpenVoiceOS/ovos-phal-plugin-connectivity-events
     pip3 install git+https://github.com/OpenVoiceOS/ovos-phal-plugin-system
@@ -95,13 +96,14 @@ function install_systemd (){
     cp $SCRIPT_DIR/stage-audio/01-speech/files/ovos-systemd-audio $HOME/.local/bin/
     cp $SCRIPT_DIR/stage-audio/02-voice/files/ovos-systemd-dinkum-listener $HOME/.local/bin/
     cp $SCRIPT_DIR/stage-phal/01-user/files/ovos-systemd-phal $HOME/.local/bin/
-    sudo cp $SCRIPT_DIR/stage-phal/02-admin/files/ovos-systemd-admin-phal /usr/libexec
-
     chmod +x $HOME/.local/bin/ovos-systemd*
-    echo $sudoPW | sudo -S chmod +x /usr/libexec/ovos-systemd-admin-phal
 
-    # sdnotify is required
-    pip3 install sdnotify
+    sudo cp $SCRIPT_DIR/stage-phal/02-admin/files/ovos-systemd-admin-phal /usr/libexec/
+    sudo sed -i '/import sdnotify/i import sys'\
+    /usr/libexec/ovos-systemd-admin-phal
+    sudo sed -i '/import sdnotify/i sys.path.insert(0, \"/home/ovos/.local/lib/python3.9/site-packages/\")' \
+    /usr/libexec/ovos-systemd-admin-phal
+    echo $sudoPW | sudo -S chmod +x /usr/libexec/ovos-systemd-admin-phal
 
     # install the service files
     if [[ ! -d $HOME/.config/systemd/user ]]; then
@@ -113,7 +115,7 @@ function install_systemd (){
     cp $SCRIPT_DIR/stage-audio/01-speech/files/ovos-audio.service $HOME/.config/systemd/user/
     cp $SCRIPT_DIR/stage-audio/02-voice/files/ovos-dinkum-listener.service $HOME/.config/systemd/user/
     cp $SCRIPT_DIR/stage-phal/01-user/files/ovos-phal.service $HOME/.config/systemd/user/
-    echo $sudoPW |  sudo -S cp $SCRIPT_DIR/stage-phal/02-admin/files/ovos-admin-phal.service /etc/systemd/system/
+    echo $sudoPW |  sudo -S cp $SCRIPT_DIR/stage-phal/02-admin/files/ovos-admin-phal.service /lib/systemd/system/
 
     for f in $HOME/.config/systemd/user/*.service ; do
         sed -i s,/usr/libexec,/home/ovos/.local/bin,g $f
