@@ -125,6 +125,7 @@ function install_systemd (){
         echo
         echo "Enabling service files"
         echo
+        echo $sudoPW | sudo -S loginctl enable-linger $USER
         systemctl --user enable ovos
         systemctl --user enable ovos-messagebus
         systemctl --user enable ovos-dinkum-listener
