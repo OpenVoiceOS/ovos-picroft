@@ -7,7 +7,7 @@ function install_core (){
     echo
 
     # set up the Raspberry Pi
-    sudo apt install -y build-essential python3-dev python3-pip swig libssl-dev libfann-dev portaudio19-dev libpulse-dev cmake libncurses-dev pulseaudio-utils pulseaudio
+    echo $sudoPW | sudo -S apt install -y build-essential python3-dev python3-pip swig libssl-dev libfann-dev portaudio19-dev libpulse-dev cmake libncurses-dev pulseaudio-utils pulseaudio
     pulseaudio -D
 
     # install ovos-core
@@ -41,7 +41,7 @@ function install_core (){
     # install text to speech (tts)
     pip3 install git+https://github.com/OpenVoiceOS/ovos-tts-plugin-mimic3-server
     pip3 install git+https://github.com/OpenVoiceOS/ovos-tts-plugin-mimic
-    sudo apt install -y espeak-ng
+    echo $sudoPW | sudo -S apt install -y espeak-ng
     pip3 install git+https://github.com/OpenVoiceOS/ovos-tts-plugin-piper
     pip3 install git+https://github.com/OpenVoiceOS/ovos-tts-server-plugin
 
@@ -95,7 +95,7 @@ function install_systemd (){
     cp $SCRIPT_DIR/stage-audio/01-speech/files/ovos-systemd-audio $HOME/.local/bin/
     cp $SCRIPT_DIR/stage-audio/02-voice/files/ovos-systemd-dinkum-listener $HOME/.local/bin/
     cp $SCRIPT_DIR/stage-phal/01-user/files/ovos-systemd-phal $HOME/.local/bin/
-    sudo cp $SCRIPT_DIR/stage-phal/02-admin/files/ovos-systemd-admin-phal /usr/libexec
+    echo $sudoPW | sudo -S cp $SCRIPT_DIR/stage-phal/02-admin/files/ovos-systemd-admin-phal /usr/libexec
 
     chmod +x $HOME/.local/bin/ovos-systemd*
     echo $sudoPW | sudo -S chmod +x /usr/libexec/ovos-systemd-admin-phal
@@ -113,7 +113,7 @@ function install_systemd (){
     cp $SCRIPT_DIR/stage-audio/01-speech/files/ovos-audio.service $HOME/.config/systemd/user/
     cp $SCRIPT_DIR/stage-audio/02-voice/files/ovos-dinkum-listener.service $HOME/.config/systemd/user/
     cp $SCRIPT_DIR/stage-phal/01-user/files/ovos-phal.service $HOME/.config/systemd/user/
-    echo $sudoPW |  sudo -S cp $SCRIPT_DIR/stage-phal/02-admin/files/ovos-admin-phal.service /etc/systemd/system/
+    echo $sudoPW | sudo -S cp $SCRIPT_DIR/stage-phal/02-admin/files/ovos-admin-phal.service /etc/systemd/system/
 
     for f in $HOME/.config/systemd/user/*.service ; do
         sed -i s,/usr/libexec,/home/ovos/.local/bin,g $f
@@ -225,8 +225,8 @@ if [[ $install != Y* && $install != y* ]]; then
 fi
 
 # update your system
-sudo apt update -y
-sudo apt upgrade -y
+echo $sudoPW | sudo -S apt update -y
+echo $sudoPW | sudo -S apt upgrade -y
 
 if [[ ! -d $HOME/.local/bin ]]; then
     mkdir -p $HOME/.local/bin
