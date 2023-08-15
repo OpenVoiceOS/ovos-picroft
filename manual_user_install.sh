@@ -219,54 +219,56 @@ echo "We are now ready to install OVOS"
 echo
 read -p "Type 'Y' to start install (any other key aborts): " install
 
+if [[ $install != Y* && $install != y* ]]; then
+    exit 0
+fi
+
 # update your system
 sudo apt update -y
 sudo apt upgrade -y
 
-if [[ $install == Y* || $install == y* ]]; then
-    if [[ ! -d $HOME/.local/bin ]]; then
-        mkdir -p $HOME/.local/bin
-    fi
-    PATH=$HOME/.local/bin:$PATH
-
-    install_core
-
-    # in preparation for someday asking the location of the ramdisk and putting it in
-    if [[ $ramdisk != "YES" ]]; then
-       sed -i /"logs"/,+4d $HOME/.config/mycroft/mycroft.conf
-    fi
-
-    if [[ $systemd == "YES" ]]; then
-        install_systemd
-    fi
-
-    if [[ $extra_skills == "YES" ]]; then
-        install_extra_skills
-    fi
-
-    echo "Done installing OVOS"
-    echo
-    read -p "Would you like to start ovos now? (Y/n): " start
-    if [[ -z "$start" || $start == y* || $start == Y* ]]; then
-        systemctl --user start ovos
-        sleep 1
-        echo $sudoPW | sudo -S systemctl start ovos-admin-phal
-    else
-        echo
-        echo "You can start the ovos services with 'systemctl --user start ovos'"
-        echo
-    fi
-    echo ""
-    echo "1. Consider creating an .asoundrc and check your microphone with alsamixer, arecord, and aplay."
-    echo ""
-    echo "2. You can find documentation at https://openvoiceos.github.io/community-docs/install_raspbian/"
-    echo ""
-    echo "3. You can find pre-built OVOS/PI images at https://ovosimages.ziggyai.online/raspbian/"
-    echo ""
-    echo "4. After a reboot $HOME/.local/bin will be added to your path and give you access to the ovos command line utilities."
-    echo ""
-    echo "Enjoy your OVOS device"
+if [[ ! -d $HOME/.local/bin ]]; then
+    mkdir -p $HOME/.local/bin
 fi
+PATH=$HOME/.local/bin:$PATH
+
+install_core
+
+# in preparation for someday asking the location of the ramdisk and putting it in
+if [[ $ramdisk != "YES" ]]; then
+    sed -i /"logs"/,+4d $HOME/.config/mycroft/mycroft.conf
+fi
+
+if [[ $systemd == "YES" ]]; then
+    install_systemd
+fi
+
+if [[ $extra_skills == "YES" ]]; then
+    install_extra_skills
+fi
+
+echo "Done installing OVOS"
+echo
+read -p "Would you like to start ovos now? (Y/n): " start
+if [[ -z "$start" || $start == y* || $start == Y* ]]; then
+    systemctl --user start ovos
+    sleep 1
+    echo $sudoPW | sudo -S systemctl start ovos-admin-phal
+else
+    echo
+    echo "You can start the ovos services with 'systemctl --user start ovos'"
+    echo
+fi
+echo ""
+echo "1. Consider creating an .asoundrc and check your microphone with alsamixer, arecord, and aplay."
+echo ""
+echo "2. You can find documentation at https://openvoiceos.github.io/community-docs/install_raspbian/"
+echo ""
+echo "3. You can find pre-built OVOS/PI images at https://ovosimages.ziggyai.online/raspbian/"
+echo ""
+echo "4. After a reboot $HOME/.local/bin will be added to your path and give you access to the ovos command line utilities."
+echo ""
+echo "Enjoy your OVOS device"
 
 exit 0
 
