@@ -40,7 +40,7 @@ function install_core (){
     echo
 
     # set up the Raspberry Pi
-    echo $sudoPW | sudo -S apt install -y build-essential python3-dev python3-pip swig libssl-dev libfann-dev portaudio19-dev libpulse-dev cmake libncurses-dev pulseaudio-utils pulseaudio
+    echo $sudoPW | sudo -S apt install -y build-essential python3-dev python3-pip python3-venv swig libssl-dev libfann-dev portaudio19-dev libpulse-dev cmake libncurses-dev pulseaudio-utils pulseaudio
 
     # make sure pulseaudio is running
     pulseaudio --check || pulseaudio -D
@@ -125,14 +125,14 @@ function install_systemd (){
     echo
 
     # install the hook files
-    cp $SCRIPT_DIR/stage-core/01-ovos-core/files/ovos-systemd-skills $HOME/.local/bin/
-    cp $SCRIPT_DIR/stage-core/02-messagebus/files/ovos-systemd-messagebus $HOME/.local/bin/
-    cp $SCRIPT_DIR/stage-audio/01-speech/files/ovos-systemd-audio $HOME/.local/bin/
-    cp $SCRIPT_DIR/stage-audio/02-voice/files/ovos-systemd-dinkum-listener $HOME/.local/bin/
-    cp $SCRIPT_DIR/stage-phal/01-user/files/ovos-systemd-phal $HOME/.local/bin/
+    cp $SCRIPT_DIR/stage-core/01-ovos-core/files/ovos-systemd-skills ${BINDIR}/
+    cp $SCRIPT_DIR/stage-core/02-messagebus/files/ovos-systemd-messagebus ${BINDIR}/
+    cp $SCRIPT_DIR/stage-audio/01-speech/files/ovos-systemd-audio ${BINDIR}/
+    cp $SCRIPT_DIR/stage-audio/02-voice/files/ovos-systemd-dinkum-listener ${BINDIR}/
+    cp $SCRIPT_DIR/stage-phal/01-user/files/ovos-systemd-phal ${BINDIR}/
     echo $sudoPW | sudo -S cp $SCRIPT_DIR/stage-phal/02-admin/files/ovos-systemd-admin-phal /usr/libexec
 
-    chmod +x $HOME/.local/bin/ovos-systemd*
+    chmod +x ${BINDIR}/ovos-systemd*
     echo $sudoPW | sudo -S chmod +x /usr/libexec/ovos-systemd-admin-phal
 
     # sdnotify is required
@@ -150,11 +150,14 @@ function install_systemd (){
     cp $SCRIPT_DIR/stage-phal/01-user/files/ovos-phal.service $HOME/.config/systemd/user/
     echo $sudoPW | sudo -S cp $SCRIPT_DIR/stage-phal/02-admin/files/ovos-admin-phal.service /etc/systemd/system/
 
+    # Use the venv python to run the scripts
     for f in $HOME/.config/systemd/user/*.service ; do
-        sed -i s,/usr/libexec,/home/ovos/.local/bin,g $f
+        sed -i s,/usr/libexec,${BINDIR},g $f
+	sed -i "s,ExecStart=,ExecStart=${OVOS_VENV}/bin/python3 ," $f
         # extend the timeouts
         # sed -i s/=1m/=2m/g $f
     done
+    echo $sudoPW | sudo -S sed -i "s,ExecStart=,ExecStart=${OVOS_VENV}/bin/python3 ," /etc/systemd/system/ovos-admin-phal.service
 
     if [[ $enabled == "YES" ]]; then
         echo
@@ -240,6 +243,9 @@ else
     want_source="NO"
     OVOS_SOURCE="git+https://github.com/OpenVoiceOS"
 fi
+: ${OVOS_VENV:=$HOME/venv-ovos}
+read -ep "What directory should the venv be installed into: " -i $OVOS_VENV OVOS_VENV
+
 read -p "Do you want to install systemd files (Y/n): " systemd
 if [[ -z "$systemd" || $systemd == y* || $systemd == Y* ]]; then
     systemd="YES"
@@ -277,8 +283,27 @@ fi
 echo $sudoPW | sudo -S apt update -y
 echo $sudoPW | sudo -S apt upgrade -y
 
-if [[ ! -d $HOME/.local/bin ]]; then
-    mkdir -p $HOME/.local/bin
+if [[ ! -d $OVOS_VENV ]]; then
+    echo Creating ovos venv
+    python3 -mvenv $OVOS_VENV
+    echo
+fi
+. $OVOS_VENV/bin/activate || {
+    echo Failed to activate ovos venv at $OVOS_VENV
+    exit 1
+}
+BINDIR=$OVOS_VENV/bin
+
+if [[ ! -d ${BINDIR} ]]; then
+    mkdir -p ${BINDIR}
+fi
+
+# Ensure PATH includes BINDIR (but only once)
+if ! grep -q ${BINDIR} ~/.bashrc; then
+cat <<EOF >> ~/.bashrc
+PATH=:\$PATH
+PATH=$BINDIR\${PATH//:'$BINDIR':/:}
+EOF
 fi
 PATH=$HOME/.local/bin:$PATH
 
@@ -320,7 +345,7 @@ echo "2. You can find documentation at https://openvoiceos.github.io/community-d
 echo ""
 echo "3. You can find pre-built OVOS/PI images at https://ovosimages.ziggyai.online/raspbian/"
 echo ""
-echo "4. After a reboot $HOME/.local/bin will be added to your path and give you access to the ovos command line utilities."
+echo "4. After a reboot ${BINDIR} will be added to your path and give you access to the ovos command line utilities."
 echo ""
 echo "Enjoy your OVOS device"
 
