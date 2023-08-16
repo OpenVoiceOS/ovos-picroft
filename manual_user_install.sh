@@ -323,7 +323,6 @@ PATH=:\$PATH
 PATH=$BINDIR\${PATH//:'$BINDIR':/:}
 EOF
 fi
-PATH=$HOME/.local/bin:$PATH
 
 if [[ $want_source == "YES" ]]; then
     get_src
