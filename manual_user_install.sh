@@ -41,7 +41,9 @@ function install_core (){
 
     # set up the Raspberry Pi
     echo $sudoPW | sudo -S apt install -y build-essential python3-dev python3-pip swig libssl-dev libfann-dev portaudio19-dev libpulse-dev cmake libncurses-dev pulseaudio-utils pulseaudio
-    pulseaudio -D
+
+    # make sure pulseaudio is running
+    pulseaudio --check || pulseaudio -D
 
     # install ovos-core
     pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-backend-client
