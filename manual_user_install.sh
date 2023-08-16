@@ -60,7 +60,8 @@ function install_core (){
     pulseaudio --check || pulseaudio -D
 
     # padatious required to support newest ovos-core
-    # pip3 install padatious
+    # fann version must be fixed as raspbian libfann-dev is too old for latest
+    pip3 install padatious fann2==1.0.7
 
     # Precise-lite wake-word (ww) cluster
     pip3 install --upgrade setuptools
