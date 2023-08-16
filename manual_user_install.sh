@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Exit on error
+# If something goes wrong just stop. The script should be re-runnable
+# and it allows the user to see issues at once rather than having
+# scroll back and figure out what went wrong.
+set -e
+
 # tested with a clean 64 bit installation of Raspbian-Lite
 
 function get_src() {
