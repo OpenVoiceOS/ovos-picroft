@@ -228,16 +228,32 @@ echo
 echo "First lets setup some things."
 echo
 
+# Save the config to allow multiple runs without typing too much :)
+function save_config() {
+    mkdir -p ~/.config/ovos/
+    cat <<EOF > ~/.config/ovos/manual_install.env
+want_source=$want_source
+OVOS_SOURCE=$OVOS_SOURCE
+OVOS_VENV=$OVOS_VENV
+systemd=$systemd
+enabled=$enabled
+ram_disk=$ram_disk
+extra_skills=$extra_skills
+install=$install
+EOF
+}
+# Get defaults from previous run
+[[ -e ~/.config/ovos/manual_install.env ]] && . ~/.config/ovos/manual_install.env
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-read -p "Do you want a local git clone of all the source (y/N): " want_source
+read -ep "Do you want a local git clone of all the source (y/N): " -i "$want_source" want_source
 if [[ $want_source == y* || $want_source == Y* ]]; then
     want_source="YES"
     PIP_EDITABLE="-e"
     echo
-    OVOS_SOURCE="$HOME/ovos-src"
-    read -ep "What directory should the source be cloned to: " -i $OVOS_SOURCE OVOS_SOURCE
+    : ${OVOS_SOURCE:="$HOME/ovos-src"}
+    read -ep "What directory should the source be cloned to: " -i "$OVOS_SOURCE" OVOS_SOURCE
     echo
 else
     want_source="NO"
@@ -246,38 +262,40 @@ fi
 : ${OVOS_VENV:=$HOME/venv-ovos}
 read -ep "What directory should the venv be installed into: " -i $OVOS_VENV OVOS_VENV
 
-read -p "Do you want to install systemd files (Y/n): " systemd
+read -ep "Do you want to install systemd files (Y/n): " -i "$systemd" systemd
 if [[ -z "$systemd" || $systemd == y* || $systemd == Y* ]]; then
     systemd="YES"
     echo
     read -s -p "Enter your $USER password: " sudoPW
     echo
     echo
-    read -p "Do you want to automatically start the ovos services? (Y/n): " enabled
+    read -ep "Do you want to automatically start the ovos services? (Y/n): " -i "$enabled" enabled
     if [[ -z "$enabled" || $enabled == y* || $enabled == Y* ]]; then
         enabled="YES"
     fi
 fi
 echo
-read -p "Are you using a ramdisk at /ramdisk/mycroft? (Y/n): " ram_disk
+read -ep "Are you using a ramdisk at /ramdisk/mycroft? (Y/n): " -i "$ram_disk" ram_disk
 if [[ -z "$ram_disk" || $ram_disk == y* || $ram_disk == Y* ]]; then
     ram_disk="YES"
 fi
 echo
 OVOS_EXTRA_SKILL_REPOS=
-read -p "Would you like to install extra skills to match the downloadable image? (Y/n): " extra_skills
+read -ep "Would you like to install extra skills to match the downloadable image? (Y/n): " -i "$extra_skills" extra_skills
 if [[ -z "$extra_skills" || $extra_skills == y* || $extra_skills == Y* ]]; then
     extra_skills="YES"
     OVOS_EXTRA_SKILL_REPOS="skill-ovos-weather skill-ovos-hello-world skill-ovos-ddg skill-ovos-wolfie skill-ovos-wikipedia skill-ovos-fallback-chatgpt skill-ovos-news skill-ovos-somafm skill-ovos-youtube-music"
 fi
+save_config # up to this point
 echo
 echo "We are now ready to install OVOS"
 echo
-read -p "Type 'Y' to start install (any other key aborts): " install
+read -ep "Type 'Y' to start install (any other key aborts): " -i "$install" install
 
 if [[ $install != Y* && $install != y* ]]; then
     exit 0
 fi
+save_config # include the install's yes answer :)
 
 # update your system
 echo $sudoPW | sudo -S apt update -y
