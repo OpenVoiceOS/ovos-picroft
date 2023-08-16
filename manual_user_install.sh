@@ -8,6 +8,20 @@ set -e
 
 # tested with a clean 64 bit installation of Raspbian-Lite
 
+# Define some python groups (these are repository names, not PyPI names!)
+# Any group can be disabled by setting the value before running the script
+# Eg to skip installing Dinkum
+# $ export OVOS_DINKUM_REPOS=""
+: ${OVOS_CORE_REPOS:="ovos-backend-client ovos-core ovos-audio ovos-ocp-audio-plugin ovos-messagebus"}
+: ${OVOS_DINKUM_REPOS:="ovos-dinkum-listener ovos-vad-plugin-silero ovos-ww-plugin-pocketsphinx"}
+: ${OVOS_PRECISE_LITE_REPOS:="ovos-ww-plugin-precise ovos-ww-plugin-precise-lite ovos-workshop ovos-lingua-franca"}
+: ${OVOS_STT_REPOS:="ovos-microphone-plugin-alsa ovos-stt-plugin-server"}
+: ${OVOS_TTS_REPOS:="ovos-tts-plugin-mimic3-server ovos-tts-plugin-mimic ovos-tts-plugin-piper ovos-tts-server-plugin"}
+: ${OVOS_EXTRA_REPOS:="ovos-config ovos-utils ovos-bus-client ovos-plugin-manager ovos-cli-client"}
+: ${OVOS_PHAL_REPOS:="ovos-PHAL ovos-phal-plugin-connectivity-events ovos-phal-plugin-system ovos-PHAL-plugin-ipgeo ovos-PHAL-plugin-oauth ovos-phal-plugin-dashboard ovos-phal-plugin-alsa"}
+: ${OVOS_SKILLS_REPOS:="skill-ovos-volume skill-ovos-fallback-unknown skill-ovos-stop skill-alerts skill-ovos-personal skill-ovos-naptime skill-ovos-date-time"}
+: ${OVOS_EXTRA_SKILL_REPOS:="skill-ovos-weather skill-ovos-hello-world skill-ovos-ddg skill-ovos-wolfie skill-ovos-wikipedia skill-ovos-fallback-chatgpt skill-ovos-news skill-ovos-somafm skill-ovos-youtube-music"}
+
 function get_src() {
     mkdir -p ${OVOS_SOURCE}
     pushd ${OVOS_SOURCE}
@@ -45,64 +59,33 @@ function install_core (){
     # make sure pulseaudio is running
     pulseaudio --check || pulseaudio -D
 
-    # install ovos-core
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-backend-client
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-core
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-audio
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-ocp-audio-plugin
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-messagebus
     # padatious required to support newest ovos-core
     # pip3 install padatious
 
-    # dinkum listener
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-dinkum-listener
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-vad-plugin-silero
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-ww-plugin-pocketsphinx
-
-    #Precise-lite wake-word (ww) cluster
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-ww-plugin-precise
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-ww-plugin-precise-lite
+    # Precise-lite wake-word (ww) cluster
     pip3 install --upgrade setuptools
     pip3 install tflite_runtime
     pip3 install PyYAML
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-workshop
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-lingua-franca
     pip3 install PyAudio
 
-    # install speech to text (stt)
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-microphone-plugin-alsa
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-stt-plugin-server
-
     # install text to speech (tts)
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-tts-plugin-mimic3-server
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-tts-plugin-mimic
     echo $sudoPW | sudo -S apt install -y espeak-ng
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-tts-plugin-piper
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-tts-server-plugin
-
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-config
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-utils
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-bus-client
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-plugin-manager
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-cli-client
 
     # install phal components
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-PHAL
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-phal-plugin-connectivity-events
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-phal-plugin-system
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-PHAL-plugin-ipgeo
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-PHAL-plugin-oauth
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-phal-plugin-dashboard
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/ovos-phal-plugin-alsa
 
-    # install required skills
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/skill-ovos-volume
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/skill-ovos-fallback-unknown
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/skill-ovos-stop
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/skill-alerts
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/skill-ovos-personal
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/skill-ovos-naptime
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/skill-ovos-date-time
+    INSTALL=""
+    # install ovos-core
+    for p in $OVOS_CORE_REPOS $OVOS_DINKUM_REPOS $OVOS_PRECISE_LITE_REPOS $OVOS_STT_REPOS $OVOS_TTS_REPOS $OVOS_EXTRA_REPOS $OVOS_PHAL_REPOS; do
+	INSTALL="$INSTALL ${PIP_EDITABLE} ${OVOS_SOURCE}/$p"
+    done
+    # Skills cannot be installed as 'editable' as they will not be discovered by importlib.metadata: https://github.com/python/cpython/issues/96144
+    for p in $OVOS_SKILLS_REPOS; do
+	INSTALL="$INSTALL ${OVOS_SOURCE}/$p"
+    done
+
+    # Do all the installs at once to allow pip to sort out dependencies nicely
+    echo installing $INSTALL
+    pip3 install $INSTALL
 
     # You can uncomment these lines if the deprecation notices are flooding your logs or slowing the system
     #sed -i '/\@deprecated/d' $HOME/.local/lib/python3.9/site-packages/ovos_utils/fingerprinting.py
@@ -185,30 +168,20 @@ function install_extra_skills (){
     echo
     echo "Installing extra skills"
     echo
-    # from NeonGeckoCom
-    pip3 install git+https://github.com/NeonGeckoCom/skill-user_settings
-    pip3 install git+https://github.com/NeonGeckoCom/skill-spelling
-    pip3 install git+https://github.com/NeonGeckoCom/skill-local_music
-    pip3 install git+https://github.com/NeonGeckoCom/skill-caffeinewiz
 
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/skill-ovos-weather
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/skill-ovos-hello-world
+    INSTALL=""
+    # install the OVOS extra skills
+    for p in $OVOS_EXTRA_SKILLS_REPOS; do
+	INSTALL="$INSTALL ${OVOS_SOURCE}/$p"
+    done
 
-    # common query
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/skill-ovos-ddg
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/skill-ovos-wolfie
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/skill-ovos-wikipedia
+    # Add the NeonGeckoCom skills
+    INSTALL="$INSTALL git+https://github.com/NeonGeckoCom/skill-user_settings git+https://github.com/NeonGeckoCom/skill-spelling git+https://github.com/NeonGeckoCom/skill-local_music git+https://github.com/NeonGeckoCom/skill-caffeinewiz"
+    # Add some fun
+    INSTALL="$INSTALL git+https://github.com/JarbasSkills/skill-icanhazdadjokes"
 
-    # fallback
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/skill-ovos-fallback-chatgpt
-
-    # OCP
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/skill-ovos-news
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/skill-ovos-somafm
-    pip3 install ${PIP_EDITABLE} ${OVOS_SOURCE}/skill-ovos-youtube-music
-
-    # fun
-    pip3 install git+https://github.com/JarbasSkills/skill-icanhazdadjokes
+    # Do all the installs at once to allow pip to sort out dependencies nicely
+    pip3 install $INSTALL
 
     # Here is where to include your local skills
     if [[ ! -d $HOME/.local/share/mycroft/skills ]]; then
@@ -280,11 +253,9 @@ if [[ -z "$ram_disk" || $ram_disk == y* || $ram_disk == Y* ]]; then
     ram_disk="YES"
 fi
 echo
-OVOS_EXTRA_SKILL_REPOS=
 read -ep "Would you like to install extra skills to match the downloadable image? (Y/n): " -i "$extra_skills" extra_skills
 if [[ -z "$extra_skills" || $extra_skills == y* || $extra_skills == Y* ]]; then
     extra_skills="YES"
-    OVOS_EXTRA_SKILL_REPOS="skill-ovos-weather skill-ovos-hello-world skill-ovos-ddg skill-ovos-wolfie skill-ovos-wikipedia skill-ovos-fallback-chatgpt skill-ovos-news skill-ovos-somafm skill-ovos-youtube-music"
 fi
 save_config # up to this point
 echo
