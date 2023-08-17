@@ -1,0 +1,12 @@
+[Unit]
+Description=Hivemind Listener
+After=pulseaudio.service
+
+[Service]
+Type=notify
+ExecStart=hivemind-core listen
+TimeoutStartSec=10m
+TimeoutStopSec=1m
+Restart=on-failure
+StartLimitInterval=5min
+StartLimitBurst=4
