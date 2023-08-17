@@ -3,7 +3,7 @@ Description=Hivemind Listener
 After=pulseaudio.service
 
 [Service]
-Type=notify
+Type=simple
 ExecStart=hivemind-core listen
 TimeoutStartSec=10m
 TimeoutStopSec=1m
