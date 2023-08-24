@@ -14,6 +14,27 @@ This guide was originally designed for a headless, (No GUI) Raspberry Pi 3. The 
 
 Please, if any mistakes, including spelling mistakes are found, or if a more detailed explanation of a step is needed, open an issue here and I will address it ASAP.
 
+## Usage
+
+Run `./manual_user_install.sh` for a full install which will work locally
+
+To just install a partial set of the modules set the unneeded ones to a space in the environment. This example will install only the modules for a satellite listener:
+
+    export OVOS_CORE_REPOS=" " OVOS_TTS_REPOS=" " OVOS_EXTRA_REPOS=" " OVOS_PHAL_REPOS=" " OVOS_SKILLS_REPOS=" " OVOS_EXTRA_SKILL_REPOS=" " OVOS_DINKUM_REPOS= OVOS_PRECISE_LITE_REPOS= OVOS_STT_REPOS=
+	./manual_user_install.sh
+
+For a satellite you'll also need to manually set the config to include:
+
+	{
+		"websocket": {
+	        // "ssl": false,
+			// "route": "/core",
+			// "port": 8181,
+			"host": "<host or IP running the messagebus>"
+		},
+		...
+	}
+
 ## Shairport
 
 Shairport-sync is available for this device as `raspOvos`
