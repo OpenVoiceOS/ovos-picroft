@@ -1,5 +1,5 @@
 python3-dev swig libssl-dev libfann-dev portaudio19-dev libpulse-dev
-python3-pip python3-wheel python3-setuptools
+python3-pip python3-wheel python3-setuptools python3-fann2
 pulseaudio
 mpg123
 git
