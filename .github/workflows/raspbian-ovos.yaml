@@ -130,6 +130,6 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.SSH_PORT }}
           source: "${{ steps.build.outputs.image-path }}"
-          target: "raspbian/development"
+          target: "raspbian/development/.testing"
           strip_components: 4
 
