@@ -159,8 +159,6 @@ function install_extra_skills (){
 	INSTALL="$INSTALL ${OVOS_SOURCE}/$p"
     done
 
-    # Add the NeonGeckoCom skills
-    INSTALL="$INSTALL git+https://github.com/NeonGeckoCom/skill-user_settings git+https://github.com/NeonGeckoCom/skill-spelling git+https://github.com/NeonGeckoCom/skill-local_music git+https://github.com/NeonGeckoCom/skill-caffeinewiz"
     # Add some fun
     INSTALL="$INSTALL git+https://github.com/JarbasSkills/skill-icanhazdadjokes"
 
