@@ -314,7 +314,7 @@ echo "1. Consider creating an .asoundrc and check your microphone with alsamixer
 echo ""
 echo "2. You can find documentation at https://openvoiceos.github.io/community-docs/install_raspbian/"
 echo ""
-echo "3. You can find pre-built OVOS/PI images at https://ovosimages.ziggyai.online/raspbian/"
+echo "3. You can find pre-built OVOS/PI images at https://ovosimages.ziggyai.online/raspbian/development/"
 echo ""
 echo "4. After a reboot ${BINDIR} will be added to your path and give you access to the ovos command line utilities."
 echo ""
