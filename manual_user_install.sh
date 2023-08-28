@@ -312,7 +312,7 @@ fi
 echo ""
 echo "1. Consider creating an .asoundrc and check your microphone with alsamixer, arecord, and aplay."
 echo ""
-echo "2. You can find documentation at https://openvoiceos.github.io/community-docs/install_raspbian/"
+echo "2. You can find documentation at https://openvoiceos.github.io/community-docs/"
 echo ""
 echo "3. You can find pre-built OVOS/PI images at https://ovosimages.ziggyai.online/raspbian/development/"
 echo ""
