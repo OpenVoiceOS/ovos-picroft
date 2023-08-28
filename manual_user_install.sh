@@ -48,7 +48,6 @@ function install_core (){
     pip3 install padatious fann2==1.0.7
 
     # Precise-lite wake-word (ww) cluster
-    pip3 install --upgrade setuptools wheel pip
     pip3 install tflite_runtime
     pip3 install PyYAML
     pip3 install PyAudio
@@ -260,6 +259,7 @@ echo $sudoPW | sudo -S apt upgrade -y
 if [[ ! -d $OVOS_VENV ]]; then
     echo Creating ovos venv
     python3 -mvenv $OVOS_VENV
+    $OVOS_VENV/bin/pip3 install --upgrade setuptools wheel pip
     echo
 fi
 . $OVOS_VENV/bin/activate || {
