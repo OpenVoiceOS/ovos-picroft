@@ -26,7 +26,7 @@ function get_src() {
     mkdir -p ${OVOS_SOURCE}
     pushd ${OVOS_SOURCE}
     echo Cloning source to ${OVOS_SOURCE}
-    for p in $OVOS_CORE_REPOS $OVOS_DINKUM_REPOS $OVOS_PRECISE_LITE_REPOS $OVOS_STT_REPOS $OVOS_TTS_REPOS $OVOS_EXTRA_REPOS $OVOS_PHAL_REPOS; do
+    for p in $OVOS_CORE_REPOS $OVOS_DINKUM_REPOS $OVOS_PRECISE_LITE_REPOS $OVOS_STT_REPOS $OVOS_TTS_REPOS $OVOS_EXTRA_REPOS $OVOS_PHAL_REPOS $OVOS_SKILLS_REPOS $OVOS_EXTRA_SKILL_REPOS; do
 	echo Cloning $p
 	[[ -d $p ]] || git clone https://github.com/OpenVoiceOS/$p
     done
