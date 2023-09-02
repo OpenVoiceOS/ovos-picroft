@@ -4,7 +4,7 @@ enable ssh.service
 enable resize2fs_once
 enable media-automount@.service
 enable wifi_powersave@.service
-enable zram.service
+enable zram-swap.service
 
 enable ntp.service
 
