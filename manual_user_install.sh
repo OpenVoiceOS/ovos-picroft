@@ -155,7 +155,7 @@ function install_extra_skills (){
 
     INSTALL=""
     # install the OVOS extra skills
-    for p in $OVOS_EXTRA_SKILLS_REPOS; do
+    for p in $OVOS_EXTRA_SKILL_REPOS; do
 	INSTALL="$INSTALL ${OVOS_SOURCE}/$p"
     done
 
