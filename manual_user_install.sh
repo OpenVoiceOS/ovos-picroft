@@ -18,7 +18,7 @@ set -e
 : ${OVOS_STT_REPOS:="ovos-microphone-plugin-alsa ovos-stt-plugin-server"}
 : ${OVOS_TTS_REPOS:="ovos-tts-plugin-mimic3-server ovos-tts-plugin-mimic ovos-tts-plugin-piper ovos-tts-server-plugin"}
 : ${OVOS_EXTRA_REPOS:="ovos-config ovos-utils ovos-bus-client ovos-plugin-manager ovos-cli-client"}
-: ${OVOS_PHAL_REPOS:="ovos-PHAL ovos-phal-plugin-connectivity-events ovos-phal-plugin-system ovos-PHAL-plugin-ipgeo ovos-PHAL-plugin-oauth ovos-phal-plugin-dashboard ovos-phal-plugin-alsa"}
+: ${OVOS_PHAL_REPOS:="ovos-PHAL ovos-phal-plugin-connectivity-events ovos-phal-plugin-system ovos-PHAL-plugin-ipgeo ovos-PHAL-plugin-oauth ovos-phal-plugin-alsa"}
 : ${OVOS_SKILLS_REPOS:="skill-ovos-volume skill-ovos-fallback-unknown skill-ovos-stop skill-alerts skill-ovos-personal skill-ovos-naptime skill-ovos-date-time"}
 : ${OVOS_EXTRA_SKILL_REPOS:="skill-ovos-weather skill-ovos-hello-world skill-ovos-ddg skill-ovos-wolfie skill-ovos-wikipedia skill-ovos-fallback-chatgpt skill-ovos-news skill-ovos-somafm skill-ovos-youtube-music"}
 
