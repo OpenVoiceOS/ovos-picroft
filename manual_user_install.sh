@@ -13,7 +13,7 @@ set -e
 # Eg to skip installing Dinkum
 # $ export OVOS_DINKUM_REPOS=""
 : ${OVOS_CORE_REPOS:="ovos-backend-client ovos-core ovos-audio ovos-ocp-audio-plugin ovos-messagebus"}
-: ${OVOS_DINKUM_REPOS:="ovos-dinkum-listener ovos-vad-plugin-silero ovos-ww-plugin-pocketsphinx"}
+: ${OVOS_DINKUM_REPOS:="ovos-dinkum-listener ovos-vad-plugin-silero ovos-ww-plugin-pocketsphinx ovos-audio-transformer-plugin-ggwave"}
 : ${OVOS_PRECISE_LITE_REPOS:="ovos-ww-plugin-precise ovos-ww-plugin-precise-lite ovos-workshop ovos-lingua-franca"}
 : ${OVOS_STT_REPOS:="ovos-microphone-plugin-alsa ovos-stt-plugin-server"}
 : ${OVOS_TTS_REPOS:="ovos-tts-plugin-mimic3-server ovos-tts-plugin-mimic ovos-tts-plugin-piper ovos-tts-server-plugin"}
@@ -38,7 +38,7 @@ function install_core (){
     echo
 
     # set up the Raspberry Pi
-    echo $sudoPW | sudo -S apt install -y build-essential python3-dev python3-pip python3-venv swig libssl-dev libfann-dev portaudio19-dev libpulse-dev cmake libncurses-dev pulseaudio-utils pulseaudio
+    echo $sudoPW | sudo -S apt install -y build-essential python3-dev python3-pip python3-venv swig libssl-dev libfann-dev portaudio19-dev libpulse-dev cmake libncurses-dev pulseaudio-utils pulseaudio libsdl2-dev
 
     # make sure pulseaudio is running
     pulseaudio --check || pulseaudio -D
