@@ -2,7 +2,7 @@
 python_version=`python --version`
 if [[ $python_version =~ ".9" ]]; then
     echo "${python_version}  Installing custom wheel"
-    pip3 install -U -f https://whl.smartgic.io/tflite_runtime-2.14.0-cp39-cp39-linux_aarch64.whl
+    pip3 install -U -f https://whl.smartgic.io/ tflite_runtime-2.14.0-cp39-cp39-linux_aarch64.whl
 else
     echo "${python_version} detected"
     pip3 install -U -f tflite_runtime
