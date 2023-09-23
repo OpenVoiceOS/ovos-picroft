@@ -69,6 +69,11 @@ function install_core (){
     pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-naptime
     pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-date-time
 
+    # workaround a breaking change in onnxruntime until it is fixed in upstream packages
+    pip3 install onnxruntime==1.15.0
+    # dependency for skill-alerts until it is no longer using neon-utils
+    pip3 install neon-utils
+
     # You can uncomment these lines if the deprecation notices are flooding your logs or slowing the system
     #sed -i '/\@deprecated/d' $HOME/.local/lib/python3.9/site-packages/ovos_utils/fingerprinting.py
     #sed -i '/\@deprecated/d' $HOME/.local/lib/python3.9/site-packages/ovos_utils/configuration.py
@@ -169,7 +174,8 @@ function install_extra_skills (){
     pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-youtube-music
 
     # fun
-    pip3 install git+https://github.com/JarbasSkills/skill-icanhazdadjokes
+    pip3 install git+https://github.com/OpenVoiceOS/skill-icanhazdadjokes
+    pip3 install git+https://github.com/OpenVoiceOS/ovos-skill-easter-eggs
 
     # Here is where to include your local skills
     if [[ ! -d $HOME/.local/share/mycroft/skills ]]; then
@@ -186,7 +192,7 @@ echo
 echo "This file will install ovos-core to this device"
 echo "using the latest commits from github."
 echo
-echo "First lets setup some things."
+echo "First let's set up some things."
 echo
 
 
@@ -213,6 +219,11 @@ echo
 read -p "Would you like to install extra skills to match the downloadable image? (Y/n): " extra_skills
 if [[ -z "$extra_skills" || $extra_skills == y* || $extra_skills == Y* ]]; then
     extra_skills="YES"
+fi
+echo
+read -p "OVOS uses PipeWire for audio by default. Would you like to use PulseAudio instead? (Y/n):  " use_pulse
+if [[ -z "$use_pulse" || $use_pulse == y* || $use_pulse == Y* ]]; then
+    use_pulse="YES"
 fi
 echo
 echo "We are now ready to install OVOS"
@@ -242,6 +253,10 @@ if [[ $install == Y* || $install == y* ]]; then
 
     if [[ $extra_skills == "YES" ]]; then
         install_extra_skills
+    fi
+
+    if [[ $use_pulse != "YES" ]]; then
+       sed -i s/pw-play/paplay/ "$HOME/.config/mycroft/mycroft.conf"
     fi
 
     echo "Done installing OVOS"
