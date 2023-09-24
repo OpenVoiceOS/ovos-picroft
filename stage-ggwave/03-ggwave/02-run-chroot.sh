@@ -7,4 +7,4 @@ cmake .. && make
 mv /home/ovos/ggwave/build/bin/* /home/ovos/.local/bin/
 rm -rf ggwave
 
-pip3 https://github.com/OpenVoiceOS/ovos-audio-transformer-plugin-ggwave
+pip3 install https://github.com/OpenVoiceOS/ovos-audio-transformer-plugin-ggwave
