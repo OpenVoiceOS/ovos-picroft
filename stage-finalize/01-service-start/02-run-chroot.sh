@@ -1,5 +1,5 @@
 # update onnxruntime to working version
-pip3 install -U -f onnxruntime~=1.15.0
+pip3 install -U onnxruntime~=1.15.0
 
 chown -Rf ovos:ovos /home/ovos
 
