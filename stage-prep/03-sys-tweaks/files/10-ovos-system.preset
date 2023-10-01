@@ -5,6 +5,7 @@ enable resize2fs_once
 enable media-automount@.service
 enable wifi_powersave@.service
 enable zram-swap.service
+enable i2csound.service
 
 enable ntp.service
 

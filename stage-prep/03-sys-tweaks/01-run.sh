@@ -57,3 +57,7 @@ sed 's/#dtparam=i2c_arm=on/dtparam=i2c_arm=on/g' ${ROOTFS_DIR}/boot/config.txt
 sed 's/#dtparam=i2s=on/dtparam=i2s=on/g' ${ROOTFS_DIR}/boot/config.txt
 sed 's/#dtparam=spi=on/dtparam=spi=on/g' ${ROOTFS_DIR}/boot/config.txt
 sed 's/dtoverlay=vc4-kms-v3d/dtoverlay=vc4-kms-v3d,audio=off/g' ${ROOTFS_DIR}/boot/config.txt
+
+# install i2csound.service
+install -v -m 0644 files/i2csound.service "${ROOTFS_DIR}/etc/systemd/system/i2csound.service"
+install -v -m 0755 files/ovos-i2csound "${ROOTFS_DIR}/usr/libexec/ovos-i2csound"
