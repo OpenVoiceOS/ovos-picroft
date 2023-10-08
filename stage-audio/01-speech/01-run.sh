@@ -16,6 +16,9 @@ install -v -d -m 0755 "${ROOTFS_DIR}/etc/udev"
 install -v -d -m 0755 "${ROOTFS_DIR}/etc/udev/rules.d"
 install -v -m 0644 files/91-pulseaudio-GeneralPlus.rules "${ROOTFS_DIR}/etc/udev/rules.d/"
 
+install -v -d -m 0755 "${ROOTFS_DIR}/etc/modules_load.d"
+install -v -m 0644 files/mk1.conf "${ROOTFS_DIR}/etc/modules_load.d/mk1.conf"
+
 install -v -d -m 0755 "${ROOTFS_DIR}/home/ovos/.local/share"
 install -v -d -m 0755 "${ROOTFS_DIR}/home/ovos/.local/share/piper_tts"
 install -v -d -m 0755 "${ROOTFS_DIR}/home/ovos/.local/share/piper_tts/voice-en-gb-alan-low"
