@@ -7,7 +7,7 @@ After=ovos-messagebus.service
 [Service]
 Type=notify
 User=ovos
-ExecStart=/usr/libexec/ovos-systemd-admin-phal
+ExecStart=%h/.venv/bin/python /usr/libexec/ovos-systemd-admin-phal
 TimeoutStartSec=1m
 TimeoutStopSec=1m
 Restart=on-failure

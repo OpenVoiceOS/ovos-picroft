@@ -7,7 +7,7 @@ After=pulseaudio.service
 
 [Service]
 Type=notify
-ExecStart=/usr/libexec/ovos-systemd-audio
+ExecStart=%h/.venv/bin/python /usr/libexec/ovos-systemd-audio
 TimeoutStartSec=1m
 TimeoutStopSec=1m
 Restart=on-failure
