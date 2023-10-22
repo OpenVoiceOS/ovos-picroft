@@ -1,13 +1,12 @@
 [Unit]
-Description=OVOS Audio
+Description=OVOS GUI
 PartOf=ovos.service
 After=ovos.service
 After=ovos-messagebus.service
-After=pulseaudio.service
 
 [Service]
 Type=notify
-ExecStart=%h/.venv/bin/python /usr/libexec/ovos-systemd-audio
+ExecStart=%h/.venv/bin/python /usr/libexec/ovos-systemd-gui
 TimeoutStartSec=1m
 TimeoutStopSec=1m
 Restart=on-failure
@@ -18,3 +17,4 @@ StartLimitBurst=4
 
 [Install]
 WantedBy=ovos.service
+

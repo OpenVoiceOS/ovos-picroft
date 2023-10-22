@@ -5,7 +5,7 @@ After=ovos.service
 
 [Service]
 Type=notify
-ExecStart=/usr/libexec/ovos-systemd-messagebus
+ExecStart=%h/.venv/bin/python /usr/libexec/ovos-systemd-messagebus
 TimeoutStartSec=1m
 TimeoutStopSec=1m
 Restart=on-failure

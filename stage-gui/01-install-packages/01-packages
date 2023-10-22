@@ -1,0 +1,17 @@
+cmake
+extra-cmake-modules
+kio kio-extras
+plasma-framework
+libqt5websockets5-dev
+libqt5webview5-dev
+qtdeclarative5-dev
+libqt5multimediaquick5
+libqt5multimedia5-plugins
+libqt5webengine5
+libkf5dbusaddons-dev
+libkf5iconthemes-dev
+kirigami2-dev
+qtmultimedia5-dev
+libkf5plasma-dev
+libkf5kio-dev
+qml-module-qtwebengine

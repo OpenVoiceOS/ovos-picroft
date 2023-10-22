@@ -6,7 +6,6 @@ rm -rf zram-swap
 
 cat >> /boot/config.txt << EOF
 
-gpu_mem=16
 disable_splash=1
 
 [pi3]
@@ -17,3 +16,11 @@ boot_delay=1
 [all]
 
 EOF
+
+if [[ ! ${VIRTUAL_ENV} ]]; then
+    source /home/ovos/.venv/bin/activate;
+fi
+
+pip3 install wheel
+
+deactivate

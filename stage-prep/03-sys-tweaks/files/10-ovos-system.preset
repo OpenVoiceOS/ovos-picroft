@@ -6,8 +6,6 @@ enable media-automount@.service
 enable wifi_powersave@.service
 enable zram-swap.service
 
-enable ntp.service
-
 disable apply_noobs_os_config.service
 disable userconfig.service
 disable systemd-networkd.socket
