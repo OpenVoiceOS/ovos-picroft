@@ -16,11 +16,3 @@ boot_delay=1
 [all]
 
 EOF
-
-if [[ ! ${VIRTUAL_ENV} ]]; then
-    source /home/ovos/.venv/bin/activate;
-fi
-
-pip3 install wheel
-
-deactivate

@@ -15,3 +15,5 @@ qtmultimedia5-dev
 libkf5plasma-dev
 libkf5kio-dev
 qml-module-qtwebengine
+qml-module-qtmultimedia
+
