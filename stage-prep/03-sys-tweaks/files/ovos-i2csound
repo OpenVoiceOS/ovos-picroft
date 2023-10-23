@@ -116,22 +116,22 @@ fi
 # Reset FAN to low speed
 /usr/sbin/i2cset -a -y 1 0x04 101 30 i
 
-    PULSE_SYSTEM=/etc/pulse/mycroft-sj201-default.pa
-    PULSE_DAEMON=/etc/pulse/mycroft-sj201-daemon.conf
-    fi
+PULSE_SYSTEM=/etc/pulse/mycroft-sj201-default.pa
+PULSE_DAEMON=/etc/pulse/mycroft-sj201-daemon.conf
+fi
 
-    # Install soundstate
-    echo "create asound status file"
-    ln -s $ASOUND_STATE /etc/ovos_asound.state
-    ln -s $ASOUND_STATE /var/lib/alsa/asound.state
+# Install soundstate
+echo "create asound status file"
+ln -s $ASOUND_STATE /etc/ovos_asound.state
+ln -s $ASOUND_STATE /var/lib/alsa/asound.state
 
-    # Install pulseaudio files
-    echo "create pulse system file"
-    ln -s $PULSE_SYSTEM /etc/pulse/system.pa
-    echo "create pulse default file"
-    ln -s $PULSE_SYSTEM /etc/pulse/default.pa
-    echo "create pulse daemon file"
-    ln -s $PULSE_DAEMON /etc/pulse/daemon.conf
+# Install pulseaudio files
+echo "create pulse system file"
+ln -s $PULSE_SYSTEM /etc/pulse/system.pa
+echo "create pulse default file"
+ln -s $PULSE_SYSTEM /etc/pulse/default.pa
+echo "create pulse daemon file"
+ln -s $PULSE_DAEMON /etc/pulse/daemon.conf
 
-    # Restore sound levels
-    alsactl -E HOME=/run/alsa -f /etc/ovos_asound.state restore
+# Restore sound levels
+alsactl -E HOME=/run/alsa -f /etc/ovos_asound.state restore

@@ -1,13 +1,12 @@
 [Unit]
-Description=OVOS ADMIN PHAL
+Description=OVOS GUI
 PartOf=ovos.service
 After=ovos.service
 After=ovos-messagebus.service
 
 [Service]
 Type=notify
-User=ovos
-ExecStart=/home/ovos/.venv/bin/python /usr/libexec/ovos-systemd-admin-phal
+ExecStart=%h/.venv/bin/python /usr/libexec/ovos-systemd-gui
 TimeoutStartSec=1m
 TimeoutStopSec=1m
 Restart=on-failure
@@ -17,4 +16,5 @@ StartLimitBurst=4
 #WatchdogSec=30s
 
 [Install]
-WantedBy=default.target
+WantedBy=ovos.service
+

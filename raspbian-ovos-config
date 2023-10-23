@@ -9,6 +9,7 @@ ARCHIVE_FILENAME="raspbian-ovos-dev"
 # stages before one of the exported stages. Otherwise, the action will make sure
 # any custom stage will include an image export directive.
 
+# Edit this list to full path of stages
 STAGE_LIST="stage0 stage1 stage2 /software/OVOS/IMAGE_BUILDING/venv/raspbian-ovos/stage-prep /software/OVOS/IMAGE_BUILDING/venv/raspbian-ovos/stage-core /software/OVOS/IMAGE_BUILDING/venv/raspbian-ovos/stage-phal /software/OVOS/IMAGE_BUILDING/venv/raspbian-ovos/stage-audio /software/OVOS/IMAGE_BUILDING/venv/raspbian-ovos/stage-skills /software/OVOS/IMAGE_BUILDING/venv/raspbian-ovos/stage-hivemind /software/OVOS/IMAGE_BUILDING/venv/raspbian-ovos/stage-finalize"
 
 # Host name of the image.
