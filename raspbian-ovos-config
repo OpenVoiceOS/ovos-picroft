@@ -9,7 +9,8 @@ ARCHIVE_FILENAME="raspbian-ovos-dev-gui"
 # stages before one of the exported stages. Otherwise, the action will make sure
 # any custom stage will include an image export directive.
 
-STAGE_LIST="stage0 stage1 stage2 /software/OVOS/IMAGE_BUILDING/gui/raspbian-ovos/stage-prep /software/OVOS/IMAGE_BUILDING/gui/raspbian-ovos/stage-core /software/OVOS/IMAGE_BUILDING/gui/raspbian-ovos/stage-phal /software/OVOS/IMAGE_BUILDING/gui/raspbian-ovos/stage-audio /software/OVOS/IMAGE_BUILDING/gui/raspbian-ovos/stage-skills /software/OVOS/IMAGE_BUILDING/gui/raspbian-ovos/stage-hivemind /software/OVOS/IMAGE_BUILDING/gui/raspbian-ovos/stage-gui /software/OVOS/IMAGE_BUILDING/gui/raspbian-ovos/stage-finalize"
+# Change ths list to full path of stages
+STAGE_LIST="stage0 stage1 stage2 /software/OVOS/IMAGE_BUILDING/gui/raspbian-ovos/stage-prep /software/OVOS/IMAGE_BUILDING/gui/raspbian-ovos/stage-core /software/OVOS/IMAGE_BUILDING/gui/raspbian-ovos/stage-phal /software/OVOS/IMAGE_BUILDING/gui/raspbian-ovos/stage-audio /software/OVOS/IMAGE_BUILDING/gui/raspbian-ovos/stage-skills /software/OVOS/IMAGE_BUILDING/gui/raspbian-ovos/stage-hivemind /software/OVOS/IMAGE_BUILDING/gui/raspbian-ovos/stage-gui /software/OVOS/IMAGE_BUILDING/gui/raspbian-ovos/stage-ggwave /software/OVOS/IMAGE_BUILDING/gui/raspbian-ovos/stage-splash /software/OVOS/IMAGE_BUILDING/gui/raspbian-ovos/stage-finalize"
 
 # Host name of the image.
 TARGET_HOSTNAME="raspOvos"

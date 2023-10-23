@@ -5,6 +5,13 @@ fi
 pip3 install git+https://github.com/OpenVoiceOS/ovos-gui-plugin-shell-companion
 pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-homescreen
 pip3 install git+https://github.com/OpenVoiceOS/ovos-gui
+pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-gui-network-client
+pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-connectivity-events
+pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-wallpaper-manager
+pip3 install git+https://github.com/OpenVoiceOS/ovos-ocp-youtube-plugin
+pip3 install git+https://github.com/OpenVoiceOS/ovos-ocp-bandcamp-plugin
+pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-network-manager
+pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-system
 
 # Mycroft-gui-qt5
 cd /home/ovos

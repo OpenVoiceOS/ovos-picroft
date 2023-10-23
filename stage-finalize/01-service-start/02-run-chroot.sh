@@ -16,3 +16,4 @@ su -c "ln -s /ramdisk/mycroft/phal.log /home/ovos/.local/state/mycroft/" --login
 su -c "ln -s /ramdisk/mycroft/skills.log /home/ovos/.local/state/mycroft/" --login ovos
 su -c "ln -s /ramdisk/mycroft/voice.log /home/ovos/.local/state/mycroft/" --login ovos
 
+loginctl enable-linger ovos

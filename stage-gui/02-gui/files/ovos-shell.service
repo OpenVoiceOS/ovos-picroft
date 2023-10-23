@@ -1,5 +1,8 @@
 [Unit]
 Description=OVOS GUI
+PartOf=ovos.service
+After=ovos.service
+After=ovos-messagebus.service
 
 [Service]
 WorkingDirectory=/home/ovos
