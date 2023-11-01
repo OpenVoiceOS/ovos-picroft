@@ -4,9 +4,12 @@ After=pulseaudio.service
 
 [Service]
 Type=simple
-ExecStart=%h/.venv/bin/python hivemind-core listen
+ExecStart=%h/.venv/bin/python %h/.venv/bin/hivemind-core listen
 TimeoutStartSec=10m
 TimeoutStopSec=1m
 Restart=on-failure
 StartLimitInterval=5min
 StartLimitBurst=4
+
+[Install]
+WantedBy=ovos.service
