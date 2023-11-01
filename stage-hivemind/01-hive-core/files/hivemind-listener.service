@@ -13,4 +13,3 @@ StartLimitBurst=4
 
 [Install]
 WantedBy=ovos.service
-
