@@ -9,17 +9,17 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
-      - uses: usimd/pi-gen-action@v1
+      - uses: usimd/pi-gen-action@v1.6
         id: build
         with:
           # Final image name.
-          image-name: raspbian-ovos-dev
+          image-name: raspOVOS-dev
 
           # List of stage name to execute in given order. Relative and absolute paths to
           # custom stage directories are allowed here. Note that by default pi-gen exports
           # images in stage2 (lite), stage4 and stage5. You probably want to hook in custom
           # stages before one of the exported stages. Otherwise, the action will make sure
-          # any custom stage will include an image export directive.
+          # any custom stage will include an image export directive.<<<<<<< ggwave
           stage-list: stage0 stage1 stage2 ./stage-prep ./stage-core ./stage-phal ./stage-audio ./stage-skills ./stage-hivemind ./stage-ggwave ./stage-finalize
 
           # Host name of the image.
@@ -108,7 +108,7 @@ jobs:
 
           # The release version to build images against. Valid values are jessie, stretch,
           # buster, bullseye, and testing.
-          release: bullseye
+          release: bookworm
 
           # Setting to `1` will prevent pi-gen from dropping the "capabilities" feature.
           # Generating the root filesystem with capabilities enabled and running it from a
