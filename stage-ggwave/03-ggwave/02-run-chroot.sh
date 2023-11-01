@@ -7,4 +7,10 @@ cmake .. && make
 mv /home/ovos/ggwave/build/bin/* /home/ovos/.local/bin/
 rm -rf ggwave
 
+if [[ ! ${VIRTUAL_ENV} ]]; then
+    source /home/ovos/.venv/bin/activate;
+fi
+
 pip3 install git+https://github.com/OpenVoiceOS/ovos-audio-transformer-plugin-ggwave
+
+deactivate
