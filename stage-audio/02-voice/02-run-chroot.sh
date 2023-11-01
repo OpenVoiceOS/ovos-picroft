@@ -1,9 +1,16 @@
+
 if [[ ! ${VIRTUAL_ENV} ]]; then
     source /home/ovos/.venv/bin/activate;
 fi
-
-# custom tflite_runtime to work with python 3.9 and raspbian bullseye
-pip3 install -U -f 'https://whl.smartgic.io/' tflite_runtime
+# Check for python version and install correct tflite_runtime
+python_version=`python --version`
+if [[ $python_version =~ ".9" ]]; then
+    echo "${python_version}  Installing custom wheel"
+    pip3 install -U -f https://whl.smartgic.io/ tflite_runtime
+else
+    echo "${python_version} detected"
+    pip3 install -U -f tflite_runtime
+fi
 
 pip3 install git+https://github.com/OpenVoiceOS/ovos-dinkum-listener
 pip3 install git+https://github.com/OpenVoiceOS/ovos-vad-plugin-silero
