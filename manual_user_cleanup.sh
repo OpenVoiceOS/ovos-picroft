@@ -66,8 +66,7 @@ echo "Removing $HOME/.config/ovos"
 rm -fr $HOME/.config/ovos
 rm -fr $HOME/.local/share/OpenVoiceOS
 
-cp manual_user_*.sh ..
-
-echo "Removing $SCRIPT_DIR... Goodbye!"
+echo "Removed everything but $SCRIPT_DIR... Goodbye!"
+#cd ..
 #rm -fr $SCRIPT_DIR
 
