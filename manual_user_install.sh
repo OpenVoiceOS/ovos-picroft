@@ -14,7 +14,7 @@ set -e
 # $ export OVOS_DINKUM_REPOS=""
 : ${OVOS_CORE_REPOS:="ovos-backend-client ovos-core ovos-audio ovos-ocp-audio-plugin ovos-messagebus"}
 : ${OVOS_DINKUM_REPOS:="ovos-dinkum-listener ovos-vad-plugin-silero ovos-ww-plugin-pocketsphinx ovos-audio-transformer-plugin-ggwave"}
-: ${OVOS_PRECISE_LITE_REPOS:="ovos-ww-plugin-precise ovos-ww-plugin-precise-lite ovos-workshop ovos-lingua-franca"}
+: ${OVOS_PRECISE_LITE_REPOS:="ovos-ww-plugin-precise ovos-ww-plugin-precise-lite ovos-workshop ovos-lingua-franca ovos-vad-plugin-webrtcvad"}
 : ${OVOS_STT_REPOS:="ovos-microphone-plugin-alsa ovos-stt-plugin-server"}
 : ${OVOS_TTS_REPOS:="ovos-tts-plugin-mimic3-server ovos-tts-plugin-mimic ovos-tts-plugin-piper ovos-tts-server-plugin"}
 : ${OVOS_EXTRA_REPOS:="ovos-config ovos-utils ovos-bus-client ovos-plugin-manager ovos-cli-client"}
@@ -49,6 +49,7 @@ function install_core (){
 
     # Precise-lite wake-word (ww) cluster
     pip3 install tflite_runtime
+
     pip3 install PyYAML
     pip3 install PyAudio
 
@@ -81,6 +82,7 @@ function install_core (){
         mkdir -p $HOME/.config/mycroft
     fi
     cp $SCRIPT_DIR/stage-core/01-ovos-core/files/mycroft.conf $HOME/.config/mycroft/
+    sed -i 's,/home/ovos/.local/share/precise_lite/hey_mycroft.tflite,https://github.com/OpenVoiceOS/precise-lite-models/raw/master/wakewords/en/hey_mycroft.tflite,' $HOME/.config/mycroft/mycroft.conf
     echo $SCRIPT_DIR
     echo
     echo "Done installing OVOS core"
@@ -120,11 +122,17 @@ function install_systemd (){
     # Use the venv python to run the scripts
     for f in $HOME/.config/systemd/user/*.service ; do
         sed -i s,/usr/libexec,${BINDIR},g $f
-	sed -i "s,ExecStart=,ExecStart=${OVOS_VENV}/bin/python3 ," $f
+        if [[ $f == "$HOME/.config/systemd/user/ovos.service" ]]; then
+            echo "Skip $f"
+        else
+            sed -i "s,ExecStart=,ExecStart=${OVOS_VENV}/bin/python3 ," $f
+            sed -i "s,\%h/.venv/bin/python,," $f
+        fi
         # extend the timeouts
         # sed -i s/=1m/=2m/g $f
     done
-    echo $sudoPW | sudo -S sed -i "s,ExecStart=,ExecStart=${OVOS_VENV}/bin/python3 ," /etc/systemd/system/ovos-admin-phal.service
+
+    echo $sudoPW | sudo -S sed -i "s,/home/ovos/.venv/bin/python,${OVOS_VENV}/bin/python3 ," /etc/systemd/system/ovos-admin-phal.service
 
     if [[ $enabled == "YES" ]]; then
         echo
