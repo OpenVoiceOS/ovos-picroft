@@ -1,0 +1,12 @@
+[Unit]
+Description=SJ201 Service
+Before=pulseaudio.service
+Before=configure-audio.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/libexec/configure_sj201_on_boot.sh
+
+[Install]
+WantedBy=multi-user.target
+WantedBy=pulseaudio.service

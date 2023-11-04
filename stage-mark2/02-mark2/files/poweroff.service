@@ -1,0 +1,13 @@
+[Unit]
+Description=Optionally hold OS in some state instead of shutting down. For SJ201R10, this keeps the fan and screen off.
+DefaultDependencies=no
+After=umount.target
+Before=final.target
+Conflicts=reboot.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/libexec/poweroff.sh
+
+[Install]
+WantedBy=shutdown.target

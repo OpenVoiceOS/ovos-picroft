@@ -1,7 +1,7 @@
 # Final image name.
-IMG_NAME="raspbian-ovos-dev"
-IMG_FILENAME="raspbian-ovos-dev"
-ARCHIVE_FILENAME="raspbian-ovos-dev"
+IMG_NAME="raspOVOS-dev-mark2"
+IMG_FILENAME="raspOVOS-dev-mark2"
+ARCHIVE_FILENAME="raspOVOS-dev-mark2"
 
 # List of stage name to execute in given order. Relative and absolute paths to
 # custom stage directories are allowed here. Note that by default pi-gen exports
@@ -10,7 +10,7 @@ ARCHIVE_FILENAME="raspbian-ovos-dev"
 # any custom stage will include an image export directive.
 
 # Edit this list to full path of stages
-STAGE_LIST="stage0 stage1 stage2 /software/OVOS/IMAGE_BUILDING/venv/raspbian-ovos/stage-prep /software/OVOS/IMAGE_BUILDING/venv/raspbian-ovos/stage-core /software/OVOS/IMAGE_BUILDING/venv/raspbian-ovos/stage-phal /software/OVOS/IMAGE_BUILDING/venv/raspbian-ovos/stage-audio /software/OVOS/IMAGE_BUILDING/venv/raspbian-ovos/stage-skills /software/OVOS/IMAGE_BUILDING/venv/raspbian-ovos/stage-hivemind /software/OVOS/IMAGE_BUILDING/venv/raspbian-ovos/stage-finalize"
+STAGE_LIST="stage0 stage1 stage2 /software/OVOS/IMAGE_BUILDING/mark2/raspbian-ovos/stage-prep /software/OVOS/IMAGE_BUILDING/mark2/raspbian-ovos/stage-core /software/OVOS/IMAGE_BUILDING/mark2/raspbian-ovos/stage-phal /software/OVOS/IMAGE_BUILDING/mark2/raspbian-ovos/stage-audio /software/OVOS/IMAGE_BUILDING/mark2/raspbian-ovos/stage-skills /software/OVOS/IMAGE_BUILDING/mark2/raspbian-ovos/stage-hivemind /software/OVOS/IMAGE_BUILDING/mark2/raspbian-ovos/stage-ggwave /software/OVOS/IMAGE_BUILDING/mark2/raspbian-ovos/stage-mark2 /software/OVOS/IMAGE_BUILDING/mark2/raspbian-ovos/stage-finalize"
 
 # Host name of the image.
 TARGET_HOSTNAME="raspOvos"
