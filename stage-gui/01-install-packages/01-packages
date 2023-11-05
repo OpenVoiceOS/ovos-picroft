@@ -8,6 +8,7 @@ qtdeclarative5-dev
 libqt5multimediaquick5
 libqt5multimedia5-plugins
 libqt5webengine5
+libqt5virtualkeyboard5
 libkf5dbusaddons-dev
 libkf5iconthemes-dev
 qtvirtualkeyboard-plugin
