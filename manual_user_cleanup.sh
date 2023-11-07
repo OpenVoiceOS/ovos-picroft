@@ -48,6 +48,9 @@ rm -fr $HOME/.config/OpenVoiceOS
 echo "Removing any nltk data."
 rm -fr $HOME/nltk_data
 
+echo "Removing any source files."
+rm -fr $HOME/ovos-src
+
 # clean up systemd files
 echo "Removing systemd files."
 rm -f ${BINDIR}/ovos-systemd-skills
