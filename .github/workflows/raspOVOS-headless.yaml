@@ -13,7 +13,7 @@ jobs:
         id: build
         with:
           # Final image name.
-          image-name: raspOVOS-headless-dev
+          image-name: rasp-ovos-headless-dev
 
           # List of stage name to execute in given order. Relative and absolute paths to
           # custom stage directories are allowed here. Note that by default pi-gen exports
