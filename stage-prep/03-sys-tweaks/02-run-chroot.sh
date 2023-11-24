@@ -4,7 +4,10 @@ cd zram-swap
 cd ..
 rm -rf zram-swap
 
-cat >> /boot/config.txt << EOF
+dpkg-reconfigure --frontend noninteractive locales
+locale-gen
+
+cat >> /boot/firmware/config.txt << EOF
 
 disable_splash=1
 
@@ -16,11 +19,3 @@ boot_delay=1
 [all]
 
 EOF
-
-if [[ ! ${VIRTUAL_ENV} ]]; then
-    source /home/ovos/.venv/bin/activate;
-fi
-
-pip3 install wheel
-
-deactivate

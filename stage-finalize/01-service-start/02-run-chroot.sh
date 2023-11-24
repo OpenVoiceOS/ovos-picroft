@@ -1,5 +1,4 @@
-# update onnxruntime to working version
-pip3 install -U onnxruntime~=1.15.0
+#!/bin/bash -e
 
 chown -Rf ovos:ovos /home/ovos
 
@@ -18,5 +17,4 @@ su -c "ln -s /ramdisk/mycroft/phal_admin.log /home/ovos/.local/state/mycroft/" -
 su -c "ln -s /ramdisk/mycroft/phal.log /home/ovos/.local/state/mycroft/" --login ovos
 su -c "ln -s /ramdisk/mycroft/skills.log /home/ovos/.local/state/mycroft/" --login ovos
 su -c "ln -s /ramdisk/mycroft/voice.log /home/ovos/.local/state/mycroft/" --login ovos
-
 

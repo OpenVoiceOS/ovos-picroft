@@ -20,7 +20,7 @@ jobs:
           # images in stage2 (lite), stage4 and stage5. You probably want to hook in custom
           # stages before one of the exported stages. Otherwise, the action will make sure
           # any custom stage will include an image export directive.
-          stage-list: stage0 stage1 stage2 ./stage-prep ./stage-core ./stage-phal ./stage-audio ./stage-skills ./stage-hivemind ./stage-ggwave ./stage-finalize
+          stage-list: stage0 stage1 stage2 ./stage-prep ./stage-splash ./stage-core ./stage-hivemind ./stage-skills ./stage-phal ./stage-audio ./stage-speech ./stage-listener ./stage-ggwave ./stage-finalize
 
           # Host name of the image.
           hostname: raspOvos
@@ -61,7 +61,7 @@ jobs:
           disable-first-boot-user-rename: 1
 
           # Additional options to include in PIGEN_DOCKER_OPTS
-          docker-opts: ''
+          docker-opts: 'ARCHIVE_FILENAME="raspOVOS-headless-dev"'
 
           # Set whether a NOOBS image should be built as well. If enabled, the output
           # directory containing the NOOBS files will be saved as output variable

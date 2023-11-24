@@ -1,0 +1,72 @@
+# Final image name.
+IMG_NAME="raspOVOS-dev"
+# Name of build directory
+IMG_FILENAME="raspOVOS-dev"
+# Name of compressed image without chosen suffix
+ARCHIVE_FILENAME="raspOVOS-dev"
+
+# List of stage name to execute in given order. Relative and absolute paths to
+# custom stage directories are allowed here. Note that by default pi-gen exports
+# images in stage2 (lite), stage4 and stage5. You probably want to hook in custom
+# stages before one of the exported stages. Otherwise, the action will make sure
+# any custom stage will include an image export directive.
+
+STAGE_LIST="stage0 stage1 stage2 /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-prep /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-core /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-phal /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-speech /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-listener /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-skills /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-hivemind /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-ggwave /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-finalize"
+
+# Host name of the image.
+TARGET_HOSTNAME="raspOvos"
+
+# Name of the initial user account.
+FIRST_USER_NAME="ovos"
+
+# Password of the intial user account, locked if empty.
+FIRST_USER_PASS="ovos"
+
+# Compression to apply on final image (either "none", "zip", "xz" or "gz").
+DEPLOY_COMPRESSION=zip
+
+# Compression level to be used. From 0 to 9 (refer to the tool man page for more
+                                             # information on this. Usually 0 is no compression but very fast, up to 9 with the
+                                             # best compression but very slow).
+COMPRESSION_LEVEL=6
+
+# Disable the renaming of the first user during the first boot. This make it so
+# 'username' stays activated. 'username' must be set for this to work. Please be
+# aware of the implied security risk of defining a default username and password
+# for your devices.
+DISABLE_FIRST_BOOT_USER_RENAME=1
+
+# Set whether a NOOBS image should be built as well. If enabled, the output
+# directory containing the NOOBS files will be saved as output variable
+# 'image-noobs-path'.
+ENABLE_NOOBS=0
+
+# Enable SSH access to Pi.
+ENABLE_SSH=1
+
+# Set the locale
+LOCALE_DEFAULT="en_US.UTF-8"
+
+# Keyboard
+KEYBOARD_KEYMAP="us"
+KEYBOARD_LAYOUT="English (US)"
+
+# wpa country
+WPA_COUNTRY="US"
+
+# My timezone
+TIMEZONE_DEFAULT="America/Denver"
+
+# If this feature is enabled, the action will configure pi-gen to not export any
+# stage as image but the last one defined in property 'stage-list'. This is
+# helpful when building a single image flavor (in contrast to building a
+                                               # lite/server and full-blown desktop image), since it speeds up the build process
+# significantly.
+#EXPORT_LAST_STAGE_ONLY=1
+
+# The release version to build images against. Valid values are jessie, stretch,
+# buster, bullseye, and testing.
+RELEASE="bookworm"
+
+# Use qcow2 images to reduce space and runtime requirements.
+USE_QCOW2=0

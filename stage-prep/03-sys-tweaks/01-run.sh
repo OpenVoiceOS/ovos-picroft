@@ -13,6 +13,8 @@ install -v -d -m 0755 "${ROOTFS_DIR}/etc/sudoers.d"
 
 install -v -m 0644 files/ovos-sudo "${ROOTFS_DIR}/etc/sudoers.d/ovos"
 
+install -v -m 0644 files/wifi_powersave@.service "${ROOTFS_DIR}/usr/lib/systemd/system/wifi_powersave@.service"
+
 install -v -m 0644 files/media-automount@.service "${ROOTFS_DIR}/usr/lib/systemd/system/media-automount@.service"
 install -v -d -m 0755 "${ROOTFS_DIR}/etc/udev/automount.d"
 install -v -m 0644 files/auto "${ROOTFS_DIR}/etc/udev/automount.d/auto"
@@ -35,17 +37,14 @@ install -v -d -m 0755 "${ROOTFS_DIR}/tmp/mycroft"
 # Create directory for systemd hooks
 install -v -d -m 0755 "${ROOTFS_DIR}/usr/libexec"
 
-on_chroot << EOF
+# if [[ -e "${ROOTFS_DIR}/etc/locale.gen" ]]; then
+# 	rm "${ROOTFS_DIR}/etc/locale.gen"
+# fi
 
-chown -R ovos:ovos /tmp/
+sed -i 's/^# *\(en_US.UTF-8\)/\1/' "${ROOTFS_DIR}/etc/locale.gen"
 
-if [[ -e /etc/locale.gen ]]; then
-	rm "/etc/locale.gen"
-fi
-
-dpkg-reconfigure --frontend noninteractive locales
-
-sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen
-locale-gen
-
-EOF
+# Enable i2c and spi
+sed -i "s|#dtparam=i2c_arm=on|dtparam=i2c_arm=on|g" "${ROOTFS_DIR}/boot/firmware/config.txt"
+sed -i "s|#dtparam=i2s=on|dtparam=i2s=on|g" "${ROOTFS_DIR}/boot/firmware/config.txt"
+sed -i "s|#dtparam=spi=on|dtparam=spi=on|g" "${ROOTFS_DIR}/boot/firmware/config.txt"
+sed -i "s|#dtparam=audio=on|dtparam=audio=on|g" "${ROOTFS_DIR}/boot/firmware/config.txt"
