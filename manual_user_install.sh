@@ -191,21 +191,6 @@ echo
 echo "First lets set up some things."
 echo
 
-# what software am I running?
-OS_SOFTWARE="`cat /etc/issue | awk '{print $1}'`"
-
-# what hardware am I running on?
-HW_ARCHITECTURE="`grep Model /proc/cpuinfo | awk '{print $3}'`"
-if [[ $HW_ARCHITECTURE == "Raspberry" ]]; then
-   HW_ARCHITECTURE=$HW_ARCHITECTURE"_Pi"
-   XART="a"
-else
-   HW_ARCHITECTURE="`uname -i`"
-   XART="an"
-fi
-echo "You are running $OS_SOFTWARE on $XART $HW_ARCHITECTURE."
-echo
-
 # Save the config to allow multiple runs without typing too much :)
 function save_config() {
     mkdir -p ~/.config/ovos/
