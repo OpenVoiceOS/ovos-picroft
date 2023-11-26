@@ -133,6 +133,7 @@ function install_systemd (){
     done
 
     echo $sudoPW | sudo -S sed -i "s,/home/ovos/.venv/bin/python,${OVOS_VENV}/bin/python3 ," /etc/systemd/system/ovos-admin-phal.service
+    echo $sudoPW | sudo -S sed -i "s,User=ovos,User=$USER ," /etc/systemd/system/ovos-admin-phal.service
 
     if [[ $enabled == "YES" ]]; then
         echo
