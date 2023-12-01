@@ -1,2 +1,5 @@
 libsdl2-dev
 cmake
+gstreamer1.0-plugins-ugly
+gstreamer1.0-plugins-good
+gstreamer1.0-plugins-bad
