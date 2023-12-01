@@ -133,6 +133,7 @@ function install_systemd (){
     done
 
     echo $sudoPW | sudo -S sed -i "s,/home/ovos/.venv/bin/python,${OVOS_VENV}/bin/python3 ," /etc/systemd/system/ovos-admin-phal.service
+    echo $sudoPW | sudo -S sed -i "s,User=ovos,User=$USER ," /etc/systemd/system/ovos-admin-phal.service
 
     if [[ $enabled == "YES" ]]; then
         echo
@@ -188,7 +189,7 @@ echo
 echo "This file will install ovos-core to this device"
 echo "using the latest commits from github."
 echo
-echo "First lets setup some things."
+echo "First lets set up some things."
 echo
 
 # Save the config to allow multiple runs without typing too much :)
@@ -210,22 +211,25 @@ EOF
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-read -ep "Do you want a local git clone of all the source (y/N): " -i "$want_source" want_source
+read -ep "Do you want a local git clone of all the source? (y/N): " -i "$want_source" want_source
 if [[ $want_source == y* || $want_source == Y* ]]; then
     want_source="YES"
     PIP_EDITABLE="-e"
     echo
     : ${OVOS_SOURCE:="$HOME/ovos-src"}
-    read -ep "What directory should the source be cloned to: " -i "$OVOS_SOURCE" OVOS_SOURCE
+    read -ep "What directory should the source be cloned to? " -i "$OVOS_SOURCE" OVOS_SOURCE
     echo
 else
     want_source="NO"
     OVOS_SOURCE="git+https://github.com/OpenVoiceOS"
+    echo
 fi
-: ${OVOS_VENV:=$HOME/venv-ovos}
-read -ep "What directory should the venv be installed into: " -i $OVOS_VENV OVOS_VENV
 
-read -ep "Do you want to install systemd files (Y/n): " -i "$systemd" systemd
+: ${OVOS_VENV:=$HOME/venv-ovos}
+read -ep "What directory should the venv be installed into? " -i $OVOS_VENV OVOS_VENV
+echo
+
+read -ep "Do you want to install systemd files? (Y/n): " -i "$systemd" systemd
 if [[ -z "$systemd" || $systemd == y* || $systemd == Y* ]]; then
     systemd="YES"
     echo
@@ -249,7 +253,7 @@ if [[ -z "$extra_skills" || $extra_skills == y* || $extra_skills == Y* ]]; then
 fi
 save_config # up to this point
 echo
-echo "We are now ready to install OVOS"
+echo "We are now ready to install OVOS."
 echo
 read -ep "Type 'Y' to start install (any other key aborts): " -i "$install" install
 
