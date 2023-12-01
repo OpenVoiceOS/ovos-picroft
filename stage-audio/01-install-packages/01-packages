@@ -1,0 +1,7 @@
+libfann2 libfann-dev portaudio19-dev libpulse-dev
+mpg123
+i2c-tools
+pulseaudio-module-zeroconf
+gstreamer1.0-plugins-good
+gstreamer1.0-plugins-bad
+gstreamer1.0-plugins-ugly

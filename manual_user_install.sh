@@ -96,8 +96,8 @@ function install_systemd (){
     # install the hook files
     cp $SCRIPT_DIR/stage-core/01-ovos-core/files/ovos-systemd-skills ${BINDIR}/
     cp $SCRIPT_DIR/stage-core/02-messagebus/files/ovos-systemd-messagebus ${BINDIR}/
-    cp $SCRIPT_DIR/stage-audio/01-speech/files/ovos-systemd-audio ${BINDIR}/
-    cp $SCRIPT_DIR/stage-audio/02-voice/files/ovos-systemd-dinkum-listener ${BINDIR}/
+    cp $SCRIPT_DIR/stage-speech/01-speech/files/ovos-systemd-audio ${BINDIR}/
+    cp $SCRIPT_DIR/stage-listener/01-listener/files/ovos-systemd-dinkum-listener ${BINDIR}/
     cp $SCRIPT_DIR/stage-phal/01-user/files/ovos-systemd-phal ${BINDIR}/
     echo $sudoPW | sudo -S cp $SCRIPT_DIR/stage-phal/02-admin/files/ovos-systemd-admin-phal /usr/libexec
 
@@ -114,8 +114,8 @@ function install_systemd (){
     cp $SCRIPT_DIR/stage-core/01-ovos-core/files/ovos.service $HOME/.config/systemd/user/
     cp $SCRIPT_DIR/stage-core/01-ovos-core/files/ovos-skills.service $HOME/.config/systemd/user/
     cp $SCRIPT_DIR/stage-core/02-messagebus/files/ovos-messagebus.service $HOME/.config/systemd/user/
-    cp $SCRIPT_DIR/stage-audio/01-speech/files/ovos-audio.service $HOME/.config/systemd/user/
-    cp $SCRIPT_DIR/stage-audio/02-voice/files/ovos-dinkum-listener.service $HOME/.config/systemd/user/
+    cp $SCRIPT_DIR/stage-speech/01-speech/files/ovos-audio.service $HOME/.config/systemd/user/
+    cp $SCRIPT_DIR/stage-listener/01-listener/files/ovos-dinkum-listener.service $HOME/.config/systemd/user/
     cp $SCRIPT_DIR/stage-phal/01-user/files/ovos-phal.service $HOME/.config/systemd/user/
     echo $sudoPW | sudo -S cp $SCRIPT_DIR/stage-phal/02-admin/files/ovos-admin-phal.service /etc/systemd/system/
 
@@ -169,7 +169,7 @@ function install_extra_skills (){
     done
 
     # Add some fun
-    INSTALL="$INSTALL git+https://github.com/JarbasSkills/skill-icanhazdadjokes"
+    INSTALL="$INSTALL git+https://github.com/OpenVoiceOS/skill-ovos-icanhazdadjokes"
 
     # Do all the installs at once to allow pip to sort out dependencies nicely
     pip3 install $INSTALL

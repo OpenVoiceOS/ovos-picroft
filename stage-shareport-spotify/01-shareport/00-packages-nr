@@ -1,11 +1,12 @@
-autoconf
-automake
+dh-autoreconf
 libpopt-dev
 libconfig-dev
-libsoxr-dev
 libavahi-client-dev
+libsoxr-dev
 libplist-dev
 libsodium-dev
-libgcrypt-dev
 libavutil-dev
+libavcodec-dev
 libavformat-dev
+libgcrypt20-dev
+xxd
