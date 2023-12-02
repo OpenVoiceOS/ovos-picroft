@@ -121,7 +121,7 @@ fi
 /usr/sbin/i2cset -a -y 1 0x04 101 30 i
 
 PULSE_SYSTEM=/etc/pulse/default.pa.d/sj201-default.pa
-PULSE_DAEMON=/usr/share/pulseaudio/alsa-mixer/profile-sets/mycroft-sj201-daemon.conf
+PULSE_DAEMON=/usr/share/pulseaudio/alsa-mixer/profile-sets/sj201-daemon.conf
 fi
 
 if [ "$AIYVOICEBONNET" ] ; then
