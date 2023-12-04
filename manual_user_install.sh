@@ -43,13 +43,21 @@ function install_core (){
     # make sure pulseaudio is running
     pulseaudio --check || pulseaudio -D
 
-    # make ggwave
+    # make ggwave from scratch
+    if [[ ! -d $SCRIPT_DIR/ggwave ]]; then
+        rm -fr $SCRIPT_DIR/ggwave
+    fi
+
     git clone https://github.com/ggerganov/ggwave --recursive
     cd ggwave && mkdir build && cd build
     sed -i 's/BUILD_SHARED_LIBS_DEFAULT ON/BUILD_SHARED_LIBS_DEFAULT OFF/g' ../CMakeLists.txt
     cmake .. && make
-    mkdir /home/$USER/.local/bin
-    mv bin/* /home/$USER/.local/bin/
+
+    if [[ ! -d $HOME/.local/bin ]]; then
+        mkdir -p $HOME/.local/bin
+    fi
+
+    mv bin/* /$HOME/.local/bin/
 
     # padatious required to support newest ovos-core
     # fann version must be fixed as raspbian libfann-dev is too old for latest
