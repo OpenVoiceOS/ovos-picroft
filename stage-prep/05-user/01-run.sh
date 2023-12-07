@@ -17,3 +17,5 @@ install -v -d -m 0755 "${ROOTFS_DIR}/home/ovos/.local"
 install -v -d -m 0755 "${ROOTFS_DIR}/home/ovos/.local/bin"
 
 install -v -d -m 0755 "${ROOTFS_DIR}/tmp/mycroft"
+
+echo "dtoverlay=i2s-mmap" >> "${ROOTFS_DIR}/boot/firmware/config.txt"
