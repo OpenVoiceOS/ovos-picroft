@@ -31,3 +31,7 @@ echo "  docs-techincal          View the OVOS Technical docs in the terminal"
 echo "  docs-hivemind           View the HiveMind docs in the terminal"
 echo "  docs-messages           View OVOS Message specs in the terminal"
 echo
+echo "Misc Helpful COMMANDs:"
+echo "  ovos-simple-cli         Chat with your device through the terminal"
+echo
+

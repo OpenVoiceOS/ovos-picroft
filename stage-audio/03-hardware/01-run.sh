@@ -22,6 +22,7 @@ install -v -m 0755 files/tas5806-init "${ROOTFS_DIR}/usr/bin/tas5806-init"
 
 install -v -m 0644 files/91-vocalfusion.rules "${ROOTFS_DIR}/etc/udev/rules.d/91-vocalfusion.rules"
 install -v -m 0644 files/99-gpio.rules "${ROOTFS_DIR}/etc/udev/rules.d/99-gpio.rules"
+install -v -m 0644 files/avrdude-gpio.conf "${ROOTFS_DIR}/etc/avrdude-gpio.conf"
 
 # seeed voicecard drivers
 git clone https://github.com/HinTak/seeed-voicecard
