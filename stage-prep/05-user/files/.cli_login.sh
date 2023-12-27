@@ -34,4 +34,3 @@ echo
 echo "Misc Helpful COMMANDs:"
 echo "  ovos-simple-cli         Chat with your device through the terminal"
 echo
-
