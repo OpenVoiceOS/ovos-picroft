@@ -48,3 +48,4 @@ sed -i "s|#dtparam=i2c_arm=on|dtparam=i2c_arm=on|g" "${ROOTFS_DIR}/boot/firmware
 sed -i "s|#dtparam=i2s=on|dtparam=i2s=on|g" "${ROOTFS_DIR}/boot/firmware/config.txt"
 sed -i "s|#dtparam=spi=on|dtparam=spi=on|g" "${ROOTFS_DIR}/boot/firmware/config.txt"
 sed -i "s|#dtparam=audio=on|dtparam=audio=on|g" "${ROOTFS_DIR}/boot/firmware/config.txt"
+sed -i "s|dtoverlay=vc4-kms-v3d|dtoverlay=vc4-fkms-v3d|g" "${ROOTFS_DIR}/boot/firmware/config.txt"

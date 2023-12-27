@@ -5,6 +5,7 @@ sed -i 's/BUILD_SHARED_LIBS_DEFAULT ON/BUILD_SHARED_LIBS_DEFAULT OFF/g' ../CMake
 cmake .. && make
 
 mv /home/ovos/ggwave/build/bin/* /home/ovos/.local/bin/
+cd /home/ovos
 rm -rf ggwave
 
 if [[ ! ${VIRTUAL_ENV} ]]; then

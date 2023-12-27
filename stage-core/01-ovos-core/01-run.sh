@@ -11,16 +11,12 @@ install -v -d -m 0755 "${ROOTFS_DIR}/home/ovos/.local/share"
 install -v -d -m 0755 "${ROOTFS_DIR}/home/ovos/.local/share/mycroft"
 install -v -d -m 0755 "${ROOTFS_DIR}/home/ovos/.local/share/mycroft/skills"
 
+install -v -d -m 0755 "${ROOTFS_DIR}/home/ovos/.config"
+install -v -d -m 0755 "${ROOTFS_DIR}/home/ovos/.config/mycroft"
+install -v -m 0644 files/user-mycroft.conf "${ROOTFS_DIR}/home/ovos/.config/mycroft/mycroft.conf"
+
 install -v -d -m 0755 "${ROOTFS_DIR}/etc/environment.d"
 install -v -m 0644 files/99-ovos-environment.conf "${ROOTFS_DIR}/etc/environment.d/99-ovos-environment.conf"
-
-if [[ -e "${ROOTFS_DIR}/etc/environment" ]]; then
-on_chroot << EOF
-
-ln -s /etc/environment /etc/environment.d/99-environment
-
-EOF
-fi
 
 install -v -m 0644 files/ovos.service "${ROOTFS_DIR}/etc/systemd/user/ovos.service"
 

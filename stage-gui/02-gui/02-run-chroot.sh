@@ -6,11 +6,12 @@ pip3 install git+https://github.com/OpenVoiceOS/ovos-gui-plugin-shell-companion
 pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-homescreen
 pip3 install git+https://github.com/OpenVoiceOS/ovos-gui
 
+pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-gui-network-client
 pip3 install evdev
 
 # Mycroft-gui-qt5
 cd /home/ovos
-git clone https://github.com/OpenVoiceOS/mycroft-gui-qt5.git
+git clone https://github.com/OpenVoiceOS/mycroft-gui-qt5
 cd mycroft-gui-qt5
 mkdir build && cd build
 cmake .. -DBUILD_WITH_QT6=OFF -DQT_MAJOR_VERSION=5 -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DKDE_INSTALL_LIBDIR=lib -DKDE_INSTALL_USE_QT_SYS_PATHS=ON
@@ -20,7 +21,7 @@ cd /home/ovos
 rm -rf mycroft-gui-qt5
 
 cd /home/ovos
-git clone https://github.com/OpenVoiceOS/ovos-shell.git
+git clone https://github.com/OpenVoiceOS/ovos-shell
 cd ovos-shell
 echo " "
 echo "Building OVOS GUI"

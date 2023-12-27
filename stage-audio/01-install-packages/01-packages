@@ -5,3 +5,5 @@ pulseaudio-module-zeroconf
 gstreamer1.0-plugins-good
 gstreamer1.0-plugins-bad
 gstreamer1.0-plugins-ugly
+libasound2-plugins
+avrdude

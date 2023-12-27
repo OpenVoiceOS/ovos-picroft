@@ -26,8 +26,11 @@ echo "  osm remove  <skill|url>   Uninstall mycroft skills"
 echo "  osm update                Update installed skills"
 echo
 echo "OVOS Docs COMMANDs:"
-echo "  docs-community          View the OVOS Community docs in the terminal"
-echo "  docs-techincal          View the OVOS Technical docs in the terminal"
-echo "  docs-hivemind           View the HiveMind docs in the terminal"
-echo "  docs-messages           View OVOS Message specs in the terminal"
+echo "  ovos-docs-viewer community          View the OVOS Community docs in the terminal"
+echo "  ovos-docs-viewer techincal          View the OVOS Technical docs in the terminal"
+echo "  ovos-docs-viewer hivemind           View the HiveMind docs in the terminal"
+echo "  ovos-docs-viewer messages           View OVOS Message specs in the terminal"
+echo
+echo "Misc Helpful COMMANDs:"
+echo "  ovos-simple-cli         Chat with your device through the terminal"
 echo
