@@ -5,7 +5,7 @@ fi
 pip3 install git+https://github.com/OpenVoiceOS/ovos_skill_manager
 pip3 install git+https://github.com/openvoiceos/ovos_skill_installer
 
-pip3 install git+https://github.com/OpenVoiceOS/skill-alerts@feat/DAV
+pip3 install git+https://github.com/OpenVoiceOS/skill-alerts
 pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-weather
 pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-ddg
 pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-wolfie
