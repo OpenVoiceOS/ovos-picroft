@@ -1,21 +1,27 @@
 #/bin/bash -e
 
 if [[ ! ${VIRTUAL_ENV} ]]; then
-source /home/ovos/.venv/bin/activate;
+    source /home/ovos/.venv/bin/activate
 fi
 
-build_vocalfusion () {
-    current_kernel=$1;
-    cd /home/ovos/VocalFusionDriver/driver;
+# Function to build VocalFusion driver for a specific kernel version
+build_vocalfusion() {
+    current_kernel=$1
+    cd /home/ovos/VocalFusionDriver/driver
+
+    # Backup Makefile if not already backed up, else restore from backup
     if [ ! -f Makefile.bk ]; then
         cp Makefile Makefile.bk
     else
-        rm Makefile;
+        rm Makefile
         cp Makefile.bk Makefile
     fi
-    echo "building VocalFusion for kernel ${current_kernel}"
+
+    echo "Building VocalFusion for kernel ${current_kernel}"
     sed -i "s|\$(shell uname -r)|$current_kernel|" Makefile
     make all
+
+    # Copy built modules to the appropriate kernel directory
     mkdir -p "/lib/modules/${current_kernel}/kernel/drivers/vocalfusion"
     cp vocalfusion* "/lib/modules/${current_kernel}/kernel/drivers/vocalfusion"
     rm Module.symvers vocalfusion-soundcard.ko vocalfusion-soundcard.mod.c vocalfusion-soundcard.o modules.order vocalfusion-soundcard.mod vocalfusion-soundcard.mod.o
@@ -24,73 +30,32 @@ build_vocalfusion () {
     cd /home/ovos
 }
 
+# Update and upgrade system packages
 apt-get update
 apt-get -y dist-upgrade --auto-remove --purge
 apt-get clean
 
+# Clone VocalFusionDriver repository
 cd /home/ovos
 git clone https://github.com/OpenVoiceOS/VocalFusionDriver
 
-# Add the button overlays
+# Add button overlays if not already present
 if [[ ! -f /boot/firmware/overlays/sj201-buttons-overlay.dtbo ]]; then
-    cp VocalFusionDriver/sj201-buttons-overlay.dtbo /boot/firmware/overlays/sj201-buttons-overlay.dtbo
+    cp VocalFusionDriver/sj201-buttons-overlay.dtbo /boot/firmware/overlays/
 fi
 if [[ ! -f /boot/firmware/overlays/sj201-rev10-pwm-fan-overlay.dtbo ]]; then
-    cp VocalFusionDriver/sj201-rev10-pwm-fan-overlay.dtbo /boot/firmware/overlays/sj201-rev10-pwm-fan-overlay.dtbo
+    cp VocalFusionDriver/sj201-rev10-pwm-fan-overlay.dtbo /boot/firmware/overlays/
 fi
 
+# Build VocalFusion driver for each available kernel version
 kernels=($(ls /lib/modules))
 echo "Looking for kernel with build dir in ${kernels[*]}"
 for k in "${kernels[@]}"; do
     build_vocalfusion "${k}"
 done
 
-# if [[ "${k}" == *2712 ]]; then
-# echo "RPi5 kernel"
-# else
-# kernel="${k}"
-# echo "Selected kernel ${kernel}"
-# break
-# fi
-# done
-
-# VocalFusion SJ201 drivers
-
-# cd VocalFusionDriver/driver
-# sed -i "s|\$(shell uname -r)|$kernel|" Makefile
-# make all
-# mkdir -p "/lib/modules/${kernel}/kernel/drivers/vocalfusion"
-# cp vocalfusion* "/lib/modules/${kernel}/kernel/drivers/vocalfusion"
-# cd /home/ovos
-# rm -rf VocalFusionDriver
-# depmod "${kernel}" -a
-=======
-kernels=($(ls /lib/modules))
-echo "Looking for kernel with build dir in ${kernels[*]}"
-for k in "${kernels[@]}"; do
-if [[ "${k}" == *2712 ]]; then
-echo "RPi5 kernel"
-else
-kernel="${k}"
-echo "Selected kernel ${kernel}"
-break
-fi
-done
-
-# VocalFusion SJ201 drivers
-cd /home/ovos
-git clone https://github.com/OpenVoiceOS/VocalFusionDriver
-cd VocalFusionDriver/driver
-sed -i "s|\$(shell uname -r)|$kernel|" Makefile
-make all
-mkdir -p "/lib/modules/${kernel}/kernel/drivers/vocalfusion"
-cp vocalfusion* "/lib/modules/${kernel}/kernel/drivers/vocalfusion"
-cd /home/ovos
-rm -rf VocalFusionDriver
-depmod "${kernel}" -a
-
+# Install required Python packages
 pip3 install smbus smbus2 spidev rpi.gpio
-
 pip3 install git+https://github.com/NeonGeckoCom/sj201-interface
 pip3 install git+https://github.com/NeonGeckoCom/neon-phal-plugin-linear_led
 pip3 install git+https://github.com/NeonGeckoCom/neon-phal-plugin-switches
