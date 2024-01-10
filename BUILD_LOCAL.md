@@ -106,20 +106,6 @@ The `/boot/firmware/config.txt` is modified to allow a GUI
 
 **Skip to [stage-finalize](stage-finalize) to build a simple raspOVOS-GUI image**
 
-## Optional Special Stages
-
-### stage-mark1
-
-**WIP**
-
-Special configuration to support the Mycroft Mark1 device
-
-### stage-mark2
-
-**WIP**
-
-Special configuration to support the Mycroft Mark2 device
-
 ## And the Final Stage
 
 ### stage-finalize
@@ -155,7 +141,7 @@ From this point, we will assume you are working from your `home` directory
 
 Clone the required repositories
 
-`git clone https://github.com/OpenVoiceOS/raspbian-ovos`
+`git clone https://github.com/OpenVoiceOS/raspOVOS`
 
 `git clone https://github.com/RPi-Distro/pi-gen`
 
@@ -189,7 +175,7 @@ Switch to the `arm64` branch of `pi-gen`
 
 To actually build an image, you need root privileges.
 
-#### Start the build process
+## Start the build process
 
 `sudo ./build.sh -c /home/<USER>/raspbian-ovos-config`
 
@@ -197,7 +183,7 @@ The `-c` flag should point to your edited configuration file.
 
 Sit back and wait.  The build process can last several hours.
 
-#### Getting the image
+## Getting the image
 
 After the build process, a compressed image will be avaliable in the directory `~/pi-gen/deploy`
 

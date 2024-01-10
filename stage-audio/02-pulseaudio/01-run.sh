@@ -51,5 +51,9 @@ install -v -m 0644 files/xvf3510.conf "${ROOTFS_DIR}/usr/share/pulseaudio/alsa-m
 
 install -v -m 0644 files/aiy-voicebonnet-v2.conf "${ROOTFS_DIR}/usr/share/pulseaudio/alsa-mixer/profile-sets/aiy-voicebonnet-v2.conf"
 
+install -v -m 0644 files/xvf3510.conf "${ROOTFS_DIR}/usr/share/pulseaudio/alsa-mixer/profile-sets/xvf3510.conf"
+install -v -m 0644 files/seeed-voicecard-4mic.conf "${ROOTFS_DIR}/usr/share/pulseaudio/alsa-mixer/profile-sets/seeed-voicecard-4mic.conf"
+install -v -m 0644 files/seeed-voicecard-8mic.conf "${ROOTFS_DIR}/usr/share/pulseaudio/alsa-mixer/profile-sets/seeed-voicecard-8mic.conf"
+
 echo "enable pulseaudio.socket" >> "${ROOTFS_DIR}/etc/systemd/user-preset/10-ovos-user.preset"
 echo "enable pulseaudio.service" >> "${ROOTFS_DIR}/etc/systemd/user-preset/10-ovos-user.preset"

@@ -18,3 +18,5 @@ qml-module-qtwebengine
 libqt5virtualkeyboard5
 qml-module-qtmultimedia
 kdeconnect
+libinput-dev
+

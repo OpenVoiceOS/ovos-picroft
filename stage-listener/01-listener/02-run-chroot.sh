@@ -25,7 +25,9 @@ pip3 install git+https://github.com/OpenVoiceOS/ovos-ww-plugin-precise-lite
 pip3 install git+https://github.com/OpenVoiceOS/ovos-ww-plugin-pocketsphinx
 pip3 install git+https://github.com/OpenVoiceOS/ovos-ww-plugin-vosk
 
-pip3 install git+https://github.com/OpenVoiceOS/ovos-microphone-plugin-alsa
+#pip3 install git+https://github.com/OpenVoiceOS/ovos-microphone-plugin-alsa
+pip3 install git+https://github.com/emphasize/ovos-PHAL-plugin-alsa@fix/mute_capabilities
 pip3 install git+https://github.com/OpenVoiceOS/ovos-microphone-plugin-sounddevice
+pip3 install git+https://github.com/OpenVoiceOS/ovos-microphone-plugin-alsa
 
 deactivate
