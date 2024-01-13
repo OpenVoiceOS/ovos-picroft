@@ -11,7 +11,7 @@ ARCHIVE_FILENAME="raspOVOS-dev"
 # stages before one of the exported stages. Otherwise, the action will make sure
 # any custom stage will include an image export directive.
 
-STAGE_LIST="stage0 stage1 stage2 /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-prep /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-core /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-phal /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-speech /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-listener /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-skills /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-hivemind /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-ggwave /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-finalize"
+STAGE_LIST="stage0 stage1 stage2 /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-prep /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-core /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-skills /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-hivemind /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-phal /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-audio /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-speech /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-listener   /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-ggwave /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-shareport /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-splash /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-gui /<FULL/PATH/TO/CLONED/REPO>/raspbian-ovos/stage-finalize"
 
 # Host name of the image.
 TARGET_HOSTNAME="raspOvos"

@@ -3,7 +3,6 @@ install -v -m 0644 files/.bashrc "${ROOTFS_DIR}/home/ovos/.bashrc"
 install -v -m 0644 files/.bash_profile "${ROOTFS_DIR}/home/ovos/.bash_profile"
 install -v -m 0644 files/.bash_aliases "${ROOTFS_DIR}/home/ovos/.bash_aliases"
 install -v -m 0644 files/.cli_login.sh "${ROOTFS_DIR}/home/ovos/.cli_login.sh"
-install -v -m 0644 files/.bannor.sh "${ROOTFS_DIR}/home/ovos/.bannor.sh"
 
 # user level mycroft.conf
 install -v -d -m 0755 "${ROOTFS_DIR}/home/ovos/.config"

@@ -1,6 +1,5 @@
 [Unit]
 Description=Hivemind Listener
-After=pulseaudio.service
 
 [Service]
 Type=simple

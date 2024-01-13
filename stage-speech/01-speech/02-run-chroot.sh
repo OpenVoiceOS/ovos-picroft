@@ -10,14 +10,4 @@ pip3 install git+https://github.com/OpenVoiceOS/ovos-vlc-plugin
 
 pip3 install espeak_phonemizer
 
-
-# cd /home/ovos
-# git clone https://github.com/libfann/fann.git
-# cd fann
-# cmake .
-# make install
-# cd ..
-# rm -rf fann
-apt update
-
 deactivate

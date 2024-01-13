@@ -2,7 +2,7 @@ if [[ ! ${VIRTUAL_ENV} ]]; then
     source /home/ovos/.venv/bin/activate;
 fi
 
-pip install --pre ovos-core[skills-essential]
+pip install git+https://github.com/OpenVoiceOS/ovos-core
 
 if [[ -e /etc/environment ]]; then
     rm /etc/environment

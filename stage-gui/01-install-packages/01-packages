@@ -19,4 +19,4 @@ libqt5virtualkeyboard5
 qml-module-qtmultimedia
 kdeconnect
 libinput-dev
-
+evemu-tools

@@ -10,8 +10,7 @@ source .venv/bin/activate
 ######################################################################
 # Initialize OpenVoiceOS CLI Environment
 ######################################################################
-sh .bannor.sh
-sh .cli_login.sh
+. .cli_login.sh
 
 if [[ -f ~/.bash_aliases ]]; then
     source ~/.bash_aliases;
