@@ -7,3 +7,6 @@ gstreamer1.0-plugins-bad
 gstreamer1.0-plugins-ugly
 libasound2-plugins
 avrdude
+raspberrypi-kernel-headers raspberrypi-kernel
+dkms
+debhelper

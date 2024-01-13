@@ -11,6 +11,9 @@ tar -xvzf /home/ovos/.local/share/piper_tts/voice-en-gb-alan-low/voice-en-gb-ala
 
 EOF
 
+# Default Vosk small English model
+cp -v -r files/vosk "${ROOTFS_DIR}/home/ovos/.local/share/"
+
 install -v -m 0644 files/ovos-audio.service "${ROOTFS_DIR}/etc/systemd/user/ovos-audio.service"
 install -v -m 0755 files/ovos-systemd-audio "${ROOTFS_DIR}/usr/libexec/ovos-systemd-audio"
 

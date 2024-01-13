@@ -7,7 +7,8 @@ pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-homescreen
 pip3 install git+https://github.com/OpenVoiceOS/ovos-gui
 
 pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-gui-network-client
-pip3 install evdev
+pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-wallpaper-manager
+pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-wallpapers
 
 # Mycroft-gui-qt5
 cd /home/ovos
