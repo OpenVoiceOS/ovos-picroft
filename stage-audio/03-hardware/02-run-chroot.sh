@@ -1,7 +1,7 @@
 #/bin/bash -e
 
 if [[ ! ${VIRTUAL_ENV} ]]; then
-source /home/ovos/.venv/bin/activate;
+    source /home/ovos/.venv/bin/activate
 fi
 
 build_vocalfusion () {
@@ -18,7 +18,7 @@ build_vocalfusion () {
     make all
     mkdir -p "/lib/modules/${current_kernel}/kernel/drivers/vocalfusion"
     cp -v vocalfusion* "/lib/modules/${current_kernel}/kernel/drivers/vocalfusion"
-    # make clean does not work because it removes the files from modules also
+
     rm Module.symvers vocalfusion-soundcard.ko vocalfusion-soundcard.mod.c vocalfusion-soundcard.o modules.order vocalfusion-soundcard.mod vocalfusion-soundcard.mod.o
 
     depmod "${current_kernel}" -a
@@ -63,6 +63,7 @@ function install_aiy () {
     cd /home/ovos
     }
 
+# Update and upgrade system packages
 apt-get update
 apt-get -y dist-upgrade --auto-remove --purge
 apt-get clean
@@ -130,9 +131,6 @@ cd /home/ovos/aiyprojects-raspbian/drivers/overlays
 dpkg -i ./aiy-overlay-voice_1.0-1_all.deb
 cd /home/ovos
 
-# aiy alsa profiles
-cp /home/ovos/aiyprojects-raspbian/drivers/sound/debian/ucm2/* /usr/share/pulseaudio/alsa-mixer/profile-sets/
-
 echo "Looking for kernel with build dir in ${kernels[*]}"
 for k in "${kernels[@]}"; do
     build_vocalfusion "${k}"
@@ -141,37 +139,14 @@ for k in "${kernels[@]}"; do
     install_aiy "${k}" "${mod}" "${ver}" "${conf_driver}"
 done
 
-kernels=($(ls /lib/modules))
-echo "Looking for kernel with build dir in ${kernels[*]}"
-for k in "${kernels[@]}"; do
-if [[ "${k}" == *2712 ]]; then
-echo "RPi5 kernel"
-else
-kernel="${k}"
-echo "Selected kernel ${kernel}"
-break
-fi
-done
-
-# VocalFusion SJ201 drivers
-cd /home/ovos
-git clone https://github.com/OpenVoiceOS/VocalFusionDriver
-cd VocalFusionDriver/driver
-sed -i "s|\$(shell uname -r)|$kernel|" Makefile
-make all
-mkdir -p "/lib/modules/${kernel}/kernel/drivers/vocalfusion"
-cp vocalfusion* "/lib/modules/${kernel}/kernel/drivers/vocalfusion"
 cd /home/ovos
 rm -rf VocalFusionDriver
-depmod "${kernel}" -a
-
-rm -rf /home/ovos/VocalFusionDriver
-cp /home/ovos/seeed-voicecard/*dtbo /boot/firmware/overlays/
-rm -rf /home/ovos/seeed-voicecard
+rm -rf seeed-voicecard
+rm -rf aiyprojects-raspbian
 rm -rf ovos-i2csound
 
+# Install required Python packages
 pip3 install smbus smbus2 spidev rpi.gpio
-
 pip3 install git+https://github.com/NeonGeckoCom/sj201-interface
 
 deactivate
