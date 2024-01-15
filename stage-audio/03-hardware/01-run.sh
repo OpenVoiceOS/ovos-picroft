@@ -1,7 +1,6 @@
 #!/bin/bash -e
 
 install -v -d -m 0755 "${ROOTFS_DIR}/etc/modules-load.d"
-install -v -m 0644 files/i2c.conf "${ROOTFS_DIR}/etc/modules-load.d/i2c.conf"
 install -v -m 0644 files/seeed_voicecard.conf "${ROOTFS_DIR}/etc/modules-load.d/seeed_voicecard.conf"
 #
 # install -v -m 0644 files/i2csound.service "${ROOTFS_DIR}/etc/systemd/system/i2csound.service"

@@ -147,6 +147,10 @@ rm -rf ovos-i2csound
 
 # Install required Python packages
 pip3 install smbus smbus2 spidev rpi.gpio
-pip3 install git+https://github.com/NeonGeckoCom/sj201-interface
+
+git clone https://github.com/NeonGeckoCom/sj201-interface
+sed -i "s|ovos_utils~=0.0.25|ovos_utils>=0.0.25|" sj201-interface/requirements/requirements.txt
+pip3 install ./sj201-interface
+rm -rf ./sj201-interface
 
 deactivate
