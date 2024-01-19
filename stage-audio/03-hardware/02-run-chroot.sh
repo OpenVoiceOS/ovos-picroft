@@ -71,7 +71,7 @@ apt-get clean
 cd /home/ovos
 git clone https://github.com/OpenVoiceOS/VocalFusionDriver
 git clone https://github.com/HinTak/seeed-voicecard
-git clone https://github.com/viraniac/aiyprojects-raspbian
+# git clone https://github.com/viraniac/aiyprojects-raspbian
 git clone https://github.com/OpenVoiceOS/ovos-i2csound
 
 
@@ -97,52 +97,54 @@ mod="seeed-voicecard"
 marker="0.0.0"
 
 cd /home/ovos/seeed-voicecard
+cp *.dtbo /boot/firmware/overlays
+cp *.dts /boot/firmware/
 mkdir -p /usr/src/$mod-$ver
 cp -a ./* /usr/src/$mod-$ver/
 
 dkms add -m $mod -v $ver
 
-# aiy-voicebonnet-soundcard
-
-ver="2.0-1.2"
-mod="aiy-voicebonnet-soundcard"
-conf_sound="/home/ovos/aiyprojects-raspbian/drivers/sound/debian/aiy-voicebonnet-soundcard-dkms.dkms"
-
-cd /home/ovos/aiyprojects-raspbian/drivers/sound
-mkdir -p /usr/src/$mod-$ver
-cp -ar ./* /usr/src/$mod-$ver
-
-dkms add -m $mod -v $ver -c $conf_sound
-
-# aiy drivers
-
-mod="aiy-dkms"
-conf_driver="/home/ovos/aiyprojects-raspbian/drivers/aiy/debian/aiy-dkms.dkms"
-
-cd /home/ovos/aiyprojects-raspbian/drivers/aiy/
-mkdir -p /usr/src/$mod-$ver
-cp -ar ./* /usr/src/$mod-$ver
-
-dkms add -m $mod -v $ver -c $conf_driver
-
-# aiy overlays
-cd /home/ovos/aiyprojects-raspbian/drivers/overlays
-./make_dpkg.sh
-dpkg -i ./aiy-overlay-voice_1.0-1_all.deb
-cd /home/ovos
+# # aiy-voicebonnet-soundcard
+#
+# ver="2.0-1.2"
+# mod="aiy-voicebonnet-soundcard"
+# conf_sound="/home/ovos/aiyprojects-raspbian/drivers/sound/debian/aiy-voicebonnet-soundcard-dkms.dkms"
+#
+# cd /home/ovos/aiyprojects-raspbian/drivers/sound
+# mkdir -p /usr/src/$mod-$ver
+# cp -ar ./* /usr/src/$mod-$ver
+#
+# dkms add -m $mod -v $ver -c $conf_sound
+#
+# # aiy drivers
+#
+# mod="aiy-dkms"
+# conf_driver="/home/ovos/aiyprojects-raspbian/drivers/aiy/debian/aiy-dkms.dkms"
+#
+# cd /home/ovos/aiyprojects-raspbian/drivers/aiy/
+# mkdir -p /usr/src/$mod-$ver
+# cp -ar ./* /usr/src/$mod-$ver
+#
+# dkms add -m $mod -v $ver -c $conf_driver
+#
+# # aiy overlays
+# cd /home/ovos/aiyprojects-raspbian/drivers/overlays
+# ./make_dpkg.sh
+# dpkg -i ./aiy-overlay-voice_1.0-1_all.deb
+# cd /home/ovos
 
 echo "Looking for kernel with build dir in ${kernels[*]}"
 for k in "${kernels[@]}"; do
     build_vocalfusion "${k}"
     install_seeed_voicecard "${k}" "${mod}" "${ver}"
-    install_aiy_voicebonnet_soundcard "${k}" "${mod}" "${ver}" "${conf_sound}"
-    install_aiy "${k}" "${mod}" "${ver}" "${conf_driver}"
+#     install_aiy_voicebonnet_soundcard "${k}" "${mod}" "${ver}" "${conf_sound}"
+#     install_aiy "${k}" "${mod}" "${ver}" "${conf_driver}"
 done
 
 cd /home/ovos
 rm -rf VocalFusionDriver
 rm -rf seeed-voicecard
-rm -rf aiyprojects-raspbian
+# rm -rf aiyprojects-raspbian
 rm -rf ovos-i2csound
 
 # Install required Python packages

@@ -2,10 +2,13 @@
 
 install -v -d -m 0755 "${ROOTFS_DIR}/etc/modules-load.d"
 install -v -m 0644 files/seeed_voicecard.conf "${ROOTFS_DIR}/etc/modules-load.d/seeed_voicecard.conf"
+install -v -m 0644 files/seeed-4mic-voicecard.dtbo "${ROOTFS_DIR}/boot/firmware/overlays/seeed-4mic-voicecard.dtbo"
+install -v -m 0644 files/seeed-8mic-voicecard.dtbo "${ROOTFS_DIR}/boot/firmware/overlays/seeed-8mic-voicecard.dtbo"
+
 #
 # install -v -m 0644 files/i2csound.service "${ROOTFS_DIR}/etc/systemd/system/i2csound.service"
 # install -v -m 0755 files/ovos-i2csound "${ROOTFS_DIR}/usr/libexec/ovos-i2csound"
-install -v -m 0644 files/99-i2c.rules "${ROOTFS_DIR}/usr/lib/udev/rules.d/99-i2c.rules"
+# install -v -m 0644 files/99-i2c.rules "${ROOTFS_DIR}/usr/lib/udev/rules.d/99-i2c.rules"
 
 # install -v -d -m 0755 "${ROOTFS_DIR}/etc/voicecard"
 # install -v -m 0644 files/wm8960_asound.state "${ROOTFS_DIR}/etc/voicecard/wm8960_asound.state"

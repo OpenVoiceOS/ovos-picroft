@@ -2,7 +2,6 @@ if [[ ! ${VIRTUAL_ENV} ]]; then
     source /home/ovos/.venv/bin/activate;
 fi
 
-pip3 install git+https://github.com/OpenVoiceOS/ovos_skill_manager
 pip3 install git+https://github.com/OpenVoiceOS/ovos_skill_installer
 
 pip3 install git+https://github.com/openVoiceOS/skill-ovos-date-time

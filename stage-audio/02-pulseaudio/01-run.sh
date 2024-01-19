@@ -1,21 +1,22 @@
 #!/bin/bash -e
 
 # Remove old configurations
-if [ -f "${ROOTFS_DIR}/etc/pulse/system.pa" ] ; then
+if [[ -f "${ROOTFS_DIR}/etc/pulse/system.pa" ]] || [[ -L "${ROOTFS_DIR}/etc/pulse/system.pa" ]]; then
 rm "${ROOTFS_DIR}/etc/pulse/system.pa"
 fi
-if [ -f "${ROOTFS_DIR}/etc/pulse/default.pa" ] ; then
+if [[ -f "${ROOTFS_DIR}/etc/pulse/default.pa" ]] || [[ -L "${ROOTFS_DIR}/etc/pulse/default.pa" ]] ; then
 rm "${ROOTFS_DIR}/etc/pulse/default.pa"
 fi
-if [ -f "${ROOTFS_DIR}/etc/pulse/daemon.conf" ] ; then
+if [[ -f "${ROOTFS_DIR}/etc/pulse/daemon.conf" ]] || [[ -L "${ROOTFS_DIR}/etc/pulse/daemon.conf" ]] ; then
 rm "${ROOTFS_DIR}/etc/pulse/daemon.conf"
 fi
-if [ -f "${ROOTFS_DIR}/var/lib/alsa/asound.state" ] ; then
+if [[ -f "${ROOTFS_DIR}/var/lib/alsa/asound.state" ]] || [[ -L "${ROOTFS_DIR}/var/lib/alsa/asound.state" ]] ; then
 rm "${ROOTFS_DIR}/var/lib/alsa/asound.state"
 fi
-if [ -f "${ROOTFS_DIR}/etc/ovos_asound.state" ] ; then
+if [[ -f "${ROOTFS_DIR}/etc/ovos_asound.state" ]] || [[ -L "${ROOTFS_DIR}/etc/ovos_asound.state" ]] ; then
 rm "${ROOTFS_DIR}/etc/ovos_asound.state"
 fi
+
 install -v -m 0644 files/pulseaudio-daemon.conf "${ROOTFS_DIR}/etc/pulse/pulseaudio-daemon.conf"
 install -v -m 0644 files/pulseaudio-system.pa "${ROOTFS_DIR}/etc/pulse/system.pa.d/pulseaudio-system.pa"
 install -v -m 0644 files/default-asound.state "${ROOTFS_DIR}/var/lib/alsa/default-asound.state"
@@ -24,7 +25,7 @@ install -v -m 0644 files/asound.conf "${ROOTFS_DIR}/etc/asound.conf"
 
 on_chroot << EOF
 
-ln -s /var/lib/alsa/default-asound.state /etc/ovos_asound.state
+# ln -s /var/lib/alsa/default-asound.state /etc/ovos_asound.state
 ln -s /var/lib/alsa/default-asound.state /var/lib/alsa/asound.state
 ln -s /etc/pulse/pulseaudio-daemon.conf /etc/pulse/daemon.conf
 ln -s /etc/pulse/system.pa.d/pulseaudio-system.pa /etc/pulse/system.pa
