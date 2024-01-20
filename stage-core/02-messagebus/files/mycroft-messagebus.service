@@ -1,0 +1,16 @@
+[Unit]
+Description=Mycroft Messagebus
+PartOf=mycroft.service
+After=mycroft.service
+
+[Service]
+Type=notify
+ExecStart=%h/.venv/bin/python /usr/libexec/mycroft-systemd-messagebus
+TimeoutStartSec=1m
+TimeoutStopSec=1m
+Restart=on-failure
+StartLimitInterval=5min
+StartLimitBurst=4
+
+[Install]
+WantedBy=mycroft.service

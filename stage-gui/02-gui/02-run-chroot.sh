@@ -2,13 +2,14 @@ if [[ ! ${VIRTUAL_ENV} ]]; then
     source /home/ovos/.venv/bin/activate;
 fi
 
-pip3 install git+https://github.com/OpenVoiceOS/ovos-gui-plugin-shell-companion
 pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-homescreen
 pip3 install git+https://github.com/OpenVoiceOS/ovos-gui
 
-pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-gui-network-client
-pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-wallpaper-manager
-pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-wallpapers
+pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-display-manager-ipc
+pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-dashboard
+pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-configuration-provider
+pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-notification-widgets
+pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-brightness-control-rpi
 
 # Mycroft-gui-qt5
 cd /home/ovos

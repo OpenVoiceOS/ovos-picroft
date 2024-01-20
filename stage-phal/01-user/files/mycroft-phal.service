@@ -1,0 +1,18 @@
+[Unit]
+Description=Mycroft PHAL
+PartOf=mycroft.service
+After=mycroft.service
+After=mycroft-messagebus.service
+
+[Service]
+Type=notify
+ExecStart=%h/.venv/bin/python /usr/libexec/mycroft-systemd-phal
+TimeoutStartSec=1m
+TimeoutStopSec=1m
+Restart=on-failure
+StartLimitInterval=5min
+StartLimitBurst=4
+
+[Install]
+WantedBy=mycroft.service
+

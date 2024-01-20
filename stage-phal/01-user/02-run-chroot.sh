@@ -9,7 +9,6 @@ pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-balena-wifi@mod
 pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-wifi-setup
 
 pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-system
-pip3 install git+https://github.com/OpenVoiceOS/ovos_utils
 
 pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-ipgeo
 pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-connectivity-events

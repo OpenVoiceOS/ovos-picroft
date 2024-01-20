@@ -14,7 +14,7 @@ EOF
 # Default Vosk small English model
 cp -v -r files/vosk "${ROOTFS_DIR}/home/ovos/.local/share/"
 
-install -v -m 0644 files/ovos-audio.service "${ROOTFS_DIR}/etc/systemd/user/ovos-audio.service"
-install -v -m 0755 files/ovos-systemd-audio "${ROOTFS_DIR}/usr/libexec/ovos-systemd-audio"
+install -v -m 0644 files/mycroft-audio.service "${ROOTFS_DIR}/etc/systemd/user/mycroft-audio.service"
+install -v -m 0755 files/mycroft-systemd-audio "${ROOTFS_DIR}/usr/libexec/mycroft-systemd-audio"
 
-echo "enable ovos-audio.service" >> "${ROOTFS_DIR}/etc/systemd/user-preset/10-ovos-user.preset"
+echo "enable mycroft-audio.service" >> "${ROOTFS_DIR}/etc/systemd/user-preset/10-ovos-user.preset"

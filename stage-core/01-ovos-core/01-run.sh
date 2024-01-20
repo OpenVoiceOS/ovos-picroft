@@ -18,9 +18,9 @@ install -v -m 0644 files/user-mycroft.conf "${ROOTFS_DIR}/home/ovos/.config/mycr
 install -v -d -m 0755 "${ROOTFS_DIR}/etc/environment.d"
 install -v -m 0644 files/99-ovos-environment.conf "${ROOTFS_DIR}/etc/environment.d/99-ovos-environment.conf"
 
-install -v -m 0644 files/ovos.service "${ROOTFS_DIR}/etc/systemd/user/ovos.service"
+install -v -m 0644 files/mycroft.service "${ROOTFS_DIR}/etc/systemd/user/mycroft.service"
 
-install -v -m 0755 files/ovos-systemd-skills "${ROOTFS_DIR}/usr/libexec/ovos-systemd-skills"
-install -v -m 0644 files/ovos-skills.service "${ROOTFS_DIR}/etc/systemd/user/ovos-skills.service"
+install -v -m 0755 files/mycroft-systemd-skills "${ROOTFS_DIR}/usr/libexec/mycroft-systemd-skills"
+install -v -m 0644 files/mycroft-skills.service "${ROOTFS_DIR}/etc/systemd/user/mycroft-skills.service"
 
-echo "enable ovos-skills.service" >> "${ROOTFS_DIR}/etc/systemd/user-preset/10-ovos-user.preset"
+echo "enable mycroft-skills.service" >> "${ROOTFS_DIR}/etc/systemd/user-preset/10-ovos-user.preset"

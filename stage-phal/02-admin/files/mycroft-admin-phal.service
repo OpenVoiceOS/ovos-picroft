@@ -1,0 +1,18 @@
+[Unit]
+Description=Mycroft ADMIN PHAL
+PartOf=mycroft.service
+After=mycroft.service
+After=mycroft-messagebus.service
+
+[Service]
+Type=notify
+User=ovos
+ExecStart=/home/ovos/.venv/bin/python /usr/libexec/mycroft-systemd-admin-phal
+TimeoutStartSec=1m
+TimeoutStopSec=1m
+Restart=on-failure
+StartLimitInterval=5min
+StartLimitBurst=4
+
+[Install]
+WantedBy=default.target

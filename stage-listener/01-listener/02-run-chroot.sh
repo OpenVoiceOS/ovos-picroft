@@ -15,8 +15,8 @@ fi
 pip3 install fann2==1.0.7
 pip3 install git+https://github.com/MycroftAI/padatious
 
-pip3 install git+https://github.com/OpenVoiceOS/ovos-dinkum-listener
-pip3 install git+https://github.com/OpenVoiceOS/ovos-vad-plugin-silero
+pip3 install git+https://github.com/OpenVoiceOS/ovos-listener
+pip3 install git+https://github.com/OpenVoiceOS/ovos-ww-plugin-precise
 
 pip3 install git+https://github.com/OpenVoiceOS/ovos-stt-plugin-server
 
@@ -24,7 +24,7 @@ pip3 install git+https://github.com/OpenVoiceOS/ovos-ww-plugin-precise-lite
 pip3 install git+https://github.com/OpenVoiceOS/ovos-ww-plugin-pocketsphinx
 pip3 install git+https://github.com/OpenVoiceOS/ovos-ww-plugin-vosk
 
-pip3 install git+https://github.com/emphasize/ovos-PHAL-plugin-alsa
+pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-alsa
 pip3 install git+https://github.com/OpenVoiceOS/ovos-microphone-plugin-sounddevice
 pip3 install git+https://github.com/OpenVoiceOS/ovos-microphone-plugin-alsa
 
