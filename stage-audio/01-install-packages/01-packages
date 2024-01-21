@@ -10,3 +10,4 @@ avrdude
 raspberrypi-kernel-headers raspberrypi-kernel
 dkms
 debhelper
+libasound2-dev
