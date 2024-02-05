@@ -44,7 +44,7 @@ function install_core (){
     pulseaudio --check || pulseaudio -D
 
     # make ggwave from scratch
-    if [[ ! -d $SCRIPT_DIR/ggwave ]]; then
+    if [[ -d $SCRIPT_DIR/ggwave ]]; then
         rm -fr $SCRIPT_DIR/ggwave
     fi
 
