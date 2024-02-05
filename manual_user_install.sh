@@ -203,7 +203,7 @@ function install_extra_skills (){
 ############################################################################################
 
 # be sure to run inside a clone of the raspOVOS repo
-if [[ ! -d stage_core ]]; then
+if [[ ! -d stage-core ]]; then
     echo "This script depends on a copy of the raspOVOS repository."
     read -ep "Would you like to clone it to the current directory? (Y/n): " -i "$fresh_clone" fresh_clone 
     if [[ -z "$fresh_clone" || $fresh_clone == y* || $fresh_clone == Y* ]]; then
