@@ -44,7 +44,7 @@ function install_core (){
     pulseaudio --check || pulseaudio -D
 
     # make ggwave from scratch
-    if [[ ! -d $SCRIPT_DIR/ggwave ]]; then
+    if [[ -d $SCRIPT_DIR/ggwave ]]; then
         rm -fr $SCRIPT_DIR/ggwave
     fi
 
@@ -201,6 +201,23 @@ function install_extra_skills (){
     }
 
 ############################################################################################
+
+# be sure to run inside a clone of the raspOVOS repo
+if [[ ! -d stage-core ]]; then
+    echo "This script depends on a copy of the raspOVOS repository."
+    read -ep "Would you like to clone it to the current directory? (Y/n): " -i "$fresh_clone" fresh_clone 
+    if [[ -z "$fresh_clone" || $fresh_clone == y* || $fresh_clone == Y* ]]; then
+	if [[ -d raspOVOS ]]; then
+	    echo "A directory called raspOVOS is already present. Please remove or rename it to continue."
+	    exit
+	fi
+	git clone https://github.com/OpenVoiceOS/raspOVOS.git
+	cd raspOVOS
+	./manual_user_install.sh
+    fi
+    exit
+fi
+
 echo
 echo "This file will install ovos-core to this device"
 echo "using the latest commits from github."
