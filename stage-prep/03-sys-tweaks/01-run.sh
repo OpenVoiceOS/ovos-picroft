@@ -37,10 +37,6 @@ install -v -d -m 0755 "${ROOTFS_DIR}/tmp/mycroft"
 # Create directory for systemd hooks
 install -v -d -m 0755 "${ROOTFS_DIR}/usr/libexec"
 
-# if [[ -e "${ROOTFS_DIR}/etc/locale.gen" ]]; then
-# 	rm "${ROOTFS_DIR}/etc/locale.gen"
-# fi
-
 sed -i 's/^# *\(en_US.UTF-8\)/\1/' "${ROOTFS_DIR}/etc/locale.gen"
 
 # Enable i2c and spi

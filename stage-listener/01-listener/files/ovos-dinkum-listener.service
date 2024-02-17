@@ -3,6 +3,7 @@ Description=OVOS Dinkum Listener
 PartOf=ovos.service
 After=ovos.service
 After=ovos-messagebus.service
+After=pulseaudio.service
 
 [Service]
 Type=notify

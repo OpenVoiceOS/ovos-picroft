@@ -3,6 +3,7 @@ Description=OVOS GUI
 PartOf=ovos.service
 After=ovos.service
 After=ovos-messagebus.service
+After=ovos-skills.service
 
 [Service]
 Type=notify

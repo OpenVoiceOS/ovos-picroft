@@ -71,88 +71,95 @@ apt-get clean
 cd /home/ovos
 git clone https://github.com/OpenVoiceOS/VocalFusionDriver
 git clone https://github.com/HinTak/seeed-voicecard
-# git clone https://github.com/viraniac/aiyprojects-raspbian
+git clone https://github.com/viraniac/aiyprojects-raspbian
 git clone https://github.com/OpenVoiceOS/ovos-i2csound
 
 
 # Install ovos-i2csound and other required files
 cd ovos-i2csound
-./install.sh --auto
+# git checkout pulseaudio
+./install.sh --auto #-ap
 cd /home/ovos
 
 # Add the button overlays
-if [[ ! -f /boot/firmware/overlays/sj201-buttons-overlay.dtbo ]]; then
-    cp VocalFusionDriver/sj201-buttons-overlay.dtbo /boot/firmware/overlays/sj201-buttons-overlay.dtbo
-fi
-if [[ ! -f /boot/firmware/overlays/sj201-rev10-pwm-fan-overlay.dtbo ]]; then
-    cp VocalFusionDriver/sj201-rev10-pwm-fan-overlay.dtbo /boot/firmware/overlays/sj201-rev10-pwm-fan-overlay.dtbo
-fi
+# if [[ ! -f /boot/firmware/overlays/sj201-buttons-overlay.dtbo ]]; then
+#     cp VocalFusionDriver/sj201-buttons-overlay.dtbo /boot/firmware/overlays/sj201-buttons-overlay.dtbo
+# fi
+# if [[ ! -f /boot/firmware/overlays/sj201-rev10-pwm-fan-overlay.dtbo ]]; then
+#     cp VocalFusionDriver/sj201-rev10-pwm-fan-overlay.dtbo /boot/firmware/overlays/sj201-rev10-pwm-fan-overlay.dtbo
+# fi
 
 kernels=($(ls /lib/modules))
 
 # seeed-voicecard
 
-ver="0.3"
-mod="seeed-voicecard"
-marker="0.0.0"
+seeed_ver="0.3"
+seeed_mod="seeed-voicecard"
+seeed_marker="0.0.0"
 
 cd /home/ovos/seeed-voicecard
 cp *.dtbo /boot/firmware/overlays
 cp *.dts /boot/firmware/
-mkdir -p /usr/src/$mod-$ver
-cp -a ./* /usr/src/$mod-$ver/
+mkdir -p /usr/src/$seeed_mod-$seeed_ver
+cp -a ./* /usr/src/$seeed_mod-$seeed_ver/
 
-dkms add -m $mod -v $ver
+dkms add -m $seeed_mod -v $seeed_ver
 
-# # aiy-voicebonnet-soundcard
+# vocalfusion
+
+cd /home/ovos/VocalFusionDriver
+cp *.dtbo /boot/firmware/overlays
+cp *.dts /boot/firmware
+
+# aiy-voicebonnet-soundcard
+
+aiy_sound_ver="3.0-1.3"
+aiy_sound_mod="aiy-voicebonnet-soundcard"
+aiy_conf_sound="/home/ovos/aiyprojects-raspbian/drivers/sound/debian/aiy-voicebonnet-soundcard-dkms.dkms"
 #
-# ver="2.0-1.2"
-# mod="aiy-voicebonnet-soundcard"
-# conf_sound="/home/ovos/aiyprojects-raspbian/drivers/sound/debian/aiy-voicebonnet-soundcard-dkms.dkms"
-#
-# cd /home/ovos/aiyprojects-raspbian/drivers/sound
-# mkdir -p /usr/src/$mod-$ver
-# cp -ar ./* /usr/src/$mod-$ver
-#
-# dkms add -m $mod -v $ver -c $conf_sound
-#
-# # aiy drivers
-#
-# mod="aiy-dkms"
-# conf_driver="/home/ovos/aiyprojects-raspbian/drivers/aiy/debian/aiy-dkms.dkms"
-#
-# cd /home/ovos/aiyprojects-raspbian/drivers/aiy/
-# mkdir -p /usr/src/$mod-$ver
-# cp -ar ./* /usr/src/$mod-$ver
-#
-# dkms add -m $mod -v $ver -c $conf_driver
-#
-# # aiy overlays
-# cd /home/ovos/aiyprojects-raspbian/drivers/overlays
-# ./make_dpkg.sh
-# dpkg -i ./aiy-overlay-voice_1.0-1_all.deb
-# cd /home/ovos
+cd /home/ovos/aiyprojects-raspbian/drivers/sound
+mkdir -p /usr/src/$aiy_sound_mod-$aiy_sound_ver
+cp -ar ./* /usr/src/$aiy_sound_mod-$aiy_sound_ver
+cp -ar ./debian/ucm2* /usr/share/alsa/ucm2/
+
+dkms add -m $aiy_sound_mod -v $aiy_sound_ver -c $aiy_conf_sound
+
+# aiy drivers
+
+aiy_drivers_ver="2.0-1.2"
+aiy_drivers_mod="aiy-dkms"
+aiy_conf_driver="/home/ovos/aiyprojects-raspbian/drivers/aiy/debian/aiy-dkms.dkms"
+
+cd /home/ovos/aiyprojects-raspbian/drivers/aiy/
+mkdir -p /usr/src/$aiy_drivers_mod-$aiy_drivers_ver
+cp -ar ./* /usr/src/$aiy_drivers_mod-$aiy_drivers_ver
+
+dkms add -m $aiy_drivers_mod -v $aiy_drivers_ver -c $aiy_conf_driver
+
+# aiy overlays
+cd /home/ovos/aiyprojects-raspbian/drivers/overlays
+./make_dpkg.sh
+dpkg -i ./aiy-overlay-voice_1.0-1_all.deb
+cp ./voice/opt/aiy/overlay-voice/* /boot/firmware/
+cd /home/ovos
 
 echo "Looking for kernel with build dir in ${kernels[*]}"
 for k in "${kernels[@]}"; do
     build_vocalfusion "${k}"
-    install_seeed_voicecard "${k}" "${mod}" "${ver}"
-#     install_aiy_voicebonnet_soundcard "${k}" "${mod}" "${ver}" "${conf_sound}"
-#     install_aiy "${k}" "${mod}" "${ver}" "${conf_driver}"
+    install_seeed_voicecard "${k}" "${seeed_mod}" "${seeed_ver}"
+    install_aiy_voicebonnet_soundcard "${k}" "${aiy_sound_mod}" "${aiy_sound_ver}" "${aiy_conf_sound}"
+    install_aiy "${k}" "${aiy_drivers_mod}" "${aiy_drivers_ver}" "${aiy_conf_driver}"
 done
 
 cd /home/ovos
 rm -rf VocalFusionDriver
 rm -rf seeed-voicecard
-# rm -rf aiyprojects-raspbian
+rm -rf aiyprojects-raspbian
 rm -rf ovos-i2csound
 
 # Install required Python packages
 pip3 install smbus smbus2 spidev rpi.gpio
 
-git clone https://github.com/NeonGeckoCom/sj201-interface
-sed -i "s|ovos_utils~=0.0.25|ovos_utils>=0.0.25|" sj201-interface/requirements/requirements.txt
-pip3 install ./sj201-interface
-rm -rf ./sj201-interface
+pip3 install git+https://github.com/NeonGeckoCom/sj201-interface
 
 deactivate

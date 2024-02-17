@@ -1,5 +1,7 @@
 [Unit]
 Description=OVOS GUI
+PartOf=ovos.service
+After=ovos.service
 
 [Service]
 WorkingDirectory=/home/ovos
@@ -19,7 +21,7 @@ Environment=LD_LIBRARY_PATH=/usr/lib
 Environment=LIBEXEC_PATH=/libexec:/usr/libexec:/usr/lib/libexec
 Environment=QML2_IMPORT_PATH=/usr/lib/qt/qml
 ExecStartPre=-/usr/bin/kbuildsycoca5
-ExecStart=ovos-shell --maximize
+ExecStart=ovos-shell
 StandardOutput=file:/ramdisk/mycroft/ovos_shell.log
 Restart=on-failure
 

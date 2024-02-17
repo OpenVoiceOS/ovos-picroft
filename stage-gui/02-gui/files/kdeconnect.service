@@ -8,4 +8,4 @@ ExecStart=/usr/lib/aarch64-linux-gnu/libexec/kdeconnectd --platform offscreen
 BusName=org.kde.kdeconnect
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target

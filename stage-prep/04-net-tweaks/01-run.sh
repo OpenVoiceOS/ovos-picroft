@@ -16,8 +16,3 @@ install -v -m 0644 files/50-org.freedesktop.NetworkManager.rules "${ROOTFS_DIR}/
 # balena stuff
 install -v -m 0755 files/wifi-connect.bin "${ROOTFS_DIR}/usr/local/sbin/wifi-connect"
 cp -rv files/wifi-connect "${ROOTFS_DIR}/usr/local/share/"
-
-# on_chroot <<EOF
-# chmod -R a+r /usr/local/share/wifi-connect
-# EOF
-

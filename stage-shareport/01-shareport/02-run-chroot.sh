@@ -19,4 +19,5 @@ autoreconf -fi
 make
 make install
 cd ..
+sed -i "s|WantedBy=multi-user.target|WantedBy=default.target|" /lib/systemd/system/shairport-sync.service
 rm -rf shairport-sync
