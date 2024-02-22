@@ -15,7 +15,7 @@ set -e
 : ${OVOS_CORE_REPOS:="ovos-backend-client ovos-core ovos-audio ovos-ocp-audio-plugin ovos-messagebus"}
 : ${OVOS_DINKUM_REPOS:="ovos-dinkum-listener ovos-vad-plugin-silero ovos-ww-plugin-pocketsphinx ovos-audio-transformer-plugin-ggwave"}
 : ${OVOS_PRECISE_LITE_REPOS:="ovos-ww-plugin-precise ovos-ww-plugin-precise-lite ovos-workshop ovos-lingua-franca ovos-vad-plugin-webrtcvad"}
-: ${OVOS_STT_REPOS:="ovos-microphone-plugin-sounddevice ovos-stt-plugin-server"}
+: ${OVOS_STT_REPOS:="ovos-microphone-plugin-alsa ovos-microphone-plugin-sounddevice ovos-stt-plugin-server"}
 : ${OVOS_TTS_REPOS:="ovos-tts-plugin-mimic3-server ovos-tts-plugin-mimic ovos-tts-plugin-piper ovos-tts-server-plugin"}
 : ${OVOS_EXTRA_REPOS:="ovos-config ovos-utils ovos-bus-client ovos-plugin-manager ovos-cli-client"}
 : ${OVOS_PHAL_REPOS:="ovos-PHAL ovos-phal-plugin-connectivity-events ovos-phal-plugin-system ovos-PHAL-plugin-ipgeo ovos-PHAL-plugin-oauth ovos-phal-plugin-alsa"}
