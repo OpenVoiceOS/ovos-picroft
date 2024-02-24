@@ -23,7 +23,7 @@ install -v -m 0644 files/91-pulseaudio-system.pa "${ROOTFS_DIR}/etc/pulse/system
 install -v -m 0644 files/91-pulseaudio-system.pa "${ROOTFS_DIR}/etc/pulse/default.pa.d/91-pulseaudio-default.pa"
 # install -v -m 0644 files/default-asound.state "${ROOTFS_DIR}/var/lib/alsa/default-asound.state"
 
-# install -v -m 0644 files/asound.conf "${ROOTFS_DIR}/etc/asound.conf"
+install -v -m 0644 files/asound.conf "${ROOTFS_DIR}/etc/asound.conf"
 
 install -v -d -m 0755 "${ROOTFS_DIR}/etc/udev"
 install -v -d -m 0755 "${ROOTFS_DIR}/etc/udev/rules.d"
