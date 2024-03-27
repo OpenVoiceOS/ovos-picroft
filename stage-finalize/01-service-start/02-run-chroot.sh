@@ -22,6 +22,6 @@ su -c "ln -s /ramdisk/mycroft/phal.log /home/ovos/.local/state/mycroft/" --login
 su -c "ln -s /ramdisk/mycroft/skills.log /home/ovos/.local/state/mycroft/" --login ovos
 su -c "ln -s /ramdisk/mycroft/voice.log /home/ovos/.local/state/mycroft/" --login ovos
 
-pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-mk1
+bin/bash /usr/lib/raspberrypi-sys-mods/regenerate_ssh_host_keys
 
 deactivate

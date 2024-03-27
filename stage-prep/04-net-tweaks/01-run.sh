@@ -16,3 +16,7 @@ install -v -m 0644 files/50-org.freedesktop.NetworkManager.rules "${ROOTFS_DIR}/
 # balena stuff
 install -v -m 0755 files/wifi-connect.bin "${ROOTFS_DIR}/usr/local/sbin/wifi-connect"
 cp -rv files/wifi-connect "${ROOTFS_DIR}/usr/local/share/"
+
+install -v -d -m 0755 "${ROOTFS_DIR}/etc/wpa_supplicant"
+install -v -m 600 files/wpa_supplicant.conf "${ROOTFS_DIR}/etc/wpa_supplicant/wpa_supplicant.conf"
+

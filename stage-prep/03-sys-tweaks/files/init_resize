@@ -1,0 +1,184 @@
+#!/bin/bash
+
+reboot_pi () {
+  umount "$FWLOC"
+  mount / -o remount,ro
+  sync
+  reboot -f "$BOOT_PART_NUM"
+  sleep 5
+  exit 0
+}
+
+get_fw_loc () {
+if [ -r /etc/default/raspberrypi-sys-mods ]; then
+  . /etc/default/raspberrypi-sys-mods
+fi
+
+if [ -z "$FWLOC" ]; then
+  if dpkg --print-architecture | grep -q '^arm'; then
+    for FWLOC in /boot /boot/firmware NOT_FOUND; do
+      if ( findmnt --fstab "$FWLOC" || findmnt "$FWLOC" ) > /dev/null; then
+        break
+      fi
+    done
+  else
+    FWLOC=/boot
+  fi
+fi
+
+echo "$FWLOC"
+
+if [ "$FWLOC" = "NOT_FOUND" ]; then
+  exit 1
+fi
+}
+
+get_variables () {
+  ROOT_PART_DEV=$(findmnt / -o source -n)
+  ROOT_PART_NAME=$(echo "$ROOT_PART_DEV" | cut -d "/" -f 3)
+  ROOT_DEV_NAME=$(echo /sys/block/*/"${ROOT_PART_NAME}" | cut -d "/" -f 4)
+  ROOT_DEV="/dev/${ROOT_DEV_NAME}"
+  ROOT_PART_NUM=$(cat "/sys/block/${ROOT_DEV_NAME}/${ROOT_PART_NAME}/partition")
+
+  BOOT_PART_DEV=$(findmnt /boot -o source -n)
+  BOOT_PART_NAME=$(echo "$BOOT_PART_DEV" | cut -d "/" -f 3)
+  BOOT_DEV_NAME=$(echo /sys/block/*/"${BOOT_PART_NAME}" | cut -d "/" -f 4)
+  BOOT_PART_NUM=$(cat "/sys/block/${BOOT_DEV_NAME}/${BOOT_PART_NAME}/partition")
+
+  OLD_DISKID=$(fdisk -l "$ROOT_DEV" | sed -n 's/Disk identifier: 0x\([^ ]*\)/\1/p')
+
+  ROOT_DEV_SIZE=$(cat "/sys/block/${ROOT_DEV_NAME}/size")
+  TARGET_END=$((ROOT_DEV_SIZE - 1))
+
+  PARTITION_TABLE=$(parted -m "$ROOT_DEV" unit s print | tr -d 's')
+
+  LAST_PART_NUM=$(echo "$PARTITION_TABLE" | tail -n 1 | cut -d ":" -f 1)
+
+  ROOT_PART_LINE=$(echo "$PARTITION_TABLE" | grep -e "^${ROOT_PART_NUM}:")
+  ROOT_PART_START=$(echo "$ROOT_PART_LINE" | cut -d ":" -f 2)
+  ROOT_PART_END=$(echo "$ROOT_PART_LINE" | cut -d ":" -f 3)
+
+  if [ "$NOOBS" = "1" ]; then
+    EXT_PART_LINE=$(echo "$PARTITION_TABLE" | grep ":::;" | head -n 1)
+    EXT_PART_NUM=$(echo "$EXT_PART_LINE" | cut -d ":" -f 1)
+    EXT_PART_START=$(echo "$EXT_PART_LINE" | cut -d ":" -f 2)
+    EXT_PART_END=$(echo "$EXT_PART_LINE" | cut -d ":" -f 3)
+  fi
+}
+
+fix_partuuid() {
+  if [ "$BOOT_PART_NUM" != "1" ]; then
+    return 0
+  fi
+  mount -o remount,rw "$ROOT_PART_DEV"
+  mount -o remount,rw "$BOOT_PART_DEV"
+  DISKID="$(dd if=/dev/hwrng bs=4 count=1 status=none | od -An -tx4 | cut -c2-9)"
+  fdisk "$ROOT_DEV" > /dev/null <<EOF
+x
+i
+0x$DISKID
+r
+w
+EOF
+  if [ "$?" -eq 0 ]; then
+    sed -i "s/${OLD_DISKID}/${DISKID}/g" /etc/fstab
+    sed -i "s/${OLD_DISKID}/${DISKID}/" "$FWLOC/cmdline.txt"
+    sync
+  fi
+
+  mount -o remount,ro "$ROOT_PART_DEV"
+  mount -o remount,ro "$BOOT_PART_DEV"
+}
+
+regenerate_ssh_host_keys () {
+  mount -o remount,rw /
+  /usr/lib/raspberrypi-sys-mods/regenerate_ssh_host_keys
+  RET="$?"
+  mount -o remount,ro /
+  return "$RET"
+}
+
+apply_custom () {
+  CONFIG_FILE="$1"
+  mount -o remount,rw /
+  mount -o remount,rw "$FWLOC"
+  if ! python3 -c "import toml" 2> /dev/null; then
+    FAIL_REASON="custom.toml provided, but python3-toml is not installed\n$FAIL_REASON"
+  else
+    set -o pipefail
+    /usr/lib/raspberrypi-sys-mods/init_config "$CONFIG_FILE" |& tee /run/firstboot.log | while read -r line; do
+        MSG="$MSG\n$line"
+        whiptail --infobox "$MSG" 20 60
+    done
+    if [ "$?" -ne 0 ]; then
+      mv /run/firstboot.log /var/log/firstboot.log
+      FAIL_REASON="Failed to apply customisations from custom.toml\n\nLog file saved as /var/log/firstboot.log\n$FAIL_REASON"
+    fi
+    set +o pipefail
+  fi
+  rm -f "$CONFIG_FILE"
+  mount -o remount,ro "$FWLOC"
+  mount -o remount,ro /
+}
+
+main () {
+  get_fw_loc
+  get_variables
+
+ whiptail --infobox "Generating SSH keys..." 20 60
+ regenerate_ssh_host_keys
+
+  if [ -f "$FWLOC/custom.toml" ]; then
+    MSG="Applying customisations from custom.toml...\n"
+    whiptail --infobox "$MSG" 20 60
+    apply_custom "$FWLOC/custom.toml"
+  fi
+
+  if [ "$ROOT_PART_END" -eq "$TARGET_END" ]; then
+    reboot_pi
+  fi
+
+  if ! parted -m "$ROOT_DEV" u s resizepart "$ROOT_PART_NUM" "$TARGET_END"; then
+    FAIL_REASON="Root partition resize failed"
+    return 1
+  fi
+
+  whiptail --infobox "Fix PARTUUID..." 20 60
+  fix_partuuid
+
+  return 0
+}
+
+mountpoint -q /proc || mount -t proc proc /proc
+mountpoint -q /sys || mount -t sysfs sys /sys
+mountpoint -q /run || mount -t tmpfs tmp /run
+mkdir -p /run/systemd
+
+mount / -o remount,ro
+
+if ! FWLOC=$(get_fw_loc); then
+  whiptail --msgbox "Could not determine firmware partition" 20 60
+  poweroff -f
+fi
+
+mount "$FWLOC" -o rw
+
+sed -i 's| init=/usr/libexec/init_resize||' "$FWLOC/cmdline.txt"
+sed -i 's| sdhci\.debug_quirks2=4||' "$FWLOC/cmdline.txt"
+
+if ! grep -q splash "$FWLOC/cmdline.txt"; then
+  sed -i "s/ quiet//g" "$FWLOC/cmdline.txt"
+fi
+mount "$FWLOC" -o remount,ro
+sync
+
+main
+
+if [ -z "$FAIL_REASON" ]; then
+  whiptail --infobox "Rebooting in 5 seconds..." 20 60
+  sleep 5
+else
+  whiptail --msgbox "Failed running firstboot:\n${FAIL_REASON}" 20 60
+fi
+
+reboot_pi

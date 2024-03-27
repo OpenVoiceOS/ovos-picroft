@@ -18,4 +18,7 @@ pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-connectivity-ev
 pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-respeaker-2mic
 pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-respeaker-4mic
 
+pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-mk1
+pip3 install git+https://github.com/OpenVoiceOS/ovos-mark1-utils
+
 deactivate
