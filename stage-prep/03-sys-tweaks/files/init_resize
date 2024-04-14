@@ -98,29 +98,6 @@ regenerate_ssh_host_keys () {
   return "$RET"
 }
 
-apply_custom () {
-  CONFIG_FILE="$1"
-  mount -o remount,rw /
-  mount -o remount,rw "$FWLOC"
-  if ! python3 -c "import toml" 2> /dev/null; then
-    FAIL_REASON="custom.toml provided, but python3-toml is not installed\n$FAIL_REASON"
-  else
-    set -o pipefail
-    /usr/lib/raspberrypi-sys-mods/init_config "$CONFIG_FILE" |& tee /run/firstboot.log | while read -r line; do
-        MSG="$MSG\n$line"
-        whiptail --infobox "$MSG" 20 60
-    done
-    if [ "$?" -ne 0 ]; then
-      mv /run/firstboot.log /var/log/firstboot.log
-      FAIL_REASON="Failed to apply customisations from custom.toml\n\nLog file saved as /var/log/firstboot.log\n$FAIL_REASON"
-    fi
-    set +o pipefail
-  fi
-  rm -f "$CONFIG_FILE"
-  mount -o remount,ro "$FWLOC"
-  mount -o remount,ro /
-}
-
 main () {
   get_fw_loc
   get_variables
@@ -128,18 +105,18 @@ main () {
  whiptail --infobox "Generating SSH keys..." 20 60
  regenerate_ssh_host_keys
 
-  if [ -f "$FWLOC/custom.toml" ]; then
-    MSG="Applying customisations from custom.toml...\n"
-    whiptail --infobox "$MSG" 20 60
-    apply_custom "$FWLOC/custom.toml"
-  fi
-
   if [ "$ROOT_PART_END" -eq "$TARGET_END" ]; then
     reboot_pi
   fi
 
+  whiptail --infobox "Resizing root partition..." 20 60
   if ! parted -m "$ROOT_DEV" u s resizepart "$ROOT_PART_NUM" "$TARGET_END"; then
     FAIL_REASON="Root partition resize failed"
+    return 1
+  fi
+
+  if ! resize2fs $ROOT_PART_DEV; then
+    FAIL_REASON="Resizing to filesystem failed"
     return 1
   fi
 
