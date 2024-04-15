@@ -16,6 +16,4 @@ install -v -m 0644 files/91-pulseaudio-GeneralPlus.rules "${ROOTFS_DIR}/etc/udev
 
 install -v -m 0644 files/GeneralPlus.conf "${ROOTFS_DIR}/usr/share/pulseaudio/alsa-mixer/profile-sets/GeneralPlus.conf"
 
-echo "mask pulseaudio.socket" >> "${ROOTFS_DIR}/etc/systemd/user-preset/10-ovos-user.preset"
-echo "mask pulseaudio.service" >> "${ROOTFS_DIR}/etc/systemd/user-preset/10-ovos-user.preset"
 echo "enable ovos-pulseaudio.service" >> "${ROOTFS_DIR}/etc/systemd/user-preset/10-ovos-user.preset"

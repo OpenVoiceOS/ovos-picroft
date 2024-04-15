@@ -25,7 +25,7 @@ build_vocalfusion () {
     cd /home/ovos
 }
 
-function install_seeed_voicecard () {
+install_seeed_voicecard () {
     cd /home/ovos/seeed-voicecard
     if [ ! -f Makefile.bk ]; then
         cp Makefile Makefile.bk
@@ -93,7 +93,7 @@ apt-get -y dist-upgrade --auto-remove --purge
 apt-get clean
 
 cd /home/ovos
-git clone https://github.com/BohdanBuinich/VocalFusionDriver
+git clone https://github.com/OpenVoiceOS/VocalFusionDriver
 git clone https://github.com/HinTak/seeed-voicecard
 git clone https://github.com/viraniac/aiyprojects-raspbian
 git clone https://github.com/OpenVoiceOS/ovos-i2csound
@@ -132,7 +132,6 @@ cp *.dts /boot/firmware/
 # vocalfusion
 
 cd /home/ovos/VocalFusionDriver
-git checkout next_gen
 cp *.dtbo /boot/firmware/overlays
 cp *.dts /boot/firmware
 

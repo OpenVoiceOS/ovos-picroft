@@ -25,7 +25,7 @@ install -v -m 0755 files/xvf3510-flash "${ROOTFS_DIR}/usr/libexec/xvf3510-flash"
 # install -v -m 0644 files/xvf3510.dtbo "${ROOTFS_DIR}/boot/firmware/overlays/xvf3510.dtbo"
 install -v -d -m 0755 "${ROOTFS_DIR}/usr/lib/firmware"
 install -v -d -m 0755 "${ROOTFS_DIR}/usr/lib/firmware/xvf3510"
-install -v -m 0644 files/app_xvf3510_int_spi_boot_v4_1_0.bin "${ROOTFS_DIR}/usr/lib/firmware/xvf3510/app_xvf3510_int_spi_boot_v4_1_0.bin"
+install -v -m 0644 files/app_xvf3510_int_spi_boot_v4_2_0.bin "${ROOTFS_DIR}/usr/lib/firmware/xvf3510/app_xvf3510_int_spi_boot_v4_2_0.bin"
 install -v -m 0755 files/sj201-reset-led "${ROOTFS_DIR}/usr/bin/sj201-reset-led"
 install -v -m 0755 files/tas5806-init "${ROOTFS_DIR}/usr/bin/tas5806-init"
 
