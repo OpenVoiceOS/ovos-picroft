@@ -20,3 +20,9 @@ qml-module-qtmultimedia
 kdeconnect
 libinput-dev
 evemu-tools
+breeze-icon-theme
+libqt5svg5-dev
+qt5-qmake
+qtbase5-dev
+qtbase5-private-dev
+libxcb-xfixes0-dev

@@ -46,4 +46,15 @@ make install
 cd /home/ovos
 rm -rf lottie-qml
 
+
+# Build the on screen keyboard
+git clone https://invent.kde.org/qt/qt/qtvirtualkeyboard/ -b v5.15.8-lts-lgpl
+cd qtvirtualkeyboard/src/virtualkeyboard
+rm qvirtualkeyboardinputcontext_p.cpp
+wget https://raw.githubusercontent.com/NeonGeckoCom/neon_debos/dev/overlays/00-build-qt-keyboard/var/qvirtualkeyboardinputcontext_p.cpp
+cd ../..
+qmake . CONFIG+="lang-all handwriting"
+make -j
+make install
+
 deactivate
