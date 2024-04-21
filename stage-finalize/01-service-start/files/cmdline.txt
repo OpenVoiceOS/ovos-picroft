@@ -1,1 +1,0 @@
-console=tty1 root=ROOTDEV rootfstype=ext4 fsck.repair=yes rootwait zram.enabled=1 zram.num_devices=4 quiet init=/usr/libexec/init_resize cfg80211.ieee80211_regdom=US

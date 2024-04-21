@@ -98,6 +98,12 @@ regenerate_ssh_host_keys () {
   return "$RET"
 }
 
+resize_fs () {
+  mount -o remount,rw "$ROOT_PART_DEV"
+  resize2fs "$ROOT_PART_DEV"
+  mount -o remount,ro "$ROOT_PART_DEV"
+}
+
 main () {
   get_fw_loc
   get_variables
@@ -115,7 +121,7 @@ main () {
     return 1
   fi
 
-  if ! resize2fs $ROOT_PART_DEV; then
+  if ! resize_fs; then
     FAIL_REASON="Resizing to filesystem failed"
     return 1
   fi
