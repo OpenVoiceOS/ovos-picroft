@@ -65,7 +65,7 @@ then
 fi
 
 # Load additional info for the block device
-readarray -t lines <<< $(blkid -po export /dev/sda)
+readarray -t lines <<< $(blkid -po export $dev)
 
 for line in "${lines[@]}"; do
     IFS='='; var=($line); unset IFS;
