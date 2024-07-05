@@ -15,10 +15,11 @@ pip3 install git+https://github.com/OpenVoiceOS/ovos_utils
 pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-ipgeo
 pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-connectivity-events
 
-pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-respeaker-2mic
-pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-respeaker-4mic
+pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-dotstar
 
 pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-mk1
 pip3 install git+https://github.com/OpenVoiceOS/ovos-mark1-utils
+
+pip3 install git+https://github.com/builderjer/ovos-PHAL-plugin-hotkeys@feat/autodetect
 
 deactivate

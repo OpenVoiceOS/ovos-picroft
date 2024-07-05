@@ -1,5 +1,0 @@
---- stage-finalize.orig/rootfs/boot/firmware/cmdline.txt
-+++ stage-finalize/rootfs/boot/firmware/cmdline.txt
-@@ -1 +1 @@
--console=tty1 root=ROOTDEV rootfstype=ext4 fsck.repair=yes rootwait zram.enabled=1 zram.num_devices=4 quiet init=/usr/lib/raspberrypi-sys-mods/firstboot cfg80211.ieee80211_regdom=US
-+console=tty1 root=ROOTDEV rootfstype=ext4 fsck.repair=yes rootwait zram.enabled=1 zram.num_devices=4 quiet init=/usr/libexec/init_resize cfg80211.ieee80211_regdom=US

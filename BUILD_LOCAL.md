@@ -6,7 +6,7 @@ It is possible to build this image locally for development purposes or for fun.
 
 This repository contains several directories with the `stage-` prefix.  Each one is executed in the order specified in a config file. [example here](#)
 
-A few of the stages are needed for an OVOS image.  Once a `headless` image is built, other stages can be added for other usage such as a GUI system, or Mark2 device.
+A few of the stages are needed for an OVOS image.  Once a `headless` image is built, other stages can be added for other usage such as a GUI system.
 
 ## Needed for Headless Image
 

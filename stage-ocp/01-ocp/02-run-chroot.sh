@@ -8,5 +8,6 @@ pip3 install git+https://github.com/OpenVoiceOS/ovos-ocp-news-plugin
 pip3 install git+https://github.com/OpenVoiceOS/ovos-ocp-youtube-plugin
 pip3 install git+https://github.com/OpenVoiceOS/ovos-ocp-bandcamp-plugin
 pip3 install git+https://github.com/OpenVoiceOS/ovos-ocp-m3u-plugin
+pip3 install git+https://github.com/OpenVoiceOS/ovos-plugin-vlc
 
 deactivate

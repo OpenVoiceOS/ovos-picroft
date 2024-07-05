@@ -13,6 +13,8 @@ pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-randomness
 # No setup.py yet
 #pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-dictation
 
-pip3 install git+https://github.com/builderjer/ovos-skill-moviemaster
+pip3 install git+https://github.com/OpenVoiceOS/ovos-skill-moviemaster
+
+pip3 install git+https://github.com/femelo/skill-ovos-pyradios
 
 deactivate

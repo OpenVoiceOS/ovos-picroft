@@ -28,4 +28,6 @@ pip3 install git+https://github.com/emphasize/ovos-PHAL-plugin-alsa
 pip3 install git+https://github.com/OpenVoiceOS/ovos-microphone-plugin-sounddevice
 pip3 install git+https://github.com/OpenVoiceOS/ovos-microphone-plugin-alsa
 
+pip3 install git+https://github.com/OpenVoiceOS/ovos-utterance-plugin-cancel
+
 deactivate

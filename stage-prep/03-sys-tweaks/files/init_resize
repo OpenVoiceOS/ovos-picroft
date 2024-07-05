@@ -99,9 +99,9 @@ regenerate_ssh_host_keys () {
 }
 
 resize_fs () {
-  mount -o remount,rw "$ROOT_PART_DEV"
+#   mount -o remount,rw "$ROOT_PART_DEV"
   resize2fs "$ROOT_PART_DEV"
-  mount -o remount,ro "$ROOT_PART_DEV"
+#   mount -o remount,ro "$ROOT_PART_DEV"
 }
 
 main () {

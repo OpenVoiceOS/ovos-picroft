@@ -48,6 +48,25 @@ install_seeed_voicecard () {
     cd /home/ovos
 }
 
+install_wm8960 () {
+    cd /home/ovos/WM8960-Audio-HAT
+    if [ ! -f Makefile.bk ]; then
+        cp Makefile Makefile.bk
+    else
+        rm Makefile;
+        cp Makefile.bk Makefile
+    fi
+    current_kernel=$1;
+    sed -i "s|\$(shell uname -r)|$current_kernel|g" Makefile
+    sed -i "s|depmod -a|depmod $current_kernel -a|" Makefile
+
+    rm /lib/modules/$current_kernel/kernel/sound/soc/codecs/snd-soc-wm8960.ko*
+    make
+    make install
+    rm *.mod *.ko Module.symvers modules.order
+    cd /home/ovos
+}
+
 function install_aiy_voicebonnet_soundcard () {
     cd /home/ovos/aiyprojects-raspbian/drivers/sound/debian
     current_kernel=$1;
@@ -97,7 +116,7 @@ git clone https://github.com/OpenVoiceOS/VocalFusionDriver
 git clone https://github.com/HinTak/seeed-voicecard
 git clone https://github.com/viraniac/aiyprojects-raspbian
 git clone https://github.com/OpenVoiceOS/ovos-i2csound
-
+git clone https://github.com/waveshare/WM8960-Audio-HAT
 
 # Install ovos-i2csound and other required files
 cd ovos-i2csound
@@ -183,6 +202,7 @@ for k in "${kernels[@]}"; do
     if [[ "${k}" == *6.6* ]]; then
         build_vocalfusion "${k}"
         install_seeed_voicecard "${k}"
+        install_wm8960 "${k}"
     #     install_seeed_voicecard "${k}" "${seeed_mod}" "${seeed_ver}"
         install_aiy_voicebonnet_soundcard "${k}" "${aiy_sound_mod}" "${aiy_sound_ver}" "${aiy_conf_sound}"
         install_aiy "${k}" "${aiy_drivers_mod}" "${aiy_drivers_ver}" "${aiy_conf_driver}"
@@ -195,11 +215,12 @@ rm -rf VocalFusionDriver
 rm -rf seeed-voicecard
 rm -rf aiyprojects-raspbian
 rm -rf ovos-i2csound
+rm -rf WM8960-Audio-HAT
 
 # Install required Python packages
 pip3 install smbus smbus2 spidev rpi.gpio
 
 pip3 install git+https://github.com/NeonGeckoCom/sj201-interface
-pip3 install git+https://github.com/smartgic/ovos-phal-plugin-aiy-v2
+# pip3 install git+https://github.com/smartgic/ovos-phal-plugin-aiy-v2
 
 deactivate

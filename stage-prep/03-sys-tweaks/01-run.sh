@@ -1,12 +1,5 @@
 #!/bin/bash -e
 
-# # Transfer from pigen
-# install -d -v -m 0755 "${ROOTFS_DIR}/etc/systemd/system/rc-local.service.d"
-# install -v -m 644 files/ttyoutput.conf	"${ROOTFS_DIR}/etc/systemd/system/rc-local.service.d/ttyoutput.conf"
-#
-# install -v -m 644 files/50raspi "${ROOTFS_DIR}/etc/apt/apt.conf.d/50raspi"
-# install -m 644 files/console-setup "${ROOTFS_DIR}/etc/default/console-setup"
-
 # Create a ramdisk
 echo "tmpfs /ramdisk tmpfs rw,nodev,nosuid,size=20M 0 0" >> "${ROOTFS_DIR}/etc/fstab"
 

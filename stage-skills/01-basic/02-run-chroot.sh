@@ -18,6 +18,7 @@ pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-somafm
 pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-ddg
 pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-youtube-music
 pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-news
+pip3 install git+https://github.com/OpenVoiceOS/ovos-skill-local-media
 
 pip3 install git+https://github.com/OpenVoiceOS/skill-ovos-boot-finished
 

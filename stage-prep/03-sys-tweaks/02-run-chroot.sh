@@ -22,9 +22,6 @@ dtoverlay=miniuart-bt
 
 EOF
 
-# echo "enable ssh.service" >> "${ROOTFS_DIR}/etc/systemd/system-preset/10-ovos-system.preset"
-# echo "enable regenerate_ssh_host_keys.service" >> "${ROOTFS_DIR}/etc/systemd/system-preset/10-ovos-system.preset"
-#
 # for GRP in input spi i2c gpio; do
 # groupadd -f -r "\$GRP"
 # done
