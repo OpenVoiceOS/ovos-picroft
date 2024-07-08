@@ -15,15 +15,15 @@ install -v -m 0644 files/ovos-sudo "${ROOTFS_DIR}/etc/sudoers.d/ovos"
 
 install -v -m 0644 files/wifi_powersave@.service "${ROOTFS_DIR}/usr/lib/systemd/system/wifi_powersave@.service"
 
-install -v -m 0644 files/media-automount@.service "${ROOTFS_DIR}/usr/lib/systemd/system/media-automount@.service"
-install -v -d -m 0755 "${ROOTFS_DIR}/etc/udev/automount.d"
-install -v -m 0644 files/auto "${ROOTFS_DIR}/etc/udev/automount.d/auto"
-install -v -m 0644 files/hfsplus "${ROOTFS_DIR}/etc/udev/automount.d/hfsplus"
-install -v -m 0644 files/ntfs "${ROOTFS_DIR}/etc/udev/automount.d/ntfs"
-install -v -m 0644 files/vfat "${ROOTFS_DIR}/etc/udev/automount.d/vfat"
-install -v -m 0644 files/99-media-automount.rules "${ROOTFS_DIR}/etc/udev/rules.d/99-media-automount.rules"
-install -v -m 0755 files/media-automount "${ROOTFS_DIR}/usr/bin/media-automount"
-install -v -d -m 0755 "${ROOTFS_DIR}/media"
+# install -v -m 0644 files/media-automount@.service "${ROOTFS_DIR}/usr/lib/systemd/system/media-automount@.service"
+# install -v -d -m 0755 "${ROOTFS_DIR}/etc/udev/automount.d"
+# install -v -m 0644 files/auto "${ROOTFS_DIR}/etc/udev/automount.d/auto"
+# install -v -m 0644 files/hfsplus "${ROOTFS_DIR}/etc/udev/automount.d/hfsplus"
+# install -v -m 0644 files/ntfs "${ROOTFS_DIR}/etc/udev/automount.d/ntfs"
+# install -v -m 0644 files/vfat "${ROOTFS_DIR}/etc/udev/automount.d/vfat"
+# install -v -m 0644 files/99-media-automount.rules "${ROOTFS_DIR}/etc/udev/rules.d/99-media-automount.rules"
+# install -v -m 0755 files/media-automount "${ROOTFS_DIR}/usr/bin/media-automount"
+# install -v -d -m 0755 "${ROOTFS_DIR}/media"
 
 install -v -d -m 0755 "${ROOTFS_DIR}/etc/systemd/system-preset"
 install -v -m 0644 files/10-ovos-system.preset "${ROOTFS_DIR}/etc/systemd/system-preset/10-ovos-system.preset"
@@ -47,3 +47,11 @@ sed -i "s|#dtparam=audio=on|dtparam=audio=on|g" "${ROOTFS_DIR}/boot/firmware/con
 sed -i "s|dtoverlay=vc4-kms-v3d|dtoverlay=vc4-fkms-v3d|g" "${ROOTFS_DIR}/boot/firmware/config.txt"
 
 install -v -m 0755 files/init_resize "${ROOTFS_DIR}/usr/libexec/init_resize"
+
+install -v -m 0755 files/resize_fs.sh "${ROOTFS_DIR}/usr/libexec/resize_fs.sh"
+install -v -m 0644 files/resize_fs.service "${ROOTFS_DIR}/etc/systemd/system/resize_fs.service"
+
+install -v -d -m 0755 "${ROOTFS_DIR}/opt/ovos"
+touch "${ROOTFS_DIR}/opt/ovos/resize_fs"
+
+echo "enable resize_fs.service" >> "${ROOTFS_DIR}/etc/systemd/system-preset/10-ovos-system.preset"

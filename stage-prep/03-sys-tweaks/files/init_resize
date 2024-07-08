@@ -104,6 +104,22 @@ resize_fs () {
 #   mount -o remount,ro "$ROOT_PART_DEV"
 }
 
+do_resize () {
+  if ! parted -m "$ROOT_DEV" u s resizepart "$ROOT_PART_NUM" "$TARGET_END"; then
+    FAIL_REASON="Partition table resize of the root partition ($DEV) failed\n$FAIL_REASON"
+    return 1
+  fi
+
+  wait_for_udev 10
+  resize2fs -f -p "$DEV"
+  RET="$?"
+  if [ "$RET" -ne 0 ]; then
+    FAIL_REASON="Root partition resize failed\n$FAIL_REASON"
+  fi
+
+  return "$RET"
+}
+
 main () {
   get_fw_loc
   get_variables
@@ -115,16 +131,20 @@ main () {
     reboot_pi
   fi
 
-  whiptail --infobox "Resizing root partition..." 20 60
-  if ! parted -m "$ROOT_DEV" u s resizepart "$ROOT_PART_NUM" "$TARGET_END"; then
-    FAIL_REASON="Root partition resize failed"
-    return 1
-  fi
-
-  if ! resize_fs; then
-    FAIL_REASON="Resizing to filesystem failed"
-    return 1
-  fi
+#   whiptail --infobox "Resizing root partition..." 20 60
+#     if ! do_resize; then
+#       FAIL_REASON="Failed resizing root partition"
+#       return 1
+#     fi
+#   if ! parted -m "$ROOT_DEV" u s resizepart "$ROOT_PART_NUM" "$TARGET_END"; then
+#     FAIL_REASON="Root partition resize failed"
+#     return 1
+#   fi
+#
+#   if ! resize_fs; then
+#     FAIL_REASON="Resizing to filesystem failed"
+#     return 1
+#   fi
 
   whiptail --infobox "Fix PARTUUID..." 20 60
   fix_partuuid

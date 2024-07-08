@@ -1,0 +1,11 @@
+[Unit]
+Description=Resize Root Partition
+ConditionPathExists=/opt/ovos/resize_fs
+Before=splashscreen.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /usr/libexec/resize_fs.sh
+
+[Install]
+WantedBy=multi-user.target

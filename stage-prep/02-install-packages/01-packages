@@ -38,3 +38,4 @@ python3-venv python3-pip python3-wheel python3-setuptools
 python3-dev swig libssl-dev
 git
 jq
+cloud-utils
