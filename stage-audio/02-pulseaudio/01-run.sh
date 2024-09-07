@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 # Install a custom pulseaudio service without the socket
-install -v -m 0644 files/ovos-pulseaudio.service "${ROOTFS_DIR}/etc/systemd/user/ovos-pulseaudio.service"
+# install -v -m 0644 files/ovos-pulseaudio.service "${ROOTFS_DIR}/etc/systemd/user/ovos-pulseaudio.service"
 install -v -d -m 0755 "${ROOTFS_DIR}/etc/pulse/daemon.conf.d"
 install -v -m 0644 files/91-pulseaudio-daemon.conf "${ROOTFS_DIR}/etc/pulse/daemon.conf.d/91-pulseaudio-daemon.conf"
 install -v -m 0644 files/91-pulseaudio-system.pa "${ROOTFS_DIR}/etc/pulse/system.pa.d/91-pulseaudio-system.pa"
