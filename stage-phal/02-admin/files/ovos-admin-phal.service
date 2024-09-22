@@ -15,4 +15,4 @@ StartLimitInterval=5min
 StartLimitBurst=4
 
 [Install]
-WantedBy=default.target
+WantedBy=ovos.service

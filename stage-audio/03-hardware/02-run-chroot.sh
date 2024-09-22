@@ -147,6 +147,8 @@ rm -rf ovos-i2csound
 
 # Install required Python packages
 pip3 install smbus smbus2 spidev rpi.gpio
-pip3 install git+https://github.com/NeonGeckoCom/sj201-interface
+
+# pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-mk2-v6-fan-control@update_imports
+pip3 install oos-PHAL-plugin-mk2-v6-fan-control
 
 deactivate

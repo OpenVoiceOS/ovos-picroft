@@ -1,2 +1,4 @@
 enable ovos.service
 enable ovos-messagebus.service
+enable pulseaudio.socket
+enable pulseaudio.service

@@ -3,6 +3,6 @@ if [[ ! ${VIRTUAL_ENV} ]]; then
 fi
 
 pip3 install sdnotify
-pip3 install git+https://github.com/OpenVoiceOS/ovos-messagebus
+pip3 install ovos-messagebus
 
 deactivate
