@@ -49,5 +49,6 @@ install -v -m 0644 files/91-vocalfusion.rules "${ROOTFS_DIR}/etc/udev/rules.d/91
 install -v -m 0644 files/99-gpio.rules "${ROOTFS_DIR}/etc/udev/rules.d/99-gpio.rules"
 
 install -v -m 0755 files/wm8960-button-overlay.dtbo "${ROOTFS_DIR}/boot/firmware/overlays/wm8960-button-overlay.dtbo"
+install -v -m 0755 files/wm8960-soundcard.dtbo "${ROOTFS_DIR}/boot/firmware/overlays/wm8960-soundcard.dtbo"
 install -v -m 0755 files/91-seeedvoicecard.rules "${ROOTFS_DIR}/etc/udev/rules.d/91-seeedvoicecard.rules"
 install -v -m 0755 files/bcm2835-alsa.conf "${ROOTFS_DIR}/etc/modprobe.d/bcm2835-alsa.conf"

@@ -149,6 +149,6 @@ rm -rf ovos-i2csound
 pip3 install smbus smbus2 spidev rpi.gpio
 
 # pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-mk2-v6-fan-control@update_imports
-pip3 install oos-PHAL-plugin-mk2-v6-fan-control
+pip3 install ovos-PHAL-plugin-mk2-fan-control
 
 deactivate
