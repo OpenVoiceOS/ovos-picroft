@@ -51,7 +51,7 @@ echo "  ovos-say-to <phrase>   Send an utterance to OVOS as if spoken by a user"
 echo
 echo "OVOS Docs COMMANDs:"
 echo "  ovos-docs-viewer community          View the OVOS Community docs in the terminal"
-echo "  ovos-docs-viewer techincal          View the OVOS Technical docs in the terminal"
+echo "  ovos-docs-viewer technical          View the OVOS Technical docs in the terminal"
 echo "  ovos-docs-viewer hivemind           View the HiveMind docs in the terminal"
 echo "  ovos-docs-viewer messages           View OVOS Message specs in the terminal"
 echo

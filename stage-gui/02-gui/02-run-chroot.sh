@@ -3,11 +3,11 @@ if [[ ! ${VIRTUAL_ENV} ]]; then
 fi
 
 pip3 install ovos-gui-plugin-shell-companion # Stable version is old
-pip3 install skill-ovos-homescreen
+pip3 install ovos-skill-homescreen
 pip3 install ovos-gui
 
 pip3 install ovos-PHAL-plugin-wallpaper-manager
-pip3 install skill-ovos-wallpapers
+pip3 install ovos-skill-wallpapers
 
 # Mycroft-gui-qt5
 cd /home/ovos
