@@ -6,9 +6,6 @@ install -v -d -m 0755 "${ROOTFS_DIR}/etc/modules-load.d"
 install -v -m 0644 files/seeed_voicecard.conf "${ROOTFS_DIR}/etc/modules-load.d/seeed_voicecard.conf"
 install -v -m 0644 files/91-seeedvoicecard.rules "${ROOTFS_DIR}/etc/udev/rules.d/91-seeedvoicecard.rules"
 install -v -m 0644 files/seeed-voicecard-4mic.conf "${ROOTFS_DIR}/usr/share/pulseaudio/alsa-mixer/profile-sets/seeed-voicecard-4mic.conf"
-# install -v -m 0644 files/seeed-voicecard-4mic-daemon.conf "${ROOTFS_DIR}/etc/pulse/seeed-voicecard-4mic-daemon.conf"
-# install -v -m 0644 files/seeed-voicecard-4mic-default.pa "${ROOTFS_DIR}/etc/pulse/default.pa.d/seeed-voicecard-4mic-default.pa"
-# install -v -m 0644 files/seeed-4mic-voicecard.dtbo "${ROOTFS_DIR}/boot/firmware/overlays/seeed-4mic-voicecard.dtbo"
 
 install -v -m 0644 files/seeed-voicecard-8mic.conf "${ROOTFS_DIR}/usr/share/pulseaudio/alsa-mixer/profile-sets/seeed-voicecard-8mic.conf"
 # install -v -m 0644 files/seeed-voicecard-8mic-daemon.conf "${ROOTFS_DIR}/etc/pulse/seeed-voicecard-8mic-daemon.conf"
@@ -37,4 +34,6 @@ install -v -m 0644 files/99-gpio.rules "${ROOTFS_DIR}/etc/udev/rules.d/99-gpio.r
 install -v -m 0644 files/avrdude-gpio.conf "${ROOTFS_DIR}/etc/avrdude-gpio.conf"
 
 install -v -m 0755 files/wm8960-button-overlay.dtbo "${ROOTFS_DIR}/boot/firmware/overlays/wm8960-button-overlay.dtbo"
-install -v -m 0755 files/wm8960-button-overlay.dts "${ROOTFS_DIR}/boot/firmware/overlays/wm8960-button-overlay.dts"
+install -v -m 0755 files/wm8960-soundcard.dtbo "${ROOTFS_DIR}/boot/firmware/overlays/wm8960-soundcard.dtbo"
+install -v -m 0755 files/91-seeedvoicecard.rules "${ROOTFS_DIR}/etc/udev/rules.d/91-seeedvoicecard.rules"
+install -v -m 0755 files/bcm2835-alsa.conf "${ROOTFS_DIR}/etc/modprobe.d/bcm2835-alsa.conf"

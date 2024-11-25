@@ -7,7 +7,7 @@ After=ovos-pulseaudio.service
 
 [Service]
 Type=notify
-ExecStart=%h/.venv/bin/python /usr/libexec/ovos-systemd-dinkum-listener
+ExecStart=%h/.venv/bin/python /usr/libexec/ovos-systemd-listener
 TimeoutStartSec=1m
 TimeoutStopSec=1m
 Restart=on-failure

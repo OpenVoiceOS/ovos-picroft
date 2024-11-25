@@ -112,9 +112,9 @@ apt-get -y dist-upgrade --auto-remove --purge
 apt-get clean
 
 cd /home/ovos
-git clone https://github.com/OpenVoiceOS/VocalFusionDriver
+# git clone https://github.com/OpenVoiceOS/VocalFusionDriver
 git clone https://github.com/HinTak/seeed-voicecard
-git clone https://github.com/viraniac/aiyprojects-raspbian
+# git clone https://github.com/viraniac/aiyprojects-raspbian
 git clone https://github.com/OpenVoiceOS/ovos-i2csound
 git clone https://github.com/waveshare/WM8960-Audio-HAT
 
@@ -156,71 +156,52 @@ cp *.dts /boot/firmware
 
 # aiy-voicebonnet-soundcard
 
-aiy_sound_ver="3.0-1.3"
-aiy_sound_mod="aiy-voicebonnet-soundcard"
-aiy_conf_sound="/home/ovos/aiyprojects-raspbian/drivers/sound/debian/aiy-voicebonnet-soundcard-dkms.dkms"
-#
-cd /home/ovos/aiyprojects-raspbian/drivers/sound
-mkdir -p /usr/src/$aiy_sound_mod-$aiy_sound_ver
-cp -ar ./* /usr/src/$aiy_sound_mod-$aiy_sound_ver
-cp -ar ./debian/ucm2* /usr/share/alsa/ucm2/
-
-dkms add -m $aiy_sound_mod -v $aiy_sound_ver -c $aiy_conf_sound
-
-# aiy drivers
-
-aiy_drivers_ver="2.0-1.2"
-aiy_drivers_mod="aiy-dkms"
-aiy_conf_driver="/home/ovos/aiyprojects-raspbian/drivers/aiy/debian/aiy-dkms.dkms"
-
-cd /home/ovos/aiyprojects-raspbian/drivers/aiy/
-mkdir -p /usr/src/$aiy_drivers_mod-$aiy_drivers_ver
-cp -ar ./* /usr/src/$aiy_drivers_mod-$aiy_drivers_ver
-
-dkms add -m $aiy_drivers_mod -v $aiy_drivers_ver -c $aiy_conf_driver
-
-# aiy led drivers
-aiy_led_drivers_ver="2.0-1.2"
-aiy_led_drivers_mod="leds-ktd202x"
-aiy_led_drivers_conf="/home/ovos/aiyprojects-raspbian/drivers/leds/debian/leds-ktd202x-dkms.dkms"
-
-cd /home/ovos/aiyprojects-raspbian/drivers/leds
-mkdir -p /usr/src/$aiy_led_drivers_mod-$aiy_led_drivers_ver
-cp -ar ./* /usr/src/$aiy_led_drivers_mod-$aiy_led_drivers_ver
-
-dkms add -m $aiy_led_drivers_mod -v $aiy_led_drivers_ver -c $aiy_led_drivers_conf
-
-# aiy overlays
-cd /home/ovos/aiyprojects-raspbian/drivers/overlays
-./make_dpkg.sh
-dpkg -i ./aiy-overlay-voice_1.0-1_all.deb
-cp ./voice/opt/aiy/overlay-voice/* /boot/firmware/
-cd /home/ovos
+# ver="2.0-1.2"
+# mod="aiy-voicebonnet-soundcard"
+# conf_sound="/home/ovos/aiyprojects-raspbian/drivers/sound/debian/aiy-voicebonnet-soundcard-dkms.dkms"
+# 
+# cd /home/ovos/aiyprojects-raspbian/drivers/sound
+# mkdir -p /usr/src/$mod-$ver
+# cp -ar ./* /usr/src/$mod-$ver
+# 
+# dkms add -m $mod -v $ver -c $conf_sound
+# 
+# # aiy drivers
+# 
+# mod="aiy-dkms"
+# conf_driver="/home/ovos/aiyprojects-raspbian/drivers/aiy/debian/aiy-dkms.dkms"
+# 
+# cd /home/ovos/aiyprojects-raspbian/drivers/aiy/
+# mkdir -p /usr/src/$mod-$ver
+# cp -ar ./* /usr/src/$mod-$ver
+# 
+# dkms add -m $mod -v $ver -c $conf_driver
+# 
+# # aiy overlays
+# cd /home/ovos/aiyprojects-raspbian/drivers/overlays
+# ./make_dpkg.sh
+# dpkg -i ./aiy-overlay-voice_1.0-1_all.deb
+# cd /home/ovos
 
 echo "Looking for kernel with build dir in ${kernels[*]}"
 for k in "${kernels[@]}"; do
-    if [[ "${k}" == *6.6* ]]; then
-        build_vocalfusion "${k}"
-        install_seeed_voicecard "${k}"
-        install_wm8960 "${k}"
-    #     install_seeed_voicecard "${k}" "${seeed_mod}" "${seeed_ver}"
-        install_aiy_voicebonnet_soundcard "${k}" "${aiy_sound_mod}" "${aiy_sound_ver}" "${aiy_conf_sound}"
-        install_aiy "${k}" "${aiy_drivers_mod}" "${aiy_drivers_ver}" "${aiy_conf_driver}"
-        install_aiy_leds "${k}" "$aiy_led_drivers_mod" "${aiy_drivers_ver}" "${aiy_led_drivers_conf}"
-    fi
+#     build_vocalfusion "${k}"
+    install_seeed_voicecard "${k}" "${mod}" "${ver}"
+#     install_aiy_voicebonnet_soundcard "${k}" "${mod}" "${ver}" "${conf_sound}"
+#     install_aiy "${k}" "${mod}" "${ver}" "${conf_driver}"
 done
 
 cd /home/ovos
-rm -rf VocalFusionDriver
+# rm -rf VocalFusionDriver
 rm -rf seeed-voicecard
-rm -rf aiyprojects-raspbian
+# rm -rf aiyprojects-raspbian
 rm -rf ovos-i2csound
 rm -rf WM8960-Audio-HAT
 
 # Install required Python packages
 pip3 install smbus smbus2 spidev rpi.gpio
 
-pip3 install git+https://github.com/NeonGeckoCom/sj201-interface
-# pip3 install git+https://github.com/smartgic/ovos-phal-plugin-aiy-v2
+# pip3 install git+https://github.com/OpenVoiceOS/ovos-PHAL-plugin-mk2-v6-fan-control@update_imports
+# pip3 install ovos-PHAL-plugin-mk2-fan-control
 
 deactivate

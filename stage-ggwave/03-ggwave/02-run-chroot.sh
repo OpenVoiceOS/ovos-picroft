@@ -22,7 +22,6 @@ else
     pip3 install -U ggwave
 fi
 
-pip3 install git+https://github.com/OpenVoiceOS/ovos-audio-transformer-plugin-ggwave
-pip3 install git+https://github.com/OpenVoiceOS/ovos-skill-ggwave
+pip3 install ovos-audio-transformer-plugin-ggwave
 
 deactivate
