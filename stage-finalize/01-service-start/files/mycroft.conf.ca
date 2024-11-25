@@ -1,0 +1,15 @@
+{
+    "system_unit": "metric",
+    "temperature_unit": "celsius",
+    "windspeed_unit": "km/h",
+    "precipitation_unit": "mm",
+    "time_format": "full",
+    "spoken_time_format": "half",
+    "date_format": "DMY",
+    "tts": {
+        "module": "ovos-tts-plugin-matxa-multispeaker-cat",
+        "ovos-tts-plugin-matxa-multispeaker-cat": {
+            "voice": "central/grau"
+        }
+    }
+}

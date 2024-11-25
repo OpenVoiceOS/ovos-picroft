@@ -44,14 +44,14 @@ install -v -m 0644 files/seeed-voicecard-4mic-default.pa "${ROOTFS_DIR}/etc/puls
 install -v -m 0644 files/seeed-voicecard-8mic-daemon.conf "${ROOTFS_DIR}/usr/share/pulseaudio/alsa-mixer/profile-sets/seeed-voicecard-8mic-daemon.conf"
 install -v -m 0644 files/seeed-voicecard-8mic-default.pa "${ROOTFS_DIR}/etc/pulse/default.pa.d/seeed-voicecard-8mic-default.pa"
 
-install -v -m 0644 files/sj201-daemon.conf "${ROOTFS_DIR}/usr/share/pulseaudio/alsa-mixer/profile-sets/sj201-daemon.conf"
-install -v -m 0644 files/sj201-default.pa "${ROOTFS_DIR}/etc/pulse/default.pa.d/sj201-default.pa"
-
-install -v -m 0644 files/xvf3510.conf "${ROOTFS_DIR}/usr/share/pulseaudio/alsa-mixer/profile-sets/xvf3510.conf"
-
-install -v -m 0644 files/aiy-voicebonnet-v2.conf "${ROOTFS_DIR}/usr/share/pulseaudio/alsa-mixer/profile-sets/aiy-voicebonnet-v2.conf"
-
-install -v -m 0644 files/xvf3510.conf "${ROOTFS_DIR}/usr/share/pulseaudio/alsa-mixer/profile-sets/xvf3510.conf"
+# install -v -m 0644 files/sj201-daemon.conf "${ROOTFS_DIR}/usr/share/pulseaudio/alsa-mixer/profile-sets/sj201-daemon.conf"
+# install -v -m 0644 files/sj201-default.pa "${ROOTFS_DIR}/etc/pulse/default.pa.d/sj201-default.pa"
+# 
+# install -v -m 0644 files/xvf3510.conf "${ROOTFS_DIR}/usr/share/pulseaudio/alsa-mixer/profile-sets/xvf3510.conf"
+# 
+# install -v -m 0644 files/aiy-voicebonnet-v2.conf "${ROOTFS_DIR}/usr/share/pulseaudio/alsa-mixer/profile-sets/aiy-voicebonnet-v2.conf"
+# 
+# install -v -m 0644 files/xvf3510.conf "${ROOTFS_DIR}/usr/share/pulseaudio/alsa-mixer/profile-sets/xvf3510.conf"
 
 install -v -m 0644 files/seeed-voicecard-4mic.conf "${ROOTFS_DIR}/usr/share/pulseaudio/alsa-mixer/profile-sets/seeed-voicecard-4mic.conf"
 install -v -m 0644 files/seeed-voicecard-8mic.conf "${ROOTFS_DIR}/usr/share/pulseaudio/alsa-mixer/profile-sets/seeed-voicecard-8mic.conf"
